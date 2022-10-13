@@ -8,29 +8,70 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float _moveSpeed = 10f;
+    public float _turnSpeed = 70f;
 
     private Vector3 _direction = new Vector3();
     private Rigidbody _rigidbody;
+    private Transform _cameraTransform;
 
 
-    private void Awake()
+    private void Awake() // usually used for getting components of the object the script is on
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void Start() // usually used to get components in other objects
+    {
+        _cameraTransform = Camera.main.transform;
+    }
+
+
 
     void Update()
-    {  
-        //forward/backward movement                     //left-right movement
-        _direction = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
-        _direction *= _moveSpeed; // multiply by movement speed = direction of movement
+    {
+        Move();
+
 
     }
+
 
     private void FixedUpdate()
     {
-       // move character by setting its velocity to the direction of movement calculated earlier
-        _rigidbody.velocity = _direction;
+       // add direction on y-axis to simulate normal gravity when falling, other wise characte will drop only very slowly
+       _direction.y = _rigidbody.velocity.y;
+
+        RotateTowardsCamera();
+        
+        // move character by setting its velocity to the direction of movement calculated earlier
+       _rigidbody.velocity = _direction;
+
+
     }
+
+    private void Move()
+    {
+        _direction = _cameraTransform.forward * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
+                      + _cameraTransform.right * Input.GetAxis("Horizontal");      //left-right movement: relative to PLAYER
+
+        _direction *= _moveSpeed; // multiply by movement speed to get direction of movement
+    }
+
+    private void RotateTowardsCamera()
+    {
+        
+        Vector3 lookDirection = _cameraTransform.forward;   // make a copy of cameraTransform.forward...
+        lookDirection.y = 0;    // ... to be able to set the y-axis of the camera to 0
+        // --> otherwise player would lean forward when looking down and lean backward when looking up
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookDirection); // declare the look rotation according to cameraForward...
+        Quaternion rotation = Quaternion.RotateTowards(_rigidbody.rotation, lookRotation, _turnSpeed * Time.fixedDeltaTime); //create a smoothed rotation value based on the player's turnSpeed
+        _rigidbody.MoveRotation(rotation); // ... and use it with the method "MoveRotation" to make the player rotate
+
+
+
+
+    }
+
+
 
 }
