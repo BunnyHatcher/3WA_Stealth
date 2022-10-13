@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
         lookDirection.y = 0;    // ... to be able to set the y-axis of the camera to 0
         // --> otherwise player would lean forward when looking down and lean backward when looking up
 
-        Quaternion lookRotation = Quaternion.LookRotation(lookDirection); // declare the look rotation according to cameraForward...
-        Quaternion rotation = Quaternion.RotateTowards(_rigidbody.rotation, lookRotation, _turnSpeed * Time.fixedDeltaTime); //create a smoothed rotation value based on the player's turnSpeed
+        Quaternion rotation = Quaternion.LookRotation(lookDirection); // declare the look rotation according to cameraForward...
+        rotation = Quaternion.RotateTowards(_rigidbody.rotation, rotation, _turnSpeed * Time.fixedDeltaTime); //create a smoothed rotation value based on the player's turnSpeed
         _rigidbody.MoveRotation(rotation); // ... and use it with the method "MoveRotation" to make the player rotate
 
 
