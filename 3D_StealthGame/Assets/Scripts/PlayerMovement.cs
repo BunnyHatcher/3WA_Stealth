@@ -2,7 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))] 
+
+
+public enum PlayerState
+{
+    IDLE,
+    JOGGING,
+    RUNNING,
+    SNEAKING,
+    JUMPING,
+    FALLING,
+    ROLLING
+
+}
+
+[RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     //privates and protected
-    //private PlayerState _currentState;
+    private PlayerState _currentState;
     private Vector3 _direction = new Vector3();
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
