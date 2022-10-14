@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Move();
+        OnStateUpdate();
 
 
     }
@@ -113,22 +113,113 @@ public class PlayerMovement : MonoBehaviour
     {
         switch (_currentState)
         {
+        //-----I D L E ------------------------------------------------------------------------------------------------------------------------------------------------
+
+
             case PlayerState.IDLE:
+                Move();
+
+                if(_direction.magnitude > 0)
+                {
+                    TransitionToState(PlayerState.JOGGING);
+                }
+
+                else if(Input.GetButtonDown("Jump"))
+                {
+                    TransitionToState(PlayerState.JUMPING);
+                }
+
                 break;
+
+        //------W A L K I N G---------------------------------------------------------------------------------------------------------------------------------------------------
+
             case PlayerState.WALKING:
                 break;
+
+        //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
+
             case PlayerState.JOGGING:
+                Move();
+                if (_direction.magnitude == 0)
+                {
+                    TransitionToState(PlayerState.IDLE);
+                }
+
+                else if (Input.GetButtonDown("Jump"))
+                {
+                    TransitionToState(PlayerState.JUMPING);
+                }
+
+                else if (_rigidbody.velocity.y > 0)
+                {
+                    TransitionToState(PlayerState.FALLING);
+                }
+
                 break;
+
+        //-------R U N N IN G ----------------------------------------------------------------------------------------------------------------------------------------------
+
             case PlayerState.RUNNING:
+                Move();
+                
+               if (Input.GetButtonDown("Jump"))
+                {
+                    TransitionToState(PlayerState.JUMPING);
+                }
+
+                else if (_rigidbody.velocity.y > 0)
+                {
+                    TransitionToState(PlayerState.FALLING);
+                }
+                
                 break;
+            
+        //------S N E A K I N G --------------------------------------------------------------------------------------------------------------------------------------------
+                
             case PlayerState.SNEAKING:
+                Move();
+
+                if (Input.GetButtonDown("Jump"))
+                {
+                    TransitionToState(PlayerState.JUMPING);
+                }
+
+                else if (_rigidbody.velocity.y > 0)
+                {
+                    TransitionToState(PlayerState.FALLING);
+                }
+
                 break;
+
+        //------J U M P I N G --------------------------------------------------------------------------------------------------------------------------------------------
+
             case PlayerState.JUMPING:
+                Move();          
+
+                if (_rigidbody.velocity.y > 0)
+                {
+                    TransitionToState(PlayerState.FALLING);
+                }
+
                 break;
+
+        //------F A L L I N G --------------------------------------------------------------------------------------------------------------------------------------------
+
             case PlayerState.FALLING:
+                Move();
+
+                if (_rigidbody.velocity.y > 0)
+                {
+                    TransitionToState(PlayerState.FALLING);
+                }
+
                 break;
+
+       //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
+
             case PlayerState.DODGING:
                 break;
+
             default:
                 break;
 
@@ -182,6 +273,8 @@ public class PlayerMovement : MonoBehaviour
                       + _cameraTransform.right * Input.GetAxis("Horizontal");      //left-right movement: relative to PLAYER
 
         _direction *= _moveSpeed; // multiply by movement speed to get direction of movement
+
+        _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
     }
 
     private void RotateTowardsCamera()
