@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private Vector3 _boxDimension;
     [SerializeField] private Transform _groundChecker;
+    [SerializeField] private float yFloorOffset = 1f;
+    private FloorDetector _floorDetector;
+
 
 
     //privates and protected
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake() // usually used for getting components of the object the script is on
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _floorDetector = GetComponentInChildren<FloorDetector>();
     }
 
     private void Start() // usually used to get components in other objects
@@ -63,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
         
 
+        
+
 
 
     }
@@ -81,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
          // add direction on y-axis to simulate normal gravity when falling, other wise characte will drop only very slowly
        _direction.y = _rigidbody.velocity.y;
         }
+
+        StickToGround();
 
         RotateTowardsCamera();
         
@@ -102,6 +110,15 @@ public class PlayerMovement : MonoBehaviour
         _direction *= _moveSpeed; // multiply by movement speed to get direction of movement
 
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jump method for that
+    }
+
+    private void StickToGround()
+    {
+        Vector3 averagePosition = _floorDetector.AverageHeight();
+
+        Vector3 newPosition = new Vector3(_rigidbody.position.x, averagePosition.y + yFloorOffset, _rigidbody.position.z); // glues the character to the average position on the y-axis
+        _rigidbody.MovePosition( newPosition);
+        _direction.y = 0;
     }
 
     private void RotateTowardsCamera()

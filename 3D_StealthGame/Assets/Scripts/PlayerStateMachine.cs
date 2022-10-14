@@ -23,8 +23,15 @@ public class PlayerStateMachine : MonoBehaviour
 {
     //public and serialized
     public float _moveSpeed = 10f;
-    public float _turnSpeed = 70f;
+    public float _turnSpeed = 500f;
     public float _jumpForce = 5f;
+
+    [Header("FloorDetection")]
+    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private Vector3 _boxDimension;
+    [SerializeField] private Transform _groundChecker;
+    [SerializeField] private float yFloorOffset = 1f;
+    private FloorDetector _floorDetector;
 
 
     //privates and protected
@@ -34,11 +41,13 @@ public class PlayerStateMachine : MonoBehaviour
     private Transform _cameraTransform;
     private Animator _animator;
     private bool _isJumping = false;
+    private bool _isGrounded = true;
 
 
     private void Awake() // usually used for getting components of the object the script is on
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _floorDetector = GetComponentInChildren<FloorDetector>();
     }
 
     private void Start() // usually used to get components in other objects
@@ -54,24 +63,39 @@ public class PlayerStateMachine : MonoBehaviour
     {
         OnStateUpdate();
 
+        // Draw boxes that represents the ground checker
+        Collider[] groundColliders = Physics.OverlapBox(_groundChecker.position, _boxDimension, Quaternion.identity, _groundMask);
+
+        _isGrounded = groundColliders.Length > 0;// if more than one ground collider touches the ground, isGrounded becomes true
+
+        if (_isGrounded)
+        {
+            Debug.Log("Touchdown!");
+        }
+
 
     }
 
 
     private void FixedUpdate()
     {
+
+       if(_currentState == PlayerState.JUMPING || _currentState == PlayerState.FALLING)
+        {
+            _direction.y = _rigidbody.velocity.y;
+        }
+
+       else
+        {
+            StickToGround();
+        }
+
        if (_isJumping )
         {
             _direction.y = _jumpForce;
             _isJumping = false; // to prevent changing to isJumping every frame after the first one
         }
-
-       else
-        { 
-         // add direction on y-axis to simulate normal gravity when falling, other wise characte will drop only very slowly
-       _direction.y = _rigidbody.velocity.y;
-        }
-
+        
         RotateTowardsCamera();
         
         // move character by setting its velocity to the direction of movement calculated earlier
@@ -208,9 +232,9 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.FALLING:
                 Move();
 
-                if (_rigidbody.velocity.y > 0)
+                if (_isGrounded)
                 {
-                    TransitionToState(PlayerState.FALLING);
+                    TransitionToState(PlayerState.IDLE);
                 }
 
                 break;
@@ -277,9 +301,17 @@ public class PlayerStateMachine : MonoBehaviour
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
     }
 
-    private void RotateTowardsCamera()
+    private void StickToGround()
     {
-        
+        Vector3 averagePosition = _floorDetector.AverageHeight();
+
+        Vector3 newPosition = new Vector3(_rigidbody.position.x, averagePosition.y + yFloorOffset, _rigidbody.position.z); // glues the character to the average position on the y-axis
+        _rigidbody.MovePosition(newPosition);
+        _direction.y = 0;
+    }
+
+    private void RotateTowardsCamera()
+    {        
         Vector3 lookDirection = _cameraTransform.forward;   // make a copy of cameraTransform.forward...
         lookDirection.y = 0;    // ... to be able to set the y-axis of the camera to 0
         // --> otherwise player would lean forward when looking down and lean backward when looking up
@@ -287,10 +319,12 @@ public class PlayerStateMachine : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(lookDirection); // declare the look rotation according to cameraForward...
         rotation = Quaternion.RotateTowards(_rigidbody.rotation, rotation, _turnSpeed * Time.fixedDeltaTime); //create a smoothed rotation value based on the player's turnSpeed
         _rigidbody.MoveRotation(rotation); // ... and use it with the method "MoveRotation" to make the player rotate
+    }
 
-
-
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(_groundChecker.position, _boxDimension * 2f); // by default OverlapBox only takes half the size of the box in each dimension, so we need to double the size of _boxDimension
     }
 
 
