@@ -7,12 +7,13 @@ using UnityEngine;
 public enum PlayerState
 {
     IDLE,
+    WALKING,
     JOGGING,
     RUNNING,
     SNEAKING,
     JUMPING,
     FALLING,
-    ROLLING
+    DODGING,
 
 }
 
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _direction = new Vector3();
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
+    private Animator _animator;
     private bool _isJumping = false;
 
 
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start() // usually used to get components in other objects
     {
         _cameraTransform = Camera.main.transform;
+        TransitionToState(PlayerState.IDLE);
         
     }
 
@@ -57,21 +60,122 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-       // add direction on y-axis to simulate normal gravity when falling, other wise characte will drop only very slowly
+       if (_isJumping )
+        {
+            _direction.y = _jumpForce;
+            _isJumping = false; // to prevent changing to isJumping every frame after the first one
+        }
+
+       else
+        { 
+         // add direction on y-axis to simulate normal gravity when falling, other wise characte will drop only very slowly
        _direction.y = _rigidbody.velocity.y;
+        }
 
         RotateTowardsCamera();
         
         // move character by setting its velocity to the direction of movement calculated earlier
        _rigidbody.velocity = _direction;
 
+    }
+
+
+    //---------------------------| S T A T E  M A C H I N E S |----------------------------------------------------------------------------------------------------------------------
+
+    private void OnStateEnter()
+    {
+        switch (_currentState)
+        {
+            case PlayerState.IDLE:
+                break;
+            case PlayerState.WALKING:
+                break;
+            case PlayerState.JOGGING:
+                break;
+            case PlayerState.RUNNING:
+                break;
+            case PlayerState.SNEAKING:
+                break;
+            case PlayerState.JUMPING:
+                _isJumping = true;
+                break;
+            case PlayerState.FALLING:
+                break;
+            case PlayerState.DODGING:
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private void OnStateUpdate()
+    {
+        switch (_currentState)
+        {
+            case PlayerState.IDLE:
+                break;
+            case PlayerState.WALKING:
+                break;
+            case PlayerState.JOGGING:
+                break;
+            case PlayerState.RUNNING:
+                break;
+            case PlayerState.SNEAKING:
+                break;
+            case PlayerState.JUMPING:
+                break;
+            case PlayerState.FALLING:
+                break;
+            case PlayerState.DODGING:
+                break;
+            default:
+                break;
+
+        }
 
     }
 
-    
-    //---------------------------M E T H O D S----------------------------------------------------------------------------------------------------------------------
-    
-    
+    private void OnStateExit()
+    {
+        switch (_currentState)
+        {
+            case PlayerState.IDLE:
+                break;
+            case PlayerState.WALKING:
+                break;
+            case PlayerState.JOGGING:
+                break;
+            case PlayerState.RUNNING:
+                break;
+            case PlayerState.SNEAKING:
+                break;
+            case PlayerState.JUMPING:
+                break;
+            case PlayerState.FALLING:
+                break;
+            case PlayerState.DODGING:
+                break;
+            default:
+                break;
+
+        }
+
+    }
+
+
+    //---------------------------| S T A T E  M A C H I N E  M E T H O D S |----------------------------------------------------------------------------------------------------------------------
+
+    private void TransitionToState(PlayerState ToState)
+    {
+        OnStateExit();
+        _currentState = ToState;
+        OnStateEnter();
+
+    }
+
+    //---------------------------| O T H E R  M E T H O D S | ----------------------------------------------------------------------------------------------------------------------
+
     private void Move()
     {
         _direction = _cameraTransform.forward * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
