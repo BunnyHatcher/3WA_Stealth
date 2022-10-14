@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 205153542}
   - component: {fileID: 205153541}
   - component: {fileID: 205153540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3522,7 +3522,7 @@ GameObject:
   - component: {fileID: 224339856}
   - component: {fileID: 224339855}
   - component: {fileID: 224339854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4721,7 +4721,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676824259}
-  m_LocalRotation: {x: 0.09853761, y: 1e-45, z: -0, w: 0.99513334}
+  m_LocalRotation: {x: 0.09853761, y: -1e-45, z: -0, w: 0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4907,7 +4907,7 @@ GameObject:
   - component: {fileID: 686809452}
   - component: {fileID: 686809451}
   - component: {fileID: 686809450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5482,7 +5482,7 @@ GameObject:
   - component: {fileID: 777097448}
   - component: {fileID: 777097447}
   - component: {fileID: 777097446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5963,7 +5963,7 @@ GameObject:
   - component: {fileID: 888977532}
   - component: {fileID: 888977531}
   - component: {fileID: 888977530}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6323,7 +6323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957694787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.808, z: 0.249}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6407,7 +6407,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18910751, y: -0.000000016895916, z: 0.0000000032538556, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910751, y: -0.000000016895918, z: 0.000000003253856, w: 0.9819564}
   m_LocalPosition: {x: -0.5200754, y: 1.5, z: 5.4485893}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6475,9 +6475,9 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968277934}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c04dfb0c5029d8648892381e7e465504, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -6778,7 +6778,7 @@ GameObject:
   - component: {fileID: 1087149947}
   - component: {fileID: 1087149946}
   - component: {fileID: 1087149945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stair (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9927,7 +9927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1188288730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blockout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10033,7 +10033,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887096, y: 0.000000016125318, z: -0.0000000060028076, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887096, y: -0.000000016125318, z: 0.0000000060028076, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10383,7 +10383,7 @@ GameObject:
   - component: {fileID: 1301742951}
   - component: {fileID: 1301742950}
   - component: {fileID: 1301742949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11291,7 +11291,7 @@ GameObject:
   - component: {fileID: 1316760234}
   - component: {fileID: 1316760233}
   - component: {fileID: 1316760232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32464,7 +32464,7 @@ GameObject:
   - component: {fileID: 1387703697}
   - component: {fileID: 1387703696}
   - component: {fileID: 1387703695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32958,7 +32958,7 @@ GameObject:
   - component: {fileID: 1409320690}
   - component: {fileID: 1409320689}
   - component: {fileID: 1409320688}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stair (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35947,7 +35947,7 @@ GameObject:
   - component: {fileID: 1458267336}
   - component: {fileID: 1458267335}
   - component: {fileID: 1458267334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36127,13 +36127,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477446144}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c04dfb0c5029d8648892381e7e465504, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.52
+  m_Height: 2.04
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.24}
 --- !u!4 &1477446147
 Transform:
   m_ObjectHideFlags: 0
@@ -36166,6 +36166,11 @@ MonoBehaviour:
   _moveSpeed: 10
   _turnSpeed: 500
   _jumpForce: 5
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _boxDimension: {x: 0.29, y: 0.2, z: 0.29}
+  _groundChecker: {fileID: 957694788}
 --- !u!43 &1572402475
 Mesh:
   m_ObjectHideFlags: 0
@@ -36470,7 +36475,7 @@ GameObject:
   - component: {fileID: 1608508047}
   - component: {fileID: 1608508046}
   - component: {fileID: 1608508045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37171,7 +37176,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730187505}
-  m_LocalRotation: {x: 0.1891075, y: -0.000000008447957, z: 0.0000000016269277, w: 0.9819564}
+  m_LocalRotation: {x: 0.1891075, y: -0.000000008447959, z: 0.000000001626928, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -37291,7 +37296,7 @@ GameObject:
   - component: {fileID: 1842429601}
   - component: {fileID: 1842429600}
   - component: {fileID: 1842429599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arc2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38113,7 +38118,7 @@ GameObject:
   - component: {fileID: 1902080648}
   - component: {fileID: 1902080647}
   - component: {fileID: 1902080646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39086,7 +39091,7 @@ GameObject:
   - component: {fileID: 2105087263}
   - component: {fileID: 2105087262}
   - component: {fileID: 2105087261}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UModeler Object (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
