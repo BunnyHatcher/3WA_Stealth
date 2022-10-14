@@ -6,13 +6,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    //public and serialized
     public float _moveSpeed = 10f;
     public float _turnSpeed = 70f;
+    public float _jumpForce = 5f;
 
+
+    //privates and protected
+    //private PlayerState _currentState;
     private Vector3 _direction = new Vector3();
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
+    private bool _isJumping = false;
 
 
     private void Awake() // usually used for getting components of the object the script is on
@@ -23,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start() // usually used to get components in other objects
     {
         _cameraTransform = Camera.main.transform;
+        
     }
 
 
@@ -48,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
+    //---------------------------M E T H O D S----------------------------------------------------------------------------------------------------------------------
+    
+    
     private void Move()
     {
         _direction = _cameraTransform.forward * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
