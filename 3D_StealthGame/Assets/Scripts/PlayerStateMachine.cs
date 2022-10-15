@@ -149,6 +149,7 @@ public class PlayerStateMachine : MonoBehaviour
                 {
                     TransitionToState(PlayerState.JOGGING);
                     _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                    _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
                 }
 
                 else if(Input.GetButtonDown("Jump"))
@@ -159,7 +160,7 @@ public class PlayerStateMachine : MonoBehaviour
                 break;
 
         //------W A L K I N G---------------------------------------------------------------------------------------------------------------------------------------------------
-
+        /*
             case PlayerState.WALKING:
                 Move();
 
@@ -174,6 +175,7 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.JUMPING);
                 }
                 break;
+        */
 
         //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
