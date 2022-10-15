@@ -122,8 +122,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.SNEAKING:
                 break;
             case PlayerState.JUMPING:
-                _isJumping = true;
-                Debug.Log("Entered Jump State!");
+                _isJumping = true;                
                 break;
             case PlayerState.FALLING:
                 break;
@@ -175,7 +174,7 @@ public class PlayerStateMachine : MonoBehaviour
                 else if (Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
-                    Debug.Log("in Jumping State");
+                    
                 }
 
                 else if (_rigidbody.velocity.y > 0)
