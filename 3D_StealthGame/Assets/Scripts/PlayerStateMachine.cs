@@ -48,6 +48,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _floorDetector = GetComponentInChildren<FloorDetector>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Start() // usually used to get components in other objects
@@ -147,7 +148,7 @@ public class PlayerStateMachine : MonoBehaviour
                 if(_direction.magnitude > 0)
                 {
                     TransitionToState(PlayerState.JOGGING);
-                    
+                    _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                 }
 
                 else if(Input.GetButtonDown("Jump"))
@@ -160,6 +161,18 @@ public class PlayerStateMachine : MonoBehaviour
         //------W A L K I N G---------------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.WALKING:
+                Move();
+
+                if (_direction.magnitude > 0)
+                {
+                    TransitionToState(PlayerState.JOGGING);
+                    _animator.SetFloat("MoveSpeedX", Input.GetAxis("Horizontal"));
+                }
+
+                else if (Input.GetButtonDown("Jump"))
+                {
+                    TransitionToState(PlayerState.JUMPING);
+                }
                 break;
 
         //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
