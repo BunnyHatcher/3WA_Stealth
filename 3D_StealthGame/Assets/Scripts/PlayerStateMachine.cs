@@ -88,12 +88,13 @@ public class PlayerStateMachine : MonoBehaviour
        else
         {
             StickToGround();
+            Debug.Log("Is Sticking to ground");
         }
 
        if (_isJumping )
         {
             _direction.y = _jumpForce;
-            _isJumping = false; // to prevent changing to isJumping every frame after the first one
+            _isJumping = false; // to prevent changing to isJumping every frame after the first one: we want to jump only once
         }
         
         RotateTowardsCamera();
@@ -122,6 +123,7 @@ public class PlayerStateMachine : MonoBehaviour
                 break;
             case PlayerState.JUMPING:
                 _isJumping = true;
+                Debug.Log("Entered Jump State!");
                 break;
             case PlayerState.FALLING:
                 break;
@@ -146,6 +148,7 @@ public class PlayerStateMachine : MonoBehaviour
                 if(_direction.magnitude > 0)
                 {
                     TransitionToState(PlayerState.JOGGING);
+                    
                 }
 
                 else if(Input.GetButtonDown("Jump"))
@@ -172,6 +175,7 @@ public class PlayerStateMachine : MonoBehaviour
                 else if (Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
+                    Debug.Log("in Jumping State");
                 }
 
                 else if (_rigidbody.velocity.y > 0)
@@ -222,7 +226,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                 if (_rigidbody.velocity.y > 0)
                 {
-                    TransitionToState(PlayerState.FALLING);
+                    TransitionToState(PlayerState.FALLING);                    
                 }
 
                 break;

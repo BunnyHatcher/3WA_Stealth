@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if(Input.GetButtonDown("Jump") && _isJumping == false)
+        if(Input.GetButtonDown("Jump") && _isGrounded == true)
         {
             _isJumping = true;
            // _animator.SetBool("isJumping", true);
