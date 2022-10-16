@@ -102,7 +102,7 @@ public class PlayerStateMachine : MonoBehaviour
         
         // move character by setting its velocity to the direction of movement calculated earlier
        _rigidbody.velocity = _direction;
-        Debug.Log(_direction.magnitude);
+        //Debug.Log(_direction.magnitude);
 
     }
 
@@ -157,6 +157,8 @@ public class PlayerStateMachine : MonoBehaviour
                 else if(Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
+                    _animator.SetBool("isJumping", true);
+                    _animator.SetBool("isGrounded", false);
                 }
 
                 break;
@@ -194,7 +196,8 @@ public class PlayerStateMachine : MonoBehaviour
                 else if (Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
-                    
+                    _animator.SetBool("isJumping", true);
+                    _animator.SetBool("isGrounded", false);
                 }
 
                 else if (_rigidbody.velocity.y > 0)
