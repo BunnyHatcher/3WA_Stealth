@@ -102,6 +102,7 @@ public class PlayerStateMachine : MonoBehaviour
         
         // move character by setting its velocity to the direction of movement calculated earlier
        _rigidbody.velocity = _direction;
+        //Debug.Log(_direction.magnitude);
 
     }
 
@@ -150,6 +151,7 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.JOGGING);
                     _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                     _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                    _animator.SetFloat("moveSpeed", _direction.magnitude);
                 }
 
                 else if(Input.GetButtonDown("Jump"))
@@ -184,6 +186,9 @@ public class PlayerStateMachine : MonoBehaviour
                 if (_direction.magnitude == 0)
                 {
                     TransitionToState(PlayerState.IDLE);
+                    _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                    _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                    _animator.SetFloat("moveSpeed", _direction.magnitude);
                 }
 
                 else if (Input.GetButtonDown("Jump"))
