@@ -102,7 +102,7 @@ public class PlayerStateMachine : MonoBehaviour
         
         // move character by setting its velocity to the direction of movement calculated earlier
        _rigidbody.velocity = _direction;
-        //Debug.Log(_direction.magnitude);
+        Debug.Log(_direction.magnitude);
 
     }
 
