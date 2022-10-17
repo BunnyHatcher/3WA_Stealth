@@ -125,7 +125,9 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.SNEAKING:
                 break;
             case PlayerState.JUMPING:
-                _isJumping = true;                
+                _isJumping = true;
+                _animator.SetBool("isJumping", true);
+                _animator.SetBool("isGrounded", false);
                 break;
             case PlayerState.FALLING:
                 break;
@@ -204,6 +206,9 @@ public class PlayerStateMachine : MonoBehaviour
                 else if (_rigidbody.velocity.y > 0)
                 {
                     TransitionToState(PlayerState.FALLING);
+                    _animator.SetBool("isJumping", false);
+                    _animator.SetBool("isGrounded", false);
+
                 }
 
                 break;
@@ -223,6 +228,8 @@ public class PlayerStateMachine : MonoBehaviour
                 else if (_rigidbody.velocity.y > 0)
                 {
                     TransitionToState(PlayerState.FALLING);
+                    _animator.SetBool("isJumping", false);
+                    _animator.SetBool("isGrounded", false);
                 }
                 
                 break;
