@@ -37,6 +37,7 @@ public class PlayerStateMachine : MonoBehaviour
     //privates and protected
     private PlayerState _currentState;
     private Vector3 _direction = new Vector3();
+    private Vector3 _orientation = new Vector3();
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
     private Animator _animator;
@@ -337,7 +338,8 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     private void RotateTowardsCamera()
-    {        
+    {
+          
         Vector3 lookDirection = _cameraTransform.forward;   // make a copy of cameraTransform.forward...
         lookDirection.y = 0;    // ... to be able to set the y-axis of the camera to 0
         // --> otherwise player would lean forward when looking down and lean backward when looking up

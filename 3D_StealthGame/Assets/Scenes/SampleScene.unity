@@ -3470,7 +3470,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -3951,7 +3950,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -3990,6 +3988,170 @@ Transform:
   m_Father: {fileID: 1188288730}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!43 &285340711
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: um_24284
+  serializedVersion: 10
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 36
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 24
+    localAABB:
+      m_Center: {x: 3.6248264, y: 1.8265834, z: 4.8666115}
+      m_Extent: {x: 3.6248264, y: 2.0084224, z: 4.8666115}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 000001000200000002000300040005000600040006000700080009000a0008000a000b000c000d000e000c000e000f00100011001200100012001300140015001600140016001700
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 24
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 40
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 56
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 1536
+    _typelessdata: 000000000000000048bb1b4100000000000000000000803f000080bf0000000000000000000080bf0000803f0000803f0000803f0000803f000000000000000028fde7400000000048bb1b4100000000000000000000803f000080bf0000000000000000000080bf0000803f0000803f0000803f0000803f28fde7c00000000028fde740bc70754048bb1b4100000000000000000000803f000080bf0000000000000000000080bf0000803f0000803f0000803f0000803f28fde7c0bc70754000000000bc70754048bb1b4100000000000000000000803f000080bf0000000000000000000080bf0000803f0000803f0000803f0000803f00000000bc70754000000000c066363f000000000000000068c3733f15679cbe0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f000000000000000000000000bc70754048bb1b410000000068c3733f15679cbe0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f0000000048bb1b4128fde740bc70754048bb1b410000000068c3733f15679cbe0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f28fde74048bb1b4128fde740c066363f000000000000000068c3733f15679cbe0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f28fde740000000000000000000343abe000000000000000091f47fbfc904993c000080bf00000000000000000000803f0000803f0000803f0000803f0000803f000000000000000028fde74000343abe000000000000000091f47fbfc904993c000080bf00000000000000000000803f0000803f0000803f0000803f0000803f28fde7c00000000028fde7400000000048bb1b410000000091f47fbfc904993c000080bf00000000000000000000803f0000803f0000803f0000803f0000803f28fde7c048bb1bc1000000000000000048bb1b410000000091f47fbfc904993c000080bf00000000000000000000803f0000803f0000803f0000803f0000803f0000000048bb1bc128fde7400000000048bb1b410000803f000000000000000000000000000000000000803f000080bf0000803f0000803f0000803f0000803f48bb1b410000000028fde74000343abe000000000000803f000000000000000000000000000000000000803f000080bf0000803f0000803f0000803f0000803f0000000000343abe28fde740c066363f000000000000803f000000000000000000000000000000000000803f000080bf0000803f0000803f0000803f0000803f00000000c066363f28fde740bc70754048bb1b410000803f000000000000000000000000000000000000803f000080bf0000803f0000803f0000803f0000803f48bb1b41bc70754028fde74000343abe000000000000000000000000000080bf0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f28fde74000343abe0000000000343abe000000000000000000000000000080bf0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f0000000000343abe00000000c066363f000000000000000000000000000080bf0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f00000000c066363f28fde740c066363f000000000000000000000000000080bf0000803f0000000000000000000080bf0000803f0000803f0000803f0000803f28fde740c066363f0000000000343abe00000000000080bf000000000000000000000000c4fbc6a3000080bf000080bf0000803f0000803f0000803f0000803f0000000000343abe000000000000000048bb1b41000080bf00000000000000000000000000008022000080bf000080bf0000803f0000803f0000803f0000803f48bb1bc10000000000000000bc70754048bb1b41000080bf000000000000000000000000a16c3b22000080bf000080bf0000803f0000803f0000803f0000803f48bb1bc1bc70754000000000c066363f00000000000080bf000000000000000000000000000080a4000080bf000080bf0000803f0000803f0000803f0000803f00000000c066363f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 3.6248264, y: 1.8265834, z: 4.8666115}
+    m_Extent: {x: 3.6258264, y: 2.0094223, z: 4.867612}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!43 &372365314
 Mesh:
   m_ObjectHideFlags: 0
@@ -4902,7 +5064,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -4988,7 +5149,7 @@ MonoBehaviour:
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse Y
+    m_InputAxisName: Yaw
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
@@ -5012,7 +5173,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
+    m_InputAxisName: Pitch
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: -180
@@ -5811,7 +5972,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -6714,7 +6874,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -6801,7 +6960,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 979f96511a4ac714baef1ea11314a0c1, type: 2}
+  m_Mesh: {fileID: 285340711}
 --- !u!23 &800671506
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6851,7 +7010,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800671503}
-  m_Mesh: {fileID: 4300000, guid: 979f96511a4ac714baef1ea11314a0c1, type: 2}
+  m_Mesh: {fileID: 285340711}
 --- !u!114 &800671508
 MonoBehaviour:
   m_ObjectHideFlags: 16
@@ -7078,7 +7237,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -7093,9 +7251,9 @@ MonoBehaviour:
   editMode: 1
   recalculateTangents: 1
   serializedGuid: 
-  assetPath: Assets/IgnoredAssets/tripolygon/UModeler/MeshAssets/um_69374.asset
+  assetPath: 
   isInvisibleObject: 0
-  mainRenderableMesh: {fileID: 4300000, guid: 979f96511a4ac714baef1ea11314a0c1, type: 2}
+  mainRenderableMesh: {fileID: 285340711}
   hotspotLayout: {fileID: 0}
   hotspotScale: 1
   hotspotPadding: 0
@@ -7412,7 +7570,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -7559,7 +7716,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18910751, y: 0.000000016895918, z: -0.000000003253856, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910751, y: -0.000000016895916, z: 0.0000000032538556, w: 0.9819564}
   m_LocalPosition: {x: -0.5200754, y: 1.5, z: 5.4485893}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10808,7 +10965,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -12337,7 +12493,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -33510,7 +33665,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -33859,7 +34013,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -36993,7 +37146,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -37175,7 +37327,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -38088,7 +38239,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -38452,7 +38602,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -38801,7 +38950,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -39222,7 +39370,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730187505}
-  m_LocalRotation: {x: 0.1891075, y: 0.000000008447959, z: -0.000000001626928, w: 0.9819564}
+  m_LocalRotation: {x: 0.1891075, y: -0.000000008447957, z: 0.0000000016269277, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40029,7 +40177,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -40409,7 +40556,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -40875,7 +41021,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -42012,7 +42157,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
