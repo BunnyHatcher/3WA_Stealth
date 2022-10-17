@@ -216,6 +216,8 @@ public class PlayerStateMachine : MonoBehaviour
                if (Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
+                    _animator.SetBool("isJumping", true);
+                    _animator.SetBool("isGrounded", false);
                 }
 
                 else if (_rigidbody.velocity.y > 0)
@@ -249,7 +251,9 @@ public class PlayerStateMachine : MonoBehaviour
 
                 if (_rigidbody.velocity.y > 0)
                 {
-                    TransitionToState(PlayerState.FALLING);                    
+                    TransitionToState(PlayerState.FALLING);
+                    _animator.SetBool("isJumping", false);
+                    _animator.SetBool("isGrounded", false);
                 }
 
                 break;
@@ -262,6 +266,8 @@ public class PlayerStateMachine : MonoBehaviour
                 if (_isGrounded)
                 {
                     TransitionToState(PlayerState.IDLE);
+                    _animator.SetBool("isJumping", false);
+                    _animator.SetBool("isGrounded", true);
                 }
 
                 break;
@@ -321,7 +327,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Move()
     {
         _direction = _cameraTransform.forward * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
-                      + _cameraTransform.right * Input.GetAxis("Horizontal");      //left-right movement: relative to PLAYER
+                      + _cameraTransform.right * Input.GetAxisRaw("Horizontal");//left-right movement: relative to PLAYER
 
         _direction *= _moveSpeed; // multiply by movement speed to get direction of movement
 
