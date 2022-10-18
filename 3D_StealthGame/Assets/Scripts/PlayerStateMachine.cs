@@ -128,15 +128,16 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.WALKING:
                 break;
             case PlayerState.JOGGING:
+                _currentSpeed = _joggingSpeed;
                 break;
             case PlayerState.RUNNING:
+                _currentSpeed = _runningSpeed;
                 break;
             case PlayerState.SNEAKING:
+                _currentSpeed = _sneakingSpeed;
                 break;
             case PlayerState.JUMPING:
                 _isJumping = true;
-                _animator.SetBool("isJumping", true);
-                _animator.SetBool("isGrounded", false);
                 break;
             case PlayerState.FALLING:
                 break;
@@ -157,31 +158,31 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.IDLE:
                 Move();
+                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                _animator.SetFloat("moveSpeed", _direction.magnitude);
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", true);
 
-                if(_direction.magnitude > 0)
+                if (_direction.magnitude > 0)
                 {
-                    if (Input.GetButton("Fire3"))
+                    if (Input.GetButton("Run"))
                     {
                         TransitionToState(PlayerState.RUNNING);
-                        _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                        _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                        _animator.SetFloat("moveSpeed", _direction.magnitude);
+                       
                     }
                     
                     else
                     {
                         TransitionToState(PlayerState.JOGGING);
-                        _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                        _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                        _animator.SetFloat("moveSpeed", _direction.magnitude);
+                        
                     }
                 }
 
                 else if(Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
-                    _animator.SetBool("isJumping", true);
-                    _animator.SetBool("isGrounded", false);
+                    
                 }
 
                 break;
@@ -208,34 +209,33 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.JOGGING:
                 Move();
+                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                _animator.SetFloat("moveSpeed", _direction.magnitude);
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", true);
+
                 if (_direction.magnitude == 0)
                 {
                     TransitionToState(PlayerState.IDLE);
-                    _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                    _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                    _animator.SetFloat("moveSpeed", _direction.magnitude);
+                    
                 }
 
                 else if (Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
-                    _animator.SetBool("isJumping", true);
-                    _animator.SetBool("isGrounded", false);
+                    
                 }
 
                 else if (!_isGrounded)
                 {
                     TransitionToState(PlayerState.FALLING);
-                    _animator.SetBool("isJumping", false);
-                    _animator.SetBool("isGrounded", false);
                 }
 
                 else if (Input.GetButton("Run"))
                 {
                     TransitionToState(PlayerState.RUNNING);
-                    _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                    _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                    _animator.SetFloat("moveSpeed", _direction.magnitude);
+                    
                 }
 
                 break;
@@ -244,27 +244,27 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.RUNNING:
                 Move();
-                
-               if (Input.GetButtonDown("Jump"))
+                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                _animator.SetFloat("moveSpeed", _direction.magnitude);
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", true);
+
+                Debug.Log("Running");
+
+                if (Input.GetButtonDown("Jump"))
                 {
                     TransitionToState(PlayerState.JUMPING);
-                    _animator.SetBool("isJumping", true);
-                    _animator.SetBool("isGrounded", false);
                 }
 
                 else if ( !_isGrounded )
                 {
                     TransitionToState(PlayerState.FALLING);
-                    _animator.SetBool("isJumping", false);
-                    _animator.SetBool("isGrounded", false);
                 }
 
                else if (!Input.GetButton("Run"))
                 {
                     TransitionToState(PlayerState.JOGGING);
-                    _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                    _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                    _animator.SetFloat("moveSpeed", _direction.magnitude);
 
                 }
                 
@@ -274,6 +274,11 @@ public class PlayerStateMachine : MonoBehaviour
                 
             case PlayerState.SNEAKING:
                 Move();
+                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                _animator.SetFloat("moveSpeed", _direction.magnitude);
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", true);
 
                 if (Input.GetButtonDown("Jump"))
                 {
@@ -290,13 +295,14 @@ public class PlayerStateMachine : MonoBehaviour
         //------J U M P I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.JUMPING:
-                Move();          
+                Move();
+                _animator.SetBool("isJumping", true);
+                _animator.SetBool("isGrounded", false);
 
                 if ( _rigidbody.velocity.y < -0.2f && !_isGrounded )
                 {
                     TransitionToState(PlayerState.FALLING);
-                    _animator.SetBool("isJumping", false);
-                    _animator.SetBool("isGrounded", false);
+                    
                 }
 
                 break;
@@ -305,12 +311,13 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.FALLING:
                 Move();
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", false);
 
                 if (_isGrounded)
                 {
                     TransitionToState(PlayerState.IDLE);
-                    _animator.SetBool("isJumping", false);
-                    _animator.SetBool("isGrounded", true);
+                    
                 }
 
                 break;
