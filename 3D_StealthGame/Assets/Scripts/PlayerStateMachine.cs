@@ -135,6 +135,7 @@ public class PlayerStateMachine : MonoBehaviour
                 break;
             case PlayerState.SNEAKING:
                 _currentSpeed = _sneakingSpeed;
+                _animator.SetBool("isSneaking", true);
                 break;
             case PlayerState.JUMPING:
                 _isJumping = true;
@@ -170,6 +171,11 @@ public class PlayerStateMachine : MonoBehaviour
                     {
                         TransitionToState(PlayerState.RUNNING);
                        
+                    }
+
+                    else if (Input.GetButton("Sneak"))
+                    {
+                        TransitionToState(PlayerState.SNEAKING);
                     }
                     
                     else
@@ -238,6 +244,11 @@ public class PlayerStateMachine : MonoBehaviour
                     
                 }
 
+                else if (Input.GetButton("Sneak"))
+                {
+                    TransitionToState(PlayerState.SNEAKING);
+                }
+
                 break;
 
         //-------R U N N IN G ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -285,7 +296,12 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.JUMPING);
                 }
 
-                else if (_rigidbody.velocity.y > 0)
+                else if (!Input.GetButton("Sneak"))
+                {
+                    TransitionToState(PlayerState.JOGGING);
+                }
+
+                else if (!_isGrounded)
                 {
                     TransitionToState(PlayerState.FALLING);
                 }
@@ -347,6 +363,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.RUNNING:
                 break;
             case PlayerState.SNEAKING:
+                _animator.SetBool("isSneaking", false);
                 break;
             case PlayerState.JUMPING:
                 break;
