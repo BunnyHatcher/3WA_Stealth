@@ -46,7 +46,8 @@ public class PlayerStateMachine : MonoBehaviour
     private Vector3 _direction = new Vector3();
     private bool _isJumping = false;
     private bool _isGrounded = true;
-    
+    private bool _isSneaking = true;
+
     // References
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
@@ -240,8 +241,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                 else if (Input.GetButton("Run"))
                 {
-                    TransitionToState(PlayerState.RUNNING);
-                    
+                    TransitionToState(PlayerState.RUNNING);                    
                 }
 
                 else if (Input.GetButton("Sneak"))
@@ -251,7 +251,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                 break;
 
-        //-------R U N N IN G ----------------------------------------------------------------------------------------------------------------------------------------------
+        //-------R U N N I N G ----------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.RUNNING:
                 Move();
