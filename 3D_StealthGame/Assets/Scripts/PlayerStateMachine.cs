@@ -175,7 +175,7 @@ public class PlayerStateMachine : MonoBehaviour
                        
                     }
 
-                    else if (Input.GetButton("Sneak"))
+                    else if (Input.GetButtonDown("Sneak") && _isSneaking == false)
                     {
                         TransitionToState(PlayerState.SNEAKING);
                     }
@@ -245,7 +245,7 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.RUNNING);                    
                 }
 
-                else if (Input.GetButton("Sneak"))
+                else if (Input.GetButtonDown("Sneak") && _isSneaking == false)
                 {
                     TransitionToState(PlayerState.SNEAKING);
                 }
@@ -297,7 +297,7 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.JUMPING);
                 }
 
-                else if (!Input.GetButton("Sneak"))
+                else if (Input.GetButtonDown("Sneak") && _isSneaking == true)
                 {
                     TransitionToState(PlayerState.JOGGING);
                 }
