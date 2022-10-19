@@ -47,6 +47,7 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _isJumping = false;
     private bool _isGrounded = true;
     private bool _isSneaking = false;
+    private bool _isDodging = false;
 
     // References
     private Rigidbody _rigidbody;
@@ -82,7 +83,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_isGrounded)
         {
-            //Debug.Log("Touchdown!");
+            Debug.Log("Touchdown!");
         }
 
 
@@ -108,12 +109,20 @@ public class PlayerStateMachine : MonoBehaviour
             _direction.y = _jumpForce;
             _isJumping = false; // to prevent changing to isJumping every frame after the first one: we want to jump only once
         }
+
+       /*
+        if (_isDodging)
+        {
+            _isDodging = false;
+        }
+       */
         
         RotateTowardsCamera();
         
         // move character by setting its velocity to the direction of movement calculated earlier
        _rigidbody.velocity = _direction;
-        Debug.Log("Speed is: " + _direction.magnitude);
+       
+        // Debug.Log("Speed is: " + _direction.magnitude);
 
     }
 
@@ -145,6 +154,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.FALLING:
                 break;
             case PlayerState.DODGING:
+                _isDodging = true;
                 break;
             default:
                 break;
@@ -172,12 +182,10 @@ public class PlayerStateMachine : MonoBehaviour
                     if (Input.GetButton("Run"))
                     {
                         TransitionToState(PlayerState.RUNNING);
-
                     }
                     else
                     {
-                    TransitionToState(PlayerState.JOGGING);
-
+                        TransitionToState(PlayerState.JOGGING);
                     }
                 }
 
@@ -190,8 +198,12 @@ public class PlayerStateMachine : MonoBehaviour
 
                 else if(Input.GetButtonDown("Jump"))
                 {
-                    TransitionToState(PlayerState.JUMPING);
-                    
+                    TransitionToState(PlayerState.JUMPING);                    
+                }
+
+                else if (Input.GetButtonDown("Dodge"))
+                {
+                    TransitionToState(PlayerState.DODGING);
                 }
 
                 break;
@@ -232,8 +244,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                 else if (Input.GetButtonDown("Jump"))
                 {
-                    TransitionToState(PlayerState.JUMPING);
-                    
+                    TransitionToState(PlayerState.JUMPING);                    
                 }
 
                 else if (!_isGrounded)
@@ -249,6 +260,11 @@ public class PlayerStateMachine : MonoBehaviour
                 else if (Input.GetButtonDown("Sneak") && _isSneaking == false)
                 {
                     TransitionToState(PlayerState.SNEAKING);
+                }
+
+                else if (Input.GetButtonDown("Dodge"))
+                {
+                    TransitionToState(PlayerState.DODGING);
                 }
 
                 break;
@@ -278,9 +294,13 @@ public class PlayerStateMachine : MonoBehaviour
                else if (!Input.GetButton("Run"))
                 {
                     TransitionToState(PlayerState.JOGGING);
-
                 }
-                
+
+               else if (Input.GetButtonDown("Dodge"))
+                {
+                    TransitionToState(PlayerState.DODGING);
+                }
+
                 break;
             
         //------S N E A K I N G --------------------------------------------------------------------------------------------------------------------------------------------
@@ -344,6 +364,9 @@ public class PlayerStateMachine : MonoBehaviour
        //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.DODGING:
+                Roll();
+                _animator.SetBool("isDodging", true);
+                
                 break;
 
             default:
@@ -374,6 +397,8 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.FALLING:
                 break;
             case PlayerState.DODGING:
+                _isDodging = false;
+                _animator.SetBool("isDodging", false);
                 break;
             default:
                 break;
@@ -403,6 +428,21 @@ public class PlayerStateMachine : MonoBehaviour
         _direction *= _currentSpeed; // multiply by movement speed to get direction of movement
 
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
+    }
+
+    public void Roll()
+    {
+        // calculate movement input
+        _direction = _cameraTransform.forward * Input.GetAxis("Vertical")
+                   + _cameraTransform.right * Input.GetAxisRaw("Horizontal");
+
+        //if character is moving...
+         //_animator.SetBool("isDodging", true);//... Play Rolling animation
+         _direction.y = 0; // don't move upwards
+
+        //make sure character rotates into direction of movement  
+            Quaternion rollRotation = Quaternion.LookRotation(_direction);
+            _rigidbody.transform.rotation = rollRotation;
     }
 
     private void StickToGround()
