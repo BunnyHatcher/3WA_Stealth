@@ -37482,10 +37482,10 @@ MonoBehaviour:
   _moveSpeed: 10
   _turnSpeed: 500
   _jumpForce: 5
-  _walkingSpeed: 1
+  _walkingSpeed: 2
   _joggingSpeed: 5
   _runningSpeed: 10
-  _sneakingSpeed: 2
+  _sneakingSpeed: 3
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
