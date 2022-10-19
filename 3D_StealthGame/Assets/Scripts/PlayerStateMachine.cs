@@ -46,7 +46,7 @@ public class PlayerStateMachine : MonoBehaviour
     private Vector3 _direction = new Vector3();
     private bool _isJumping = false;
     private bool _isGrounded = true;
-    private bool _isSneaking = true;
+    private bool _isSneaking = false;
 
     // References
     private Rigidbody _rigidbody;
@@ -135,6 +135,7 @@ public class PlayerStateMachine : MonoBehaviour
                 _currentSpeed = _runningSpeed;
                 break;
             case PlayerState.SNEAKING:
+                _isSneaking = true;
                 _currentSpeed = _sneakingSpeed;
                 _animator.SetBool("isSneaking", true);
                 break;
@@ -363,6 +364,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.RUNNING:
                 break;
             case PlayerState.SNEAKING:
+                _isSneaking = false;
                 _animator.SetBool("isSneaking", false);
                 break;
             case PlayerState.JUMPING:
