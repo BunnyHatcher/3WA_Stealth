@@ -334,7 +334,8 @@ public class PlayerStateMachine : MonoBehaviour
                 if (_isGrounded)
                 {
                     TransitionToState(PlayerState.IDLE);
-                    
+                    _animator.SetBool("isGrounded", true);
+
                 }
 
                 break;
