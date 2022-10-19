@@ -82,7 +82,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_isGrounded)
         {
-            Debug.Log("Touchdown!");
+            //Debug.Log("Touchdown!");
         }
 
 
@@ -100,7 +100,7 @@ public class PlayerStateMachine : MonoBehaviour
        else
         {
             StickToGround();
-            Debug.Log("Is Sticking to ground");
+            //Debug.Log("Is Sticking to ground");
         }
 
        if (_isJumping )
@@ -113,7 +113,7 @@ public class PlayerStateMachine : MonoBehaviour
         
         // move character by setting its velocity to the direction of movement calculated earlier
        _rigidbody.velocity = _direction;
-        //Debug.Log(_direction.magnitude);
+        Debug.Log("Speed is: " + _direction.magnitude);
 
     }
 
@@ -172,20 +172,21 @@ public class PlayerStateMachine : MonoBehaviour
                     if (Input.GetButton("Run"))
                     {
                         TransitionToState(PlayerState.RUNNING);
-                       
-                    }
 
-                    else if (Input.GetButtonDown("Sneak") && _isSneaking == false)
-                    {
-                        TransitionToState(PlayerState.SNEAKING);
                     }
-                    
                     else
                     {
-                        TransitionToState(PlayerState.JOGGING);
-                        
+                    TransitionToState(PlayerState.JOGGING);
+
                     }
                 }
+
+                else if (Input.GetButtonDown("Sneak") && _isSneaking == false)
+                {
+                    TransitionToState(PlayerState.SNEAKING);
+                }
+
+                
 
                 else if(Input.GetButtonDown("Jump"))
                 {
