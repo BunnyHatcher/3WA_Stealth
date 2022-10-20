@@ -52,12 +52,16 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _isJumping = false;
     private bool _isGrounded = true;
     private bool _isSneaking = false;
-    private bool _isDodging = false;
 
     // References
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
     private Animator _animator;
+    
+    // Dodging
+    [SerializeField] AnimationCurve dodgeCurve;
+    private bool _isDodging = false;
+    float _dodgeTimer;
 
 
     private void Awake() // usually used for getting components of the object the script is on
@@ -65,6 +69,11 @@ public class PlayerStateMachine : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _floorDetector = GetComponentInChildren<FloorDetector>();
         _animator = GetComponentInChildren<Animator>();
+        
+        //Dodging
+        //Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
+        //_dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame 
+
         _currentSpeed = _joggingSpeed;
     }
 
@@ -371,7 +380,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.DODGING:
                 Roll();
                 _animator.SetTrigger("DodgeTrigger");
-
+                //StartCoroutine(Dodge());
                 
                 break;
 
@@ -455,6 +464,8 @@ public class PlayerStateMachine : MonoBehaviour
             Quaternion rollRotation = Quaternion.LookRotation(_direction);
             _rigidbody.transform.rotation = rollRotation;
     }
+
+    
 
     private void StickToGround()
     {
