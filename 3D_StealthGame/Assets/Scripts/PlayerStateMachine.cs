@@ -31,6 +31,11 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private float _runningSpeed = 10f;
     [SerializeField] private float _sneakingSpeed = 2f;
 
+    [Header("Smoothing Values")]
+    [SerializeField] private float _smoothSpeed = 5f;
+    [SerializeField] private float _speedSmoothDampVelocity = 0.0f;
+    [SerializeField] private float _speedSmoothTime = 0.3f;
+
 
     [Header("FloorDetection")]
     [SerializeField] private LayerMask _groundMask;
@@ -365,7 +370,8 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.DODGING:
                 Roll();
-                _animator.SetBool("isDodging", true);
+                _animator.SetTrigger("DodgeTrigger");
+
                 
                 break;
 
@@ -422,19 +428,24 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Move()
     {
-        _direction = _cameraTransform.forward * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
-                      + _cameraTransform.right * Input.GetAxisRaw("Horizontal");//left-right movement: relative to PLAYER
+        _direction = _cameraTransform.forward.normalized * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
+                      + _cameraTransform.right.normalized * Input.GetAxisRaw("Horizontal");//left-right movement: relative to PLAYER
+
+        // Smoothing movement
+       // _currentSpeed = Mathf.SmoothDamp( _smoothSpeed, _currentSpeed, ref _speedSmoothDampVelocity, _speedSmoothTime);
 
         _direction *= _currentSpeed; // multiply by movement speed to get direction of movement
 
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
+
+
     }
 
     public void Roll()
     {
         // calculate movement input
-        _direction = _cameraTransform.forward * Input.GetAxis("Vertical")
-                   + _cameraTransform.right * Input.GetAxisRaw("Horizontal");
+        _direction = _cameraTransform.forward.normalized * Input.GetAxis("Vertical")
+                   + _cameraTransform.right.normalized * Input.GetAxisRaw("Horizontal");
 
         //if character is moving...
          //_animator.SetBool("isDodging", true);//... Play Rolling animation
