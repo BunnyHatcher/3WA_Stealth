@@ -44,6 +44,13 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private float yFloorOffset = 1f;
     private FloorDetector _floorDetector;
 
+    [Header("Dodging")]
+    private float _dodgeDuration;
+    private float _dodgeLength;
+    private float remainingDodgeTime;
+    private Vector3 dodgingDirectionInput;
+    private bool _isDodging = false;
+
 
     //privates and protected
     private PlayerState _currentState;
@@ -57,12 +64,7 @@ public class PlayerStateMachine : MonoBehaviour
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
     private Animator _animator;
-    
-    // Dodging
-    [SerializeField] AnimationCurve dodgeCurve;
-    private bool _isDodging = false;
-    float _dodgeTimer;
-
+    private float deltaTime;
 
     private void Awake() // usually used for getting components of the object the script is on
     {
@@ -378,9 +380,15 @@ public class PlayerStateMachine : MonoBehaviour
        //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.DODGING:
-                Roll();
+                Dodge(deltaTime);
                 _animator.SetTrigger("DodgeTrigger");
-                //StartCoroutine(Dodge());
+                
+                if(remainingDodgeTime <= 0f)
+                {
+                    _isDodging = false;
+                    _animator.SetBool("isDodging", false);
+                }
+                
                 
                 break;
 
@@ -446,28 +454,28 @@ public class PlayerStateMachine : MonoBehaviour
         _direction *= _currentSpeed; // multiply by movement speed to get direction of movement
 
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
-
-
     }
 
-    public void Roll()
+    public void Dodge(float deltaTime)
     {
-        // calculate movement input
-        _direction = _cameraTransform.forward.normalized * Input.GetAxis("Vertical")
-                   + _cameraTransform.right.normalized * Input.GetAxisRaw("Horizontal");
+        Vector3 _dodgeMovement = new Vector3();
 
-        //if character is moving...
-         //_animator.SetBool("isDodging", true);//... Play Rolling animation
-         _direction.y = 0; // don't move upwards
+        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") * _dodgeLength / _dodgeDuration;
+        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") * _dodgeLength / _dodgeDuration;
 
         //make sure character rotates into direction of movement  
-            Quaternion rollRotation = Quaternion.LookRotation(_direction);
-            _rigidbody.transform.rotation = rollRotation;
+        Quaternion rollRotation = Quaternion.LookRotation(_direction);
+        _rigidbody.transform.rotation = rollRotation;
+
+        remainingDodgeTime -= deltaTime;
+
+
     }
 
-    
 
-    private void StickToGround()
+
+
+        private void StickToGround()
     {
         Vector3 averagePosition = _floorDetector.AverageHeight();
 
