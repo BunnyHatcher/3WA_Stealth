@@ -45,11 +45,17 @@ public class PlayerStateMachine : MonoBehaviour
     private FloorDetector _floorDetector;
 
     [Header("Dodging")]
+    /*
     private float _dodgeDuration;
     private float _dodgeLength;
     private float remainingDodgeTime;
     private Vector3 dodgingDirectionInput;
     private bool _isDodging = false;
+    */
+
+    [SerializeField] AnimationCurve dodgeCurve;
+    bool _isDodging;
+    float _dodgeTimer;
 
 
     //privates and protected
@@ -72,9 +78,6 @@ public class PlayerStateMachine : MonoBehaviour
         _floorDetector = GetComponentInChildren<FloorDetector>();
         _animator = GetComponentInChildren<Animator>();
         
-        //Dodging
-        //Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
-        //_dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame 
 
         _currentSpeed = _joggingSpeed;
     }
@@ -83,6 +86,10 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _cameraTransform = Camera.main.transform;
         TransitionToState(PlayerState.IDLE);
+       
+        //Dodging
+        Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
+        _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame 
         
     }
 
@@ -170,7 +177,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.FALLING:
                 break;
             case PlayerState.DODGING:
-                _isDodging = true;
+                
                 break;
             default:
                 break;
@@ -380,16 +387,9 @@ public class PlayerStateMachine : MonoBehaviour
        //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.DODGING:
-                Dodge(deltaTime);
-                _animator.SetTrigger("DodgeTrigger");
-                
-                if(remainingDodgeTime <= 0f)
-                {
-                    _isDodging = false;
-                    _animator.SetBool("isDodging", false);
-                }
-                
-                
+
+                StartCoroutine(Dodge());
+                        
                 break;
 
             default:
@@ -456,21 +456,8 @@ public class PlayerStateMachine : MonoBehaviour
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
     }
 
-    public void Dodge(float deltaTime)
-    {
-        Vector3 _dodgeMovement = new Vector3();
 
-        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") * _dodgeLength / _dodgeDuration;
-        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") * _dodgeLength / _dodgeDuration;
-
-        //make sure character rotates into direction of movement  
-        Quaternion rollRotation = Quaternion.LookRotation(_direction);
-        _rigidbody.transform.rotation = rollRotation;
-
-        remainingDodgeTime -= deltaTime;
-
-
-    }
+    
 
 
 
@@ -501,6 +488,62 @@ public class PlayerStateMachine : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(_groundChecker.position, _boxDimension * 2f); // by default OverlapBox only takes half the size of the box in each dimension, so we need to double the size of _boxDimension
     }
+
+
+
+    /*
+    public void Dodge(float deltaTime)
+    {
+        Vector3 _dodgeMovement = new Vector3();
+
+        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") * _dodgeLength / _dodgeDuration;
+        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") * _dodgeLength / _dodgeDuration;
+
+        //make sure character rotates into direction of movement  
+        Quaternion rollRotation = Quaternion.LookRotation(_direction);
+        _rigidbody.transform.rotation = rollRotation;
+
+        remainingDodgeTime -= deltaTime;
+    }
+    */
+
+    IEnumerator Dodge()
+    {
+        _isDodging = true;
+        float timer = 0;
+        _animator.SetTrigger("DodgeTrigger");
+        while (timer < _dodgeTimer)
+        {
+            float speed = dodgeCurve.Evaluate(timer);
+            //Vector3 dodgeDir = (_cameraTransform.forward * Input.GetAxis("Vertical"))
+            //                 + (_cameraTransform.right * Input.GetAxisRaw("Horizontal")) * speed;
+            //_rigidbody.Move(dodgeDir * Time.deltaTime);
+            timer += Time.deltaTime;
+            
+            yield return null;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
