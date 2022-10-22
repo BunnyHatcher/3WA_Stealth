@@ -21,6 +21,10 @@ public enum PlayerState
 
 public class PlayerStateMachine : MonoBehaviour
 {
+
+    private CharacterController controller;
+    private float gravityValue = -9.81f;
+
     //public and serialized
     [Header("Movement Speeds")]
     public float _moveSpeed = 10f;
@@ -45,17 +49,16 @@ public class PlayerStateMachine : MonoBehaviour
     private FloorDetector _floorDetector;
 
     [Header("Dodging")]
-    /*
     private float _dodgeDuration;
     private float _dodgeLength;
     private float remainingDodgeTime;
-    private Vector3 dodgingDirectionInput;
+    private Vector2 dodgingDirectionInput;
     private bool _isDodging = false;
-    */
 
+    /*
     [SerializeField] AnimationCurve dodgeCurve;
-    bool _isDodging;
     float _dodgeTimer;
+    */
 
 
     //privates and protected
@@ -70,7 +73,7 @@ public class PlayerStateMachine : MonoBehaviour
     private Rigidbody _rigidbody;
     private Transform _cameraTransform;
     private Animator _animator;
-    private float deltaTime;
+    
 
     private void Awake() // usually used for getting components of the object the script is on
     {
@@ -84,13 +87,16 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Start() // usually used to get components in other objects
     {
+        controller = gameObject.AddComponent<CharacterController>();
+
         _cameraTransform = Camera.main.transform;
         TransitionToState(PlayerState.IDLE);
        
+        /*
         //Dodging
         Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
         _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame 
-        
+        */
     }
 
 
@@ -115,6 +121,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void FixedUpdate()
     {
+        return;
 
        if(_currentState == PlayerState.JUMPING || _currentState == PlayerState.FALLING)
         {
@@ -185,15 +192,24 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    public void Tick()
+    {
+        float deltaTime = Time.deltaTime;
+        Move(deltaTime);
+
+    }
+
     private void OnStateUpdate()
     {
+        Tick();
+
         switch (_currentState)
         {
         //-----I D L E ------------------------------------------------------------------------------------------------------------------------------------------------
 
 
             case PlayerState.IDLE:
-                Move();
+                
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                 _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
                 _animator.SetFloat("moveSpeed", _direction.magnitude);
@@ -252,7 +268,7 @@ public class PlayerStateMachine : MonoBehaviour
         //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.JOGGING:
-                Move();
+                
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                 _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
                 _animator.SetFloat("moveSpeed", _direction.magnitude);
@@ -295,7 +311,7 @@ public class PlayerStateMachine : MonoBehaviour
         //-------R U N N I N G ----------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.RUNNING:
-                Move();
+                
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                 _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
                 _animator.SetFloat("moveSpeed", _direction.magnitude);
@@ -329,7 +345,7 @@ public class PlayerStateMachine : MonoBehaviour
         //------S N E A K I N G --------------------------------------------------------------------------------------------------------------------------------------------
                 
             case PlayerState.SNEAKING:
-                Move();
+                
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                 _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
                 _animator.SetFloat("moveSpeed", _direction.magnitude);
@@ -356,7 +372,7 @@ public class PlayerStateMachine : MonoBehaviour
         //------J U M P I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.JUMPING:
-                Move();
+                
                 _animator.SetBool("isJumping", true);
                 _animator.SetBool("isGrounded", false);
 
@@ -371,7 +387,7 @@ public class PlayerStateMachine : MonoBehaviour
         //------F A L L I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
             case PlayerState.FALLING:
-                Move();
+                
                 _animator.SetBool("isJumping", false);
                 _animator.SetBool("isGrounded", false);
 
@@ -388,8 +404,9 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.DODGING:
 
-                StartCoroutine(Dodge());
-                        
+                //StartCoroutine(Dodge());
+                
+                
                 break;
 
             default:
@@ -443,7 +460,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     //---------------------------| O T H E R  M E T H O D S | ----------------------------------------------------------------------------------------------------------------------
 
-    private void Move()
+    private void Move(float deltaTime)
     {
         _direction = _cameraTransform.forward.normalized * Input.GetAxis("Vertical")   //forward/backward movement: relative to CAMERA
                       + _cameraTransform.right.normalized * Input.GetAxisRaw("Horizontal");//left-right movement: relative to PLAYER
@@ -451,9 +468,17 @@ public class PlayerStateMachine : MonoBehaviour
         // Smoothing movement
        // _currentSpeed = Mathf.SmoothDamp( _smoothSpeed, _currentSpeed, ref _speedSmoothDampVelocity, _speedSmoothTime);
 
-        _direction *= _currentSpeed; // multiply by movement speed to get direction of movement
+        _direction *= _currentSpeed * deltaTime; // multiply by movement speed to get direction of movement
 
-        _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
+        if (controller.isGrounded)
+        { _direction.y = 0; } // Vertical transform is not taken into account, we have the Jumpmethod for that
+        else
+        {
+            _direction.y += gravityValue * Time.deltaTime;
+
+        }
+        
+        controller.Move(_direction);
     }
 
 
@@ -491,13 +516,16 @@ public class PlayerStateMachine : MonoBehaviour
 
 
 
-    /*
+    
     public void Dodge(float deltaTime)
     {
-        Vector3 _dodgeMovement = new Vector3();
+        float dodgeSpeed = _dodgeLength / _dodgeDuration;
+        float dodgeCurrentLength = dodgeSpeed * deltaTime;
 
-        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") * _dodgeLength / _dodgeDuration;
-        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") * _dodgeLength / _dodgeDuration;
+        Vector3 dodgeMovement = new Vector3();
+
+        dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") * dodgeCurrentLength;
+        dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") * _dodgeLength / _dodgeDuration;
 
         //make sure character rotates into direction of movement  
         Quaternion rollRotation = Quaternion.LookRotation(_direction);
@@ -505,24 +533,41 @@ public class PlayerStateMachine : MonoBehaviour
 
         remainingDodgeTime -= deltaTime;
     }
-    */
 
-    IEnumerator Dodge()
-    {
-        _isDodging = true;
-        float timer = 0;
-        _animator.SetTrigger("DodgeTrigger");
-        while (timer < _dodgeTimer)
-        {
-            float speed = dodgeCurve.Evaluate(timer);
-            //Vector3 dodgeDir = (_cameraTransform.forward * Input.GetAxis("Vertical"))
-            //                 + (_cameraTransform.right * Input.GetAxisRaw("Horizontal")) * speed;
-            //_rigidbody.Move(dodgeDir * Time.deltaTime);
-            timer += Time.deltaTime;
-            
-            yield return null;
-        }
-    }
+
+
+    /*
+     IEnumerator Dodge()
+     {
+         _isDodging = true;
+         float timer = 0;
+         //_animator.SetTrigger("DodgeTrigger");
+         _animator.SetBool("isDodging", true);
+         while (timer < _dodgeTimer)
+         {
+             float speed = dodgeCurve.Evaluate(timer);
+             Vector3 dodgeDir = (_cameraTransform.forward * Input.GetAxis("Vertical"))
+                             + (_cameraTransform.right * Input.GetAxisRaw("Horizontal")) * speed;
+
+             dodgeDir *= _currentSpeed;
+
+             dodgeDir.y = 0;
+
+             //make sure character rotates into direction of movement  
+             Quaternion rollRotation = Quaternion.LookRotation(_direction);
+             _rigidbody.transform.rotation = rollRotation;
+
+             //_rigidbody.Move(dodgeDir * Time.deltaTime);
+             timer += Time.deltaTime;
+
+             yield return null;
+         }
+
+         _isDodging = false;
+         _animator.SetBool("isDodging", false);
+     }
+
+     */
 
 
 
