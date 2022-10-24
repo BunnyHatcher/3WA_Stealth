@@ -88,8 +88,10 @@ public class PlayerStateMachine : MonoBehaviour
         TransitionToState(PlayerState.IDLE);
        
         //Dodging
+        /*
         Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
-        _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame 
+        _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame
+        */
         
     }
 

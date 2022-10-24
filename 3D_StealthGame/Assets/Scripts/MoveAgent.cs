@@ -82,6 +82,13 @@ public class MoveAgent : MonoBehaviour
         }
     }
 
+    void Idle()
+    {
+        _stateNote.text = "Idle";
+    }
+
+
+
 
 
 
