@@ -697,6 +697,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -1045,6 +1046,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -1393,6 +1395,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -2623,6 +2626,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -3825,6 +3829,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -4305,6 +4310,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -7280,6 +7286,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -7877,6 +7884,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -8737,6 +8745,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -9773,6 +9782,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -11247,6 +11257,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -13128,6 +13139,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -13891,6 +13903,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -14418,6 +14431,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -14619,6 +14633,8 @@ GameObject:
   - component: {fileID: 1010160786}
   - component: {fileID: 1010160787}
   - component: {fileID: 1010160788}
+  - component: {fileID: 1010160790}
+  - component: {fileID: 1010160789}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -14725,6 +14741,38 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
+--- !u!114 &1010160789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010160782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1010160790
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010160782}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 8142b4d805da8b541922349d478fe5ae, type: 3}
+  m_Controller: {fileID: 9100000, guid: 17a195e7ba8fdb945b3c391ace4dcf42, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!43 &1012919755
 Mesh:
   m_ObjectHideFlags: 0
@@ -15071,6 +15119,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8142b4d805da8b541922349d478fe5ae, type: 3}
       propertyPath: m_Name
       value: Ch18_nonPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 8142b4d805da8b541922349d478fe5ae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 8142b4d805da8b541922349d478fe5ae, type: 3}
       propertyPath: m_Controller
@@ -16893,6 +16945,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -17373,6 +17426,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -18859,7 +18913,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887096, y: -0.00000001612532, z: 0.000000006002808, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887096, y: 0.000000016125318, z: -0.0000000060028076, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19325,6 +19379,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -19842,6 +19897,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -20486,6 +20542,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -21336,6 +21393,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -21833,6 +21891,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -22313,6 +22372,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -23435,6 +23495,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -25268,6 +25329,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -25969,6 +26031,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -27220,6 +27283,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -27614,6 +27678,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -30094,6 +30159,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -30589,6 +30655,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -30922,6 +30989,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -31285,6 +31353,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -32125,6 +32194,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -32811,6 +32881,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -35205,6 +35276,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
