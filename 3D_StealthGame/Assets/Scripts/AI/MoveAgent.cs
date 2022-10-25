@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class MoveAgent : MonoBehaviour
 {
     private StateMachine _brain;
-    private Animator _animator;
+    //private Animator _animator;
     private Text _stateNote;
 
     private NavMeshAgent _agent;    
@@ -18,10 +18,13 @@ public class MoveAgent : MonoBehaviour
     //Patrol Behaviour
     public Transform[] _points;
     private int _destPoint = 0;
+    private bool _goingForward =  true;
+    [SerializeField] private bool _backAndForth = false;
+
 
     private void Awake()
     {
-        _animator = transform.GetChild(0).GetComponent<Animator>();
+        //_animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Start()
@@ -38,28 +41,90 @@ public class MoveAgent : MonoBehaviour
 
     private void Update()
     {
-        // _agent.SetDestination(m_target.position);
-        
-        // Choose the next destination point when the agent gets
-        // close to the current one.
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if(_backAndForth)
+        {
+            if (_goingForward)
+            { GotoNextPoint(); }
+
+            else
+            { GoToPreviousPoint(); }
+        }
+
+        else
+        {
+
             GotoNextPoint();
+
+        }
+        
+        
 
 
 
     }
     private void GotoNextPoint()
     {
-        // Returns if no points have been set up
-        if (_points.Length == 0)
-            return;
+        // Choose the next destination point when the agent gets
+        // close to the current one.
+        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
 
-        // Set the agent to go to the currently selected destination.
-        _agent.destination = _points[_destPoint].position;
+        
+        { // Returns if no points have been set up
+            if (_points.Length == 0)
+                return;
 
-        // Choose the next point in the array as the destination,
-        // cycling to the start if necessary.
-        _destPoint = (_destPoint + 1) % _points.Length;
+            _destPoint++;
+
+            if(_destPoint >= _points.Length)
+            {
+                if(_backAndForth)
+                {
+                    _goingForward = false;
+                    _destPoint = _points.Length - 1;
+                }
+
+                else
+                {
+                    _destPoint = 0;
+                }
+            }
+
+            
+            
+            // Set the agent to go to the currently selected destination.
+            _agent.destination = _points[_destPoint].position;
+
+            // Choose the next point in the array as the destination,
+            // cycling to the start if necessary.
+            //_destPoint = (_destPoint + 1) % _points.Length;
+        }
+    }
+
+    private void GoToPreviousPoint()
+    {
+        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        {
+            _destPoint--;
+
+            if(_destPoint < 0)
+            {
+               if(_backAndForth)
+                {
+                    _goingForward = true;
+                    _destPoint = 0;
+                }
+                
+                else
+                {
+                 _destPoint = _points.Length - 1;
+                }
+            }
+
+            _agent.destination = _points[_destPoint].position;
+
+        }
+
+
     }
 
     private void OnDrawGizmos()
