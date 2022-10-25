@@ -289,6 +289,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                 else if (Input.GetButtonDown("Dodge"))
                 {
+                    Debug.Log("Transition to Dodge");
                     TransitionToState(PlayerState.DODGING);
                 }
 
@@ -323,6 +324,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                else if (Input.GetButtonDown("Dodge"))
                 {
+                    
                     TransitionToState(PlayerState.DODGING);
                 }
 
@@ -513,7 +515,9 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _isDodging = true;
         float timer = 0;
-        _animator.SetTrigger("DodgeTrigger");
+        //_animator.SetTrigger("DodgeTrigger");
+        _animator.SetBool("isDodging", true);
+
         while (timer < _dodgeTimer)
         {
             float speed = dodgeCurve.Evaluate(timer);
