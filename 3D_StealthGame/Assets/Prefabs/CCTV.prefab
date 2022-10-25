@@ -497,7 +497,6 @@ GameObject:
   - component: {fileID: 169463043281545572}
   - component: {fileID: 169463043281545569}
   - component: {fileID: 169463043281545574}
-  - component: {fileID: 169463043281545568}
   m_Layer: 0
   m_Name: Swivel
   m_TagString: Untagged
@@ -571,21 +570,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &169463043281545568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169463043281545573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 454da593ed430ad4fac90e05fe620685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _leftLimit: {fileID: 169463042754331621}
-  _rightLimit: {fileID: 169463041522254947}
-  _rotateSpeed: 0.3
 --- !u!1 &169463043470738430
 GameObject:
   m_ObjectHideFlags: 0
