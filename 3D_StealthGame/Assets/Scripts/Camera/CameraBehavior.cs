@@ -8,6 +8,7 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private Transform _rightLimit;
     [SerializeField] private float _rotateSpeed;
     public GameObject lookAtRotator;
+    private float _resetTimer = 0f;
 
     private Transform _target;
     [SerializeField] private Transform _playerTransform = null;
@@ -28,6 +29,12 @@ public class CameraBehavior : MonoBehaviour
         {
            lookAtRotator.transform.LookAt(_playerTransform.position);
            //_target = _playerTransform;
+
+            if (_resetTimer < Time.timeSinceLevelLoad)
+            {
+                _playerTransform = null;
+            }
+
         }
 
         else
@@ -44,6 +51,15 @@ public class CameraBehavior : MonoBehaviour
             Debug.Log("Player detected");
             _playerTransform = other.transform;
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _resetTimer = Time.timeSinceLevelLoad + 2f;
+        }
+
     }
 
 
