@@ -69,7 +69,16 @@ public class CameraBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _resetTimer = Time.timeSinceLevelLoad + 2f;
+            Vector3 rayDirection = other.transform.position - transform.position;
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, rayDirection, out hit, Mathf.Infinity, _rayLayer))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    _resetTimer = Time.timeSinceLevelLoad + 2f;
+                }
+            }
         }
 
     }
