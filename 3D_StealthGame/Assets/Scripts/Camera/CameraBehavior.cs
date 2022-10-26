@@ -49,6 +49,7 @@ public class CameraBehavior : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            Debug.Log("Player Collision");
 
             Vector3 rayDirection = other.transform.position - transform.position;
             RaycastHit hit;
@@ -58,7 +59,7 @@ public class CameraBehavior : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                 _playerTransform = other.transform;
-                Debug.Log("Player detected");
+                Debug.Log("Player Raycast");
                 }
             }
         }

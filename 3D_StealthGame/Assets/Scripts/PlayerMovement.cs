@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         if ( _isGrounded ) 
         {
-            Debug.Log("Touchdown!");
+            //Debug.Log("Touchdown!");
         }
 
         

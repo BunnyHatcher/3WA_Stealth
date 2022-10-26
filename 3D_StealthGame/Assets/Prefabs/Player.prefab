@@ -197,9 +197,9 @@ GameObject:
   - component: {fileID: 6226591702050383226}
   - component: {fileID: 6226591702050383231}
   - component: {fileID: 6226591702050383230}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,12 +292,21 @@ MonoBehaviour:
   _joggingSpeed: 5
   _runningSpeed: 10
   _sneakingSpeed: 2
+  _smoothSpeed: 5
+  _speedSmoothDampVelocity: 0
+  _speedSmoothTime: 0.3
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
   _boxDimension: {x: 0.29, y: 0.2, z: 0.29}
   _groundChecker: {fileID: 6226591701530504255}
   yFloorOffset: 1
+  dodgeCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6226591702073814674
 GameObject:
   m_ObjectHideFlags: 0
