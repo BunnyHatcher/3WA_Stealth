@@ -7,17 +7,18 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private Transform _leftLimit;
     [SerializeField] private Transform _rightLimit;
     [SerializeField] private float _rotateSpeed;
-    public GameObject lookAtRotator;
+    public GameObject lookAtVisor;
     private float _resetTimer = 0f;
 
     private Transform _target;
     [SerializeField] private Transform _playerTransform = null;
     private bool _rightToLeft = true;
+    [SerializeField] LayerMask _rayLayer;
 
-    
-    
-    
-    
+
+
+
+
     private void Start()
     {
         _target = _rightLimit;
@@ -27,7 +28,7 @@ public class CameraBehavior : MonoBehaviour
     {
         if (_playerTransform != null)
         {
-           lookAtRotator.transform.LookAt(_playerTransform.position);
+           lookAtVisor.transform.LookAt(_playerTransform.position);
            //_target = _playerTransform;
 
             if (_resetTimer < Time.timeSinceLevelLoad)
@@ -48,8 +49,18 @@ public class CameraBehavior : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("Player detected");
-            _playerTransform = other.transform;
+
+            Vector3 rayDirection = other.transform.position - transform.position;
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, rayDirection, out hit, Mathf.Infinity, _rayLayer))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                _playerTransform = other.transform;
+                Debug.Log("Player detected");
+                }
+            }
         }
     }
 
