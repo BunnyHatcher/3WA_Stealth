@@ -10256,11 +10256,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &799313237 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4701017424883704675, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}
-  m_PrefabInstance: {fileID: 8934867833080858359}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &842736788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2610670786098672608, guid: 41e69b0de3073df49893ada4ae2c4f1f, type: 3}
@@ -12915,7 +12910,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18910751, y: 0.000000016895916, z: -0.0000000032538556, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910751, y: -0.000000016895918, z: 0.000000003253856, w: 0.9819564}
   m_LocalPosition: {x: -0.52007484, y: 1.5, z: 61.000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18787,7 +18782,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887096, y: 0.000000016125318, z: -0.0000000060028076, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887096, y: -0.000000016125318, z: 0.0000000060028076, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30177,7 +30172,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730187505}
-  m_LocalRotation: {x: 0.1891075, y: 0.000000008447957, z: -0.0000000016269277, w: 0.9819564}
+  m_LocalRotation: {x: 0.1891075, y: -0.000000008447959, z: 0.000000001626928, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36547,9 +36542,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: SurveillanceCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 8934867834359476426, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}
-      propertyPath: lookAtRotator
-      value: 
-      objectReference: {fileID: 799313237}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}

@@ -901,7 +901,7 @@ MonoBehaviour:
   _leftLimit: {fileID: 8934867834022403270}
   _rightLimit: {fileID: 8934867833161237345}
   _rotateSpeed: 0.3
-  lookAtRotator: {fileID: 0}
+  lookAtRotator: {fileID: 4701017424883704675}
   _playerTransform: {fileID: 0}
 --- !u!54 &8260912440254938933
 Rigidbody:
