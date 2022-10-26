@@ -7,9 +7,10 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private Transform _leftLimit;
     [SerializeField] private Transform _rightLimit;
     [SerializeField] private float _rotateSpeed;
+    public GameObject lookAtRotator;
 
     private Transform _target;
-    private Transform _playerTransform = null;
+    [SerializeField] private Transform _playerTransform = null;
     private bool _rightToLeft = true;
 
     
@@ -25,7 +26,8 @@ public class CameraBehavior : MonoBehaviour
     {
         if (_playerTransform != null)
         {
-            transform.LookAt(_playerTransform.position);
+           lookAtRotator.transform.LookAt(_playerTransform.position);
+           //_target = _playerTransform;
         }
 
         else
