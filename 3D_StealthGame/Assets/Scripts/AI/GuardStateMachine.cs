@@ -7,10 +7,15 @@ using UnityEngine.UI;
 public class GuardStateMachine : MonoBehaviour
 {
     private StateMachine _brain;
-    private NavMeshAgent _agent;
+    private MoveAgent _agentPatrol;
     private PlayerStateMachine _player;
+
+    private NavMeshAgent _agent;
     private Animator _animator;
     private Text _stateNote;
+
+
+    private float _changeMind;
     
     //Vision Cone
     private VisionCone _visionCone;
@@ -32,6 +37,7 @@ public class GuardStateMachine : MonoBehaviour
         _brain = GetComponent<StateMachine>();
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerStateMachine>();
+        _agentPatrol = GetComponent<MoveAgent>();
         _agent = GetComponent<NavMeshAgent>();
   
         _playerIsNear = false;
@@ -62,5 +68,26 @@ public class GuardStateMachine : MonoBehaviour
     }
     void OnPatrolExit()
     {
+    }
+
+
+    // WANDER STATE
+    void OnWanderEnter()
+    {
+        _animator.SetBool("isWandering", true);
+        Vector3 wanderDirection = (Random.insideUnitSphere * 1.2f) + transform.position;
+        NavMeshHit navMeshHit;
+        NavMesh.SamplePosition(wanderDirection, out navMeshHit, 3f, NavMesh.AllAreas);
+        Vector3 destination = navMeshHit.position;
+        _agent.SetDestination(destination);
+    }
+    void Wander()
+    {
+        _stateNote.text = "Wandering";
+    }
+
+    void OnWanderExit()
+    {
+        _animator.SetBool("isWandering", false);
     }
 }
