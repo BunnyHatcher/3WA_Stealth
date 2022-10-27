@@ -107,7 +107,12 @@ public class NFTBotStateMachine : MonoBehaviour
     }
     void Wander()
     {
-        _stateNote.text = "Wandering";
+        _stateNote.text = "Wander";
+        if (_agent.remainingDistance <= .25f) // distance left before reaching the point they were looking for
+        {
+            _agent.ResetPath();
+            _brain.PushState(Idle, OnIdleEnter, OnIdleExit);
+        }
     }
 
     void OnWanderExit()
