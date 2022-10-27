@@ -45,7 +45,13 @@ public class MoveAgent : MonoBehaviour
 
     private void Update()
     {
-        if(_backAndForth)
+        Patrol();
+
+    }
+
+    private void Patrol()
+    {
+        if (_backAndForth)
         {
             if (_goingForward)
             { GotoNextPoint(); }
@@ -60,12 +66,8 @@ public class MoveAgent : MonoBehaviour
             GotoNextPoint();
 
         }
-        
-        
-
-
-
     }
+
     private void GotoNextPoint()
     {
         // Choose the next destination point when the agent gets
