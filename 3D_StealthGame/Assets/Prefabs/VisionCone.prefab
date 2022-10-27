@@ -27,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6049647401129100605}
-  m_LocalRotation: {x: 0.4999997, y: -0.86602557, z: -0.0000014044005, w: 0.0000024324947}
-  m_LocalPosition: {x: 0.26068878, y: 0.04822731, z: 0.00000036129177}
+  m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.43738323, y: 0.37252098, z: 0.43738317}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -1.3027552e-11, y: 180.00034, z: 300.00006}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &6049647401129100609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +604,7 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
+      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -642,7 +643,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6049647401129100605}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

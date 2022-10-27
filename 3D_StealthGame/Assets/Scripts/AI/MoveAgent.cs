@@ -21,10 +21,14 @@ public class MoveAgent : MonoBehaviour
     private bool _goingForward =  true;
     [SerializeField] private bool _backAndForth = false;
 
+    //Vision Cone
+    private VisionCone _visionCone;
+
 
     private void Awake()
     {
         //_animator = transform.GetChild(0).GetComponent<Animator>();
+        _visionCone = GetComponentInChildren<VisionCone>();
     }
 
     private void Start()
