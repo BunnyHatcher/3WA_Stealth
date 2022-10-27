@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+using TMPro;
 
-public class GuardStateMachine : MonoBehaviour
+
+public class NFTBotStateMachine : MonoBehaviour
 {
     private StateMachine _brain;
     private MoveAgent _agentPatrol;
@@ -12,7 +13,9 @@ public class GuardStateMachine : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-    private Text _stateNote;
+
+    [SerializeField]
+    private TMP_Text _stateNote;
 
 
     private float _changeMind;
@@ -33,24 +36,26 @@ public class GuardStateMachine : MonoBehaviour
 
     void Start()
     {
-        _player = GetComponent<PlayerStateMachine>();
-        _brain = GetComponent<StateMachine>();
-        _animator = GetComponent<Animator>();
+        
         _player = FindObjectOfType<PlayerStateMachine>();
-        _agentPatrol = GetComponent<MoveAgent>();
+        _brain = GetComponent<StateMachine>();
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _agentPatrol = GetComponent<MoveAgent>();
   
         _playerIsNear = false;
         _withinCatchRange = false;
         _playerDetected = false;
 
-        _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
+        _brain.PushState(Idle, OnIdleEnter, OnIdleExit);
     }
 
     
     void Update()
     {
-        
+        _playerIsNear = Vector3.Distance(transform.position, _player.transform.position) < 5;
+        _withinCatchRange = Vector3.Distance(transform.position, _player.transform.position) < 1;
+
     }
 
 
@@ -92,8 +97,9 @@ public class GuardStateMachine : MonoBehaviour
     // WANDER STATE
     void OnWanderEnter()
     {
+        _stateNote.text = "Wander";
         _animator.SetBool("isWandering", true);
-        Vector3 wanderDirection = (Random.insideUnitSphere * 1.2f) + transform.position;
+        Vector3 wanderDirection = (Random.insideUnitSphere * 4f) + transform.position;
         NavMeshHit navMeshHit;
         NavMesh.SamplePosition(wanderDirection, out navMeshHit, 3f, NavMesh.AllAreas);
         Vector3 destination = navMeshHit.position;
