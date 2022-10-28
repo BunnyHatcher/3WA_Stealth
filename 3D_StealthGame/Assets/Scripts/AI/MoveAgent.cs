@@ -49,7 +49,7 @@ public class MoveAgent : MonoBehaviour
 
     }
 
-    private void Patrol()
+    public void Patrol()
     {
         if (_backAndForth)
         {
@@ -153,10 +153,7 @@ public class MoveAgent : MonoBehaviour
         }
     }
 
-    void Idle()
-    {
-        _stateNote.text = "Idle";
-    }
+    
 
 
 

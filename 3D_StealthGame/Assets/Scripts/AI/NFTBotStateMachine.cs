@@ -17,9 +17,11 @@ public class NFTBotStateMachine : MonoBehaviour
     [SerializeField]
     private TMP_Text _stateNote;
 
-
+    //Wandering
     private float _changeMind;
-    
+    public float _changeMindMinRange = 4;
+    public float _changeMindMaxRange = 10;
+
     //Vision Cone
     private VisionCone _visionCone;
 
@@ -27,6 +29,9 @@ public class NFTBotStateMachine : MonoBehaviour
     private bool _playerIsNear;
     private bool _withinCatchRange;
     private bool _playerDetected;
+
+    //Attacking
+    private float _attackTimer;
 
 
     private void Awake()
@@ -76,21 +81,52 @@ public class NFTBotStateMachine : MonoBehaviour
     // IDLE STATE
     void OnIdleEnter()
     {
+        _stateNote.text = "Idle";
         _agent.ResetPath();
     }
     void Idle()
     {
-        _stateNote.text = "Idle";
         _changeMind -= Time.deltaTime;
-        if (_changeMind <= 0)
+        if (_playerIsNear)
+        {
+            _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+        }
+        else if (_changeMind <= 0)
         {
             _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
-            _changeMind = Random.Range(4, 10);
+            _changeMind = Random.Range(_changeMindMinRange, _changeMindMaxRange);
         }
 
     }
     void OnIdleExit()
     {
+    }
+
+    // CHASE STATE
+    void OnChaseEnter()
+    {
+        _stateNote.text = "Chase";
+        _animator.SetBool("Chase", true);
+    }
+
+    void Chase()
+    {
+        _agent.SetDestination(_player.transform.position);
+        if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
+        {
+            _brain.PopState();
+            _brain.PushState(Idle, OnIdleEnter, OnIdleExit);
+        }
+
+        if (_withinCatchRange)
+        {
+            _brain.PushState(Attack, OnEnterAttack, null);
+        }
+    }
+
+    void OnChaseExit()
+    {
+        _animator.SetBool("Chase", false);
     }
 
 
@@ -107,11 +143,16 @@ public class NFTBotStateMachine : MonoBehaviour
     }
     void Wander()
     {
-        _stateNote.text = "Wander";
+        
         if (_agent.remainingDistance <= .25f) // distance left before reaching the point they were looking for
         {
             _agent.ResetPath();
             _brain.PushState(Idle, OnIdleEnter, OnIdleExit);
+        }
+
+        if (_playerIsNear)
+        {
+            _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
         }
     }
 
@@ -119,4 +160,39 @@ public class NFTBotStateMachine : MonoBehaviour
     {
         _animator.SetBool("isWandering", false);
     }
+
+
+    // ATTACK
+    void OnEnterAttack()
+    {
+        _agent.ResetPath();
+        _stateNote.text = "Attack";
+    }
+    void Attack()
+    {
+            _attackTimer -= Time.deltaTime;
+            if (!_withinCatchRange)
+            {
+                _brain.PopState();
+            }
+            else if (_attackTimer <= 0)
+            {
+                _animator.SetTrigger("Attack");
+                
+                _attackTimer = 2f;
+            }
+     
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -87,11 +87,10 @@ public class PlayerStateMachine : MonoBehaviour
         _cameraTransform = Camera.main.transform;
         TransitionToState(PlayerState.IDLE);
        
-        //Dodging
-        
+        /*
         Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
         _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame
-        
+        */
         
     }
 
@@ -502,8 +501,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector3 _dodgeMovement = new Vector3();
 
-        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") * _dodgeLength / _dodgeDuration;
-        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") * _dodgeLength / _dodgeDuration;
+        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") ;
+        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") ;
 
         //make sure character rotates into direction of movement  
         Quaternion rollRotation = Quaternion.LookRotation(_direction);
