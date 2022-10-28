@@ -45,16 +45,16 @@ public class PlayerStateMachine : MonoBehaviour
     private FloorDetector _floorDetector;
 
     [Header("Dodging")]
-    /*
+    
     private float _dodgeDuration;
     private float _dodgeLength;
     private float remainingDodgeTime;
     private Vector3 dodgingDirectionInput;
-    private bool _isDodging = false;
-    */
+    public bool _isDodging = false;
+    
 
     [SerializeField] AnimationCurve dodgeCurve;
-    bool _isDodging;
+    
     float _dodgeTimer;
 
 
@@ -88,10 +88,10 @@ public class PlayerStateMachine : MonoBehaviour
         TransitionToState(PlayerState.IDLE);
        
         //Dodging
-        /*
+        
         Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
         _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame
-        */
+        
         
     }
 
@@ -181,7 +181,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.FALLING:
                 break;
             case PlayerState.DODGING:
-                
+                _animator.SetBool("isDodging", true);
                 break;
             default:
                 break;
@@ -394,7 +394,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             case PlayerState.DODGING:
 
-                StartCoroutine(Dodge());
+                Dodge();
                         
                 break;
 
@@ -439,7 +439,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     //---------------------------| S T A T E  M A C H I N E  M E T H O D S |----------------------------------------------------------------------------------------------------------------------
 
-    private void TransitionToState(PlayerState ToState)
+    public void TransitionToState(PlayerState ToState)
     {
         OnStateExit();
         _currentState = ToState;
@@ -497,8 +497,8 @@ public class PlayerStateMachine : MonoBehaviour
 
 
 
-    /*
-    public void Dodge(float deltaTime)
+
+    public void Dodge()
     {
         Vector3 _dodgeMovement = new Vector3();
 
@@ -508,12 +508,11 @@ public class PlayerStateMachine : MonoBehaviour
         //make sure character rotates into direction of movement  
         Quaternion rollRotation = Quaternion.LookRotation(_direction);
         _rigidbody.transform.rotation = rollRotation;
-
-        remainingDodgeTime -= deltaTime;
     }
-    */
 
-    IEnumerator Dodge()
+
+    /*
+    Dodge()
     {
         _isDodging = true;
         float timer = 0;
@@ -531,6 +530,7 @@ public class PlayerStateMachine : MonoBehaviour
             yield return null;
         }
     }
+    */
 
 
 
