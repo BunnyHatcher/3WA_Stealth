@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 
 public class GuardStateMachine : MonoBehaviour
 {
-    //-----DECLARATIONS------------------------------- 
+    //-----REFERENCES------------------------------- 
 
-    #region Declarations
+    #region References
 
     private StateMachine _brain;
     private MoveAgent _agentPatrol;
@@ -16,7 +17,13 @@ public class GuardStateMachine : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-    private Text _stateNote;
+    
+    [SerializeField]
+    private TMP_Text _stateNote;
+
+    //Vision Cone
+    private VisionCone _visionCone;
+    
 
     //Wandering
     private float _changeMind;
@@ -26,13 +33,11 @@ public class GuardStateMachine : MonoBehaviour
     //Attacking
     private float _attackTimer;
 
-    //Vision Cone
-    private VisionCone _visionCone;
 
     // bools
     private bool _playerIsNear;
     private bool _withinCatchRange;
-    private bool _playerDetected;
+    
 
     #endregion
 
@@ -59,7 +64,7 @@ public class GuardStateMachine : MonoBehaviour
   
         _playerIsNear = false;
         _withinCatchRange = false;
-        _playerDetected = false;
+        _visionCone._playerDetected = false;
 
         _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
     }
@@ -96,7 +101,11 @@ public class GuardStateMachine : MonoBehaviour
     void Patrol()
     {
         _agentPatrol.Patrol();
-
+        
+        if (_visionCone._playerDetected == true)
+        {
+            _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+        }
     }
     void OnPatrolExit()
     {
@@ -110,7 +119,8 @@ public class GuardStateMachine : MonoBehaviour
     
     // IDLE STATE
 
-   void OnIdleEnter()
+   /*
+    void OnIdleEnter()
         {
             _stateNote.text = "Idle";
             _agent.ResetPath();
@@ -125,13 +135,15 @@ public class GuardStateMachine : MonoBehaviour
         else if (_changeMind <= 0)
         {
            _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
-                _changeMind = Random.Range(_changeMindMinRange, _changeMindMaxRange);
+           _changeMind = Random.Range(_changeMindMinRange, _changeMindMaxRange);
         }        
     }
 
     void OnIdleExit()
     {
     }
+
+    */
 
     #endregion
 
@@ -178,7 +190,7 @@ public class GuardStateMachine : MonoBehaviour
         if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
         {
             _brain.PopState();
-            _brain.PushState(Idle, OnIdleEnter, OnIdleExit);
+            _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
         }
 
         if (_withinCatchRange)
@@ -221,6 +233,15 @@ public class GuardStateMachine : MonoBehaviour
     }
 
     #endregion
+
+
+
+    // METHODS
+
+    private void DetectPlayer()
+    {
+        
+    }
 
 
 

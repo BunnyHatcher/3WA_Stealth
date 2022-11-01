@@ -9,6 +9,8 @@ public class VisionCone : MonoBehaviour
     
     [HideInInspector]
     public GameObject _target;
+
+    public bool _playerDetected;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +25,7 @@ public class VisionCone : MonoBehaviour
                 {
                     Debug.Log("Guard has seen player");
                     _target = other.gameObject;
+                    _playerDetected = true;
                 }
             }
             

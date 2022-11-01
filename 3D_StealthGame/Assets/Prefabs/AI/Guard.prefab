@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 2795342800549566328}
   - component: {fileID: 2795342800549566331}
   - component: {fileID: 2795342800549566329}
+  - component: {fileID: 1900704633}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -394,6 +395,21 @@ MonoBehaviour:
   lookAtCoolTime: 0.2
   lookAtHeatTime: 0.2
   looking: 1
+--- !u!114 &1900704633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795342800549566304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4344763682a34ebbe01cdcb040dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateNote: {fileID: 2795342798515749992}
+  _changeMindMinRange: 4
+  _changeMindMaxRange: 10
 --- !u!1 &3583269689338589408
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,14 +438,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3583269689338589408}
-  m_LocalRotation: {x: -0.675738, y: -0.00000045859252, z: -0.00000040234673, w: 0.73714197}
+  m_LocalRotation: {x: -0.6592287, y: 0.01780605, z: -0.004325834, w: 0.7517193}
   m_LocalPosition: {x: -0.0031004024, y: 0.6551001, z: 0.08190155}
-  m_LocalScale: {x: 0.20671247, y: 0.1986626, z: 0.18109599}
+  m_LocalScale: {x: 0.28171965, y: 0.23630416, z: 0.3007206}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2795342800549566335}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 274.977, y: -0.00008739589, z: 0.00001756948}
+  m_LocalEulerAnglesHint: {x: 277.712, y: 14.005, z: 347.09}
 --- !u!114 &3583269689338589340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,7 +1015,6 @@ MonoBehaviour:
         normal_: {x: 0, y: 0, z: 0}
         distance_: 0
       backup: 0
-      propertyJSON: 
     uvIslandManager_:
       uvislands_: []
       uvislandsStream_: 
@@ -1099,6 +1114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1cdd3a85f22e9943923072a2ab2fbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 192
+  _target: {fileID: 0}
+  _playerDetected: 0
 --- !u!1001 &2795342798471795810
 PrefabInstance:
   m_ObjectHideFlags: 0
