@@ -249,6 +249,16 @@ public class GuardStateMachine : MonoBehaviour
     // SUSPICION STATE
     void OnEnterSuspicion()
     {
+        timeSinceLastSawPlayer = 0;
+    }
+
+    void Suspicion()
+    {
+
+    }
+
+    void OnExitSuspicion()
+    {
 
     }
 
