@@ -34,17 +34,20 @@ public class GuardStateMachine : MonoBehaviour
     private float _attackTimer;
 
 
-    // bools
+    //Chasing
     private bool _playerIsNear;
     private bool _withinCatchRange;
-    
+
+    // Suspicion
+    float timeSinceLastSawPlayer = Mathf.Infinity;
+
 
     #endregion
 
 
-    
-    
-    
+
+
+
     //-----INITIALIZATIONS------------------------------- 
 
     #region Awake & Start
@@ -100,12 +103,17 @@ public class GuardStateMachine : MonoBehaviour
     }
     void Patrol()
     {
-        _agentPatrol.Patrol();
         
-        if (_visionCone._playerDetected == true)
+        if (_visionCone._target != null)
         {
             _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
         }
+
+        else
+        { 
+        _agentPatrol.Patrol();
+        }
+
     }
     void OnPatrolExit()
     {
@@ -229,6 +237,18 @@ public class GuardStateMachine : MonoBehaviour
 
             _attackTimer = 2f;
         }
+
+    }
+
+    #endregion
+
+
+
+    #region SUSPICION
+
+    // SUSPICION STATE
+    void OnEnterSuspicion()
+    {
 
     }
 
