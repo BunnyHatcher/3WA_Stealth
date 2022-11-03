@@ -45,11 +45,11 @@ public class MoveAgent : MonoBehaviour
 
     private void Update()
     {
-        Patrol();
+        PatrolMovement();
 
     }
 
-    public void Patrol()
+    public void PatrolMovement()
     {
         if (_backAndForth)
         {

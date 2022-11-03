@@ -306,7 +306,7 @@ public class PlayerStateMachine : MonoBehaviour
                 _animator.SetBool("isJumping", false);
                 _animator.SetBool("isGrounded", true);
 
-                Debug.Log("Running");
+                //Debug.Log("Running");
 
                 if (Input.GetButtonDown("Jump"))
                 {

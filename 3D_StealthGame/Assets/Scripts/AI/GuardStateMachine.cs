@@ -39,7 +39,9 @@ public class GuardStateMachine : MonoBehaviour
     private bool _withinCatchRange;
 
     // Suspicion
-    float timeSinceLastSawPlayer = Mathf.Infinity;
+    float _timeSinceLastSawPlayer = Mathf.Infinity;
+    [SerializeField]
+    float _suspicionTime = 4f;
 
 
     #endregion
@@ -67,7 +69,7 @@ public class GuardStateMachine : MonoBehaviour
   
         _playerIsNear = false;
         _withinCatchRange = false;
-        _visionCone._playerDetected = false;
+        _visionCone._fullDetection = false;
 
         _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
     }
@@ -106,12 +108,15 @@ public class GuardStateMachine : MonoBehaviour
         
         if (_visionCone._target != null)
         {
+            //if (_visionCone._fullDetection == true)
+            //{ }             
+
             _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
         }
 
         else
         { 
-        _agentPatrol.Patrol();
+        _agentPatrol.PatrolMovement();
         }
 
     }
@@ -203,8 +208,12 @@ public class GuardStateMachine : MonoBehaviour
 
         if (_withinCatchRange)
         {
+            _timeSinceLastSawPlayer = 0;
             _brain.PushState(Attack, OnEnterAttack, null);
         }
+
+
+        _timeSinceLastSawPlayer += Time.deltaTime;
     }
 
     void OnChaseExit()
@@ -249,7 +258,7 @@ public class GuardStateMachine : MonoBehaviour
     // SUSPICION STATE
     void OnEnterSuspicion()
     {
-        timeSinceLastSawPlayer = 0;
+        
     }
 
     void Suspicion()
