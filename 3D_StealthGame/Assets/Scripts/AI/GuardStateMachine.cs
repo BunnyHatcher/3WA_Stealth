@@ -41,7 +41,7 @@ public class GuardStateMachine : MonoBehaviour
     // Suspicion
     float _timeSinceLastSawPlayer = Mathf.Infinity;
     [SerializeField]
-    float _suspicionTime = 4f;
+    float _suspicionTime = 5f;
 
 
     #endregion
@@ -82,7 +82,8 @@ public class GuardStateMachine : MonoBehaviour
 
     void Update()
     {
-
+        _playerIsNear = Vector3.Distance(transform.position, _player.transform.position) < 5;
+        _withinCatchRange = Vector3.Distance(transform.position, _player.transform.position) < 1;
     }
 
     #endregion

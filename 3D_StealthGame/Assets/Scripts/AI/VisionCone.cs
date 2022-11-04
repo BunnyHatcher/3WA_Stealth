@@ -90,6 +90,7 @@ public class VisionCone : MonoBehaviour
         {
             Debug.Log("Player exited Detection");
             _fullDetection = false;
+            _fleetingDetection = false;
             _target = null;
         }
     }
