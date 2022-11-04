@@ -9,7 +9,9 @@ public class PatrolBehavior : StateMachineBehaviour
 {
 
     private NavMeshAgent _agent;
-    
+    private StateMachine _brain;
+    private VisionCone _visionCone;
+
     //Patrol Behaviour
     public Transform[] _points;
     private int _destPoint = 0;
@@ -30,8 +32,12 @@ public class PatrolBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PatrolMovement();
-    }
 
+        if (_visionCone._target != null)
+        {
+            animator.SetBool("playerDetected", true);
+        }
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
