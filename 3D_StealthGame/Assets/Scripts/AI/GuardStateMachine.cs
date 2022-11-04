@@ -17,13 +17,13 @@ public class GuardStateMachine : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-    
+
     [SerializeField]
     private TMP_Text _stateNote;
 
     //Vision Cone
     private VisionCone _visionCone;
-    
+
 
     //Wandering
     private float _changeMind;
@@ -66,7 +66,7 @@ public class GuardStateMachine : MonoBehaviour
         _player = FindObjectOfType<PlayerStateMachine>();
         _agentPatrol = GetComponent<MoveAgent>();
         _agent = GetComponent<NavMeshAgent>();
-  
+
         _playerIsNear = false;
         _withinCatchRange = false;
         _visionCone._fullDetection = false;
@@ -76,22 +76,22 @@ public class GuardStateMachine : MonoBehaviour
 
     #endregion
 
-    
-    
+
+
     #region Update & FixedUpdate
 
     void Update()
     {
-        
+
     }
 
     #endregion
 
 
-    
-    
-    
-    
+
+
+
+
     //-----S T A T E S-------------------------------    
 
 
@@ -105,18 +105,23 @@ public class GuardStateMachine : MonoBehaviour
     }
     void Patrol()
     {
-        
+
         if (_visionCone._target != null)
         {
-            //if (_visionCone._fullDetection == true)
-            //{ }             
+            if (_visionCone._fullDetection == true)
+            {
+                _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+            }
 
-            _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+            else if (_visionCone._fleetingDetection == true && _visionCone._fullDetection == false)
+            {
+                _brain.PushState(Suspicion, OnSuspicionEnter, OnChaseExit);
+            }
         }
 
         else
-        { 
-        _agentPatrol.PatrolMovement();
+        {
+            _agentPatrol.PatrolMovement();
         }
 
     }
@@ -129,34 +134,34 @@ public class GuardStateMachine : MonoBehaviour
 
 
     #region IDLE
-    
+
     // IDLE STATE
 
-   /*
-    void OnIdleEnter()
-        {
-            _stateNote.text = "Idle";
-            _agent.ResetPath();
-        }
-    void Idle()
-    {
-        _changeMind -= Time.deltaTime;
-        if (_playerIsNear)
-        {
-           _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
-        }
-        else if (_changeMind <= 0)
-        {
-           _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
-           _changeMind = Random.Range(_changeMindMinRange, _changeMindMaxRange);
-        }        
-    }
+    /*
+     void OnIdleEnter()
+         {
+             _stateNote.text = "Idle";
+             _agent.ResetPath();
+         }
+     void Idle()
+     {
+         _changeMind -= Time.deltaTime;
+         if (_playerIsNear)
+         {
+            _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+         }
+         else if (_changeMind <= 0)
+         {
+            _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
+            _changeMind = Random.Range(_changeMindMinRange, _changeMindMaxRange);
+         }        
+     }
 
-    void OnIdleExit()
-    {
-    }
+     void OnIdleExit()
+     {
+     }
 
-    */
+     */
 
     #endregion
 
@@ -256,34 +261,28 @@ public class GuardStateMachine : MonoBehaviour
     #region SUSPICION
 
     // SUSPICION STATE
-    void OnEnterSuspicion()
+    void OnSuspicionEnter()
     {
-        
+        _stateNote.text = "Suspicious";
+        _agent.ResetPath();
     }
 
     void Suspicion()
     {
+        _suspicionTime -= Time.deltaTime;
+
+        if (_suspicionTime <= 0)
+        {
+            _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
+
+        }
 
     }
+        void OnSuspicionExit()
+        {
 
-    void OnExitSuspicion()
-    {
+        }
 
-    }
-
-    #endregion
-
-
-
-    // METHODS
-
-    private void DetectPlayer()
-    {
-        
-    }
-
-
-
-
+        #endregion
 
 }
