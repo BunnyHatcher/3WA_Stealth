@@ -6,8 +6,15 @@ public class PlayerControls : MonoBehaviour
 {
 
     #region References
-    private CharacterController _controller;
+    
+    // Camera
     private Transform _cameraTransform;
+
+    // Rotation
+    public float RotationDamping;
+
+    //Movement
+    private CharacterController _controller;
     private Vector3 _playerMovement;
     private float _currentSpeed = 6f;
 
@@ -38,16 +45,42 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Get input for movement direction
         float vertical = Input.GetAxisRaw("Vertical");
         float horizontal = Input.GetAxisRaw("Horizontal");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        _playerMovement = new Vector3(horizontal, 0f, vertical).normalized;
 
-        _controller.Move(direction * _currentSpeed * Time.deltaTime);
+        // Move into calculated direction
+        _controller.Move(_playerMovement * _currentSpeed * Time.deltaTime);
 
+        //Rotation
         
     }
+        
+        
+        
+        
+        
+        
+        private void FaceMovementDirection(Vector3 movement, float deltaTime)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), deltaTime * RotationDamping);
+        }
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
