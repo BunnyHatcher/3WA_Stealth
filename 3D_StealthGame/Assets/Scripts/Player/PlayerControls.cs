@@ -15,7 +15,7 @@ public class PlayerControls : MonoBehaviour
 
     //Movement
     private CharacterController _controller;
-    private Vector3 _playerMovement;
+    private Vector3 _movementDirection;
     private float _currentSpeed = 6f;
 
 
@@ -46,14 +46,22 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         // Get input for movement direction
-        float vertical = Input.GetAxisRaw("Vertical");
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        _playerMovement = new Vector3(horizontal, 0f, vertical).normalized;
+        _movementDirection = _cameraTransform.forward * Input.GetAxisRaw("Vertical")
+                            + _cameraTransform.right * Input.GetAxisRaw("Horizontal");
+
+
+        _movementDirection.y = 0f;
 
         // Move into calculated direction
-        _controller.Move(_playerMovement * _currentSpeed * Time.deltaTime);
+        _controller.Move(_movementDirection.normalized * _currentSpeed * Time.deltaTime);
 
         //Rotation
+        Vector3 lookDirection = _cameraTransform.forward;
+        lookDirection.y = 0;
+        
+
+        Quaternion lookRotation = Quaternion.LookRotation(lookDirection); 
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, _turnSpeed * Time.fixedDeltaTime); 
         
     }
         
@@ -61,11 +69,12 @@ public class PlayerControls : MonoBehaviour
         
         
         
-        
+       /* 
         private void FaceMovementDirection(Vector3 movement, float deltaTime)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), deltaTime * RotationDamping);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), deltaTime * _turnSpeed);
         }
+       */
 
 
 
