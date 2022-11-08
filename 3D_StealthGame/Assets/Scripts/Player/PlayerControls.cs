@@ -6,23 +6,27 @@ public class PlayerControls : MonoBehaviour
 {
 
     #region References
-
+    
     // Camera
-    public Transform _cameraTransform;
+    private Transform _cameraTransform;
 
     // Rotation
-    public float _turnSpeed { get; private set; }
-    
+    public float RotationDamping;
 
     //Movement
-    public CharacterController _controller;
-    public Vector3 _movementDirection;
-    public float _currentSpeed { get; private set; }
+    private CharacterController _controller;
+    private Vector3 _movementDirection;
+    private float _currentSpeed = 6f;
 
 
     [Header("Movement Speeds")]
     public float _moveSpeed = 10f;
-    
+    public float _turnSpeed = 500f;
+    public float _jumpForce = 5f;
+    [SerializeField] private float _walkingSpeed = 1f;
+    [SerializeField] private float _joggingSpeed = 5f;
+    [SerializeField] private float _runningSpeed = 10f;
+    [SerializeField] private float _sneakingSpeed = 2f;
 
     #endregion
 
@@ -60,7 +64,18 @@ public class PlayerControls : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, _turnSpeed * Time.fixedDeltaTime); 
         
     }
-   
+        
+        
+        
+        
+        
+       /* 
+        private void FaceMovementDirection(Vector3 movement, float deltaTime)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), deltaTime * _turnSpeed);
+        }
+       */
+
 
 
 
