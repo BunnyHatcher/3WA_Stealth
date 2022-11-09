@@ -2,30 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharacterState
-{
-    IDLE,
-    WALKING,
-    JOGGING,
-    RUNNING,
-    SNEAKING,
-    JUMPING,
-    FALLING,
-    DODGING,
 
-}
+
 
 public class AnimatorParametersUpdater : MonoBehaviour
 {
     /// <summary>
-    /// Script managing all animator parameters
+    /// Singleton script managing all animator parameters
     /// like SetFloat, SetBool, SetTrigger etc.
     /// </summary>
     /// 
 
 
-    private CharacterState _currentState;
+    public Vector2 _direction; //Joystick direction, not to confuse with player speed, velocity etc.
+    public float _moveSpeed;
+    
     private Animator _animator;
+    //private IDLE _idleState;
 
 
     // Start is called before the first frame update
@@ -34,52 +27,25 @@ public class AnimatorParametersUpdater : MonoBehaviour
         _animator = GetComponent<Animator>();
         
 
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (_currentState)
+        _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        _animator.SetFloat("directionMagnitude", _direction.magnitude );
+        _animator.SetFloat("moveSpeed", _moveSpeed * 100);
+        
+
+        if (Input.GetButton("Run") && _direction.magnitude > 0)
         {
-            case CharacterState.IDLE:
-                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                //_animator.SetFloat("moveSpeed", _movementDirection.magnitude);
-                _animator.SetBool("isJumping", false);
-                _animator.SetBool("isGrounded", true);
-                break;
-
-            case CharacterState.WALKING:
-                break;
-
-            case CharacterState.JOGGING:
-                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
-                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                //_animator.SetFloat("moveSpeed", _movementDirection.magnitude);
-                _animator.SetBool("isJumping", false);
-                _animator.SetBool("isGrounded", true);
-
-                break;
-
-            case CharacterState.RUNNING:
-                break;
-
-            case CharacterState.SNEAKING:
-                break;
-
-            case CharacterState.JUMPING:
-                _animator.SetBool("isJumping", true);
-                _animator.SetBool("isGrounded", false);
-                break;
-
-            case CharacterState.FALLING:
-                _animator.SetBool("isJumping", false);
-                _animator.SetBool("isGrounded", false);
-                break;
-
-
-
-
+            _animator.SetBool("runningKeyPressed", true);
         }
+
+
+
     }
 }
