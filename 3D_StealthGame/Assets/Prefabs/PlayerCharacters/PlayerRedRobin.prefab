@@ -170,7 +170,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029768838861633103}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000035762784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0009968132, y: 1.003, z: -1.7829971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -180,7 +180,7 @@ Transform:
   - {fileID: 2029768839194240710}
   m_Father: {fileID: 2755350298570591766}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -0, y: 179.99997, z: 0}
+  m_LocalEulerAnglesHint: {x: -0, y: 0, z: 0}
 --- !u!114 &2029768838861633098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +339,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029768839082504449}
-  m_LocalRotation: {x: -0.000015390957, y: -0.99848676, z: -0.05499312, w: 0.0002794471}
+  m_LocalRotation: {x: -0.1891075, y: 0.00000076706334, z: -0.00000014772287, w: -0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -417,7 +417,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029768839194240709}
-  m_LocalRotation: {x: -0.00000015075166, y: -0.9371708, z: 0.348871, w: -0.00000040497937}
+  m_LocalRotation: {x: -0.34887102, y: 0.0000007401414, z: -0.00000027552488, w: -0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -622,7 +622,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029768839664277139}
-  m_LocalRotation: {x: -0.000045019413, y: -0.9869794, z: -0.16084644, w: 0.00027624628}
+  m_LocalRotation: {x: -0.09853761, y: 0.0000007859179, z: -0.000000077821205, w: -0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -837,7 +837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2755350298570591766
 Transform:
   m_ObjectHideFlags: 0
@@ -1211,6 +1211,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 92bdd53b916f8aa4e9153dae594d6432, type: 2}
+    - target: {fileID: 5866666021909216657, guid: d843012831af9a245b33f70299701b91, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d843012831af9a245b33f70299701b91, type: 3}
 --- !u!1 &1218885402881291493 stripped
@@ -1243,7 +1247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218885402881291493}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2d577efbf6efdb4fb6653f34389dbbc, type: 3}
   m_Name: 
@@ -1256,6 +1260,34 @@ MonoBehaviour:
   _joggingSpeed: 5
   _runningSpeed: 10
   _sneakingSpeed: 2
+--- !u!114 &1407823845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218885402881291493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7633eb8594f7bf48a993bd96bd95753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _direction: {x: 0, y: 0}
+  _moveSpeed: 0
+--- !u!114 &1407823850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218885402881291493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b23330fe2642dc4fad5be2a63606baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 1887041074}
+  _drag: 0.1
 --- !u!4 &1991023678058770015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d843012831af9a245b33f70299701b91, type: 3}
