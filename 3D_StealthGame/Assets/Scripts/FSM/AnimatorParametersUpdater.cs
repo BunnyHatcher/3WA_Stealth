@@ -31,7 +31,9 @@ public class AnimatorParametersUpdater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponent<Animator>();
+        
+
     }
 
     // Update is called once per frame
@@ -42,10 +44,41 @@ public class AnimatorParametersUpdater : MonoBehaviour
             case CharacterState.IDLE:
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
                 _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
-                //_animator.SetFloat("moveSpeed", _direction.magnitude);
+                //_animator.SetFloat("moveSpeed", _movementDirection.magnitude);
                 _animator.SetBool("isJumping", false);
                 _animator.SetBool("isGrounded", true);
                 break;
+
+            case CharacterState.WALKING:
+                break;
+
+            case CharacterState.JOGGING:
+                _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
+                _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
+                //_animator.SetFloat("moveSpeed", _movementDirection.magnitude);
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", true);
+
+                break;
+
+            case CharacterState.RUNNING:
+                break;
+
+            case CharacterState.SNEAKING:
+                break;
+
+            case CharacterState.JUMPING:
+                _animator.SetBool("isJumping", true);
+                _animator.SetBool("isGrounded", false);
+                break;
+
+            case CharacterState.FALLING:
+                _animator.SetBool("isJumping", false);
+                _animator.SetBool("isGrounded", false);
+                break;
+
+
+
 
         }
     }
