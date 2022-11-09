@@ -57,6 +57,9 @@ public abstract class CharacterStateBase : StateMachineBehaviour
     
 
 
+    
+    
+    
     protected void Move()
     {
         // Get input for movement direction

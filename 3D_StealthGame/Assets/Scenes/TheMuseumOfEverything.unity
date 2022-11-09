@@ -20866,7 +20866,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887102, y: -3e-45, z: 1e-45, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887102, y: 1e-45, z: -0, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24510,6 +24510,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7633eb8594f7bf48a993bd96bd95753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _direction: {x: 0, y: 0}
+  _moveSpeed: 0
+--- !u!143 &1407823848 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 1887041074, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
+  m_PrefabInstance: {fileID: 1887041072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407823850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407823840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b23330fe2642dc4fad5be2a63606baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 1407823848}
+  _drag: 0.1
 --- !u!1 &1418008774
 GameObject:
   m_ObjectHideFlags: 0
@@ -35400,6 +35421,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRedRobin
       objectReference: {fileID: 0}
+    - target: {fileID: 2755350298570591765, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2755350298570591766, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -35442,6 +35467,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2755350298570591766, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755350299612197235, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755350300198192982, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566912759597659173, guid: c3a89a5dd622f554d848251aac5e39f5, type: 3}
@@ -43402,6 +43435,10 @@ PrefabInstance:
     - target: {fileID: 4701017424883764751, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}
       propertyPath: m_Name
       value: SurveillanceCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701017424883764751, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}

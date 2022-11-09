@@ -41,7 +41,7 @@ public class AnimatorParametersUpdater : MonoBehaviour
         // IDLE
         if (_direction.magnitude == 0)
         {
-            _animator.SetFloat("directionMagnitude", _direction.magnitude);
+            //_animator.SetFloat("directionMagnitude", _direction.magnitude);
             _animator.SetFloat("moveSpeed", _moveSpeed * 100);
             _animator.SetBool("isJumping", false);
             _animator.SetBool("isGrounded", true);
@@ -52,7 +52,7 @@ public class AnimatorParametersUpdater : MonoBehaviour
         // JOGGING
         if (_direction.magnitude > 0)
         {
-            _animator.SetFloat("directionMagnitude", _direction.magnitude);
+            //_animator.SetFloat("directionMagnitude", _direction.magnitude);
             _animator.SetFloat("moveSpeed", _moveSpeed * 100);
             _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
             _animator.SetFloat("SpeedY", Input.GetAxis("Vertical"));
