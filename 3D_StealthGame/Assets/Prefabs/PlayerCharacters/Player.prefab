@@ -301,6 +301,7 @@ MonoBehaviour:
   _boxDimension: {x: 0.29, y: 0.2, z: 0.29}
   _groundChecker: {fileID: 6226591701530504255}
   yFloorOffset: 1
+  _isDodging: 0
   dodgeCurve:
     serializedVersion: 2
     m_Curve: []
