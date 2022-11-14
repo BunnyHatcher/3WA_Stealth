@@ -45,16 +45,16 @@ public class PlayerStateMachine : MonoBehaviour
     private FloorDetector _floorDetector;
 
     [Header("Dodging")]
-    
+
     private float _dodgeDuration;
     private float _dodgeLength;
     private float remainingDodgeTime;
     private Vector3 dodgingDirectionInput;
     public bool _isDodging = false;
-    
+
 
     [SerializeField] AnimationCurve dodgeCurve;
-    
+
     float _dodgeTimer;
 
 
@@ -77,7 +77,7 @@ public class PlayerStateMachine : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _floorDetector = GetComponentInChildren<FloorDetector>();
         _animator = GetComponentInChildren<Animator>();
-        
+
 
         _currentSpeed = _joggingSpeed;
     }
@@ -86,12 +86,12 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _cameraTransform = Camera.main.transform;
         TransitionToState(PlayerState.IDLE);
-       
+
         /*
         Keyframe _lastDodgeFrame = dodgeCurve[dodgeCurve.length - 1];// Get points of Dodge Curve
         _dodgeTimer = _lastDodgeFrame.time;// set dodge timer to time passed since last dodge frame
         */
-        
+
     }
 
 
@@ -108,7 +108,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (_isGrounded)
         {
             //Debug.Log("Touchdown!");
-            
+
 
         }
 
@@ -119,35 +119,35 @@ public class PlayerStateMachine : MonoBehaviour
     private void FixedUpdate()
     {
 
-       if(_currentState == PlayerState.JUMPING || _currentState == PlayerState.FALLING)
+        if (_currentState == PlayerState.JUMPING || _currentState == PlayerState.FALLING)
         {
             _direction.y = _rigidbody.velocity.y;
         }
 
-       else
+        else
         {
             StickToGround();
             //Debug.Log("Is Sticking to ground");
         }
 
-       if (_isJumping )
+        if (_isJumping)
         {
             _direction.y = _jumpForce;
             _isJumping = false; // to prevent changing to isJumping every frame after the first one: we want to jump only once
         }
 
-       /*
-        if (_isDodging)
-        {
-            _isDodging = false;
-        }
-       */
-        
+        /*
+         if (_isDodging)
+         {
+             _isDodging = false;
+         }
+        */
+
         RotateTowardsCamera();
-        
+
         // move character by setting its velocity to the direction of movement calculated earlier
-       _rigidbody.velocity = _direction;
-       
+        _rigidbody.velocity = _direction;
+
         // Debug.Log("Speed is: " + _direction.magnitude);
 
     }
@@ -220,11 +220,11 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.SNEAKING);
                 }
 
-                
 
-                else if(Input.GetButtonDown("Jump"))
+
+                else if (Input.GetButtonDown("Jump"))
                 {
-                    TransitionToState(PlayerState.JUMPING);                    
+                    TransitionToState(PlayerState.JUMPING);
                 }
 
                 else if (Input.GetButtonDown("Dodge"))
@@ -254,8 +254,8 @@ public class PlayerStateMachine : MonoBehaviour
             */
 
             //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
-            
-                #region JOGGING
+
+            #region JOGGING
             case PlayerState.JOGGING:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -267,12 +267,12 @@ public class PlayerStateMachine : MonoBehaviour
                 if (_direction.magnitude == 0)
                 {
                     TransitionToState(PlayerState.IDLE);
-                    
+
                 }
 
                 else if (Input.GetButtonDown("Jump"))
                 {
-                    TransitionToState(PlayerState.JUMPING);                    
+                    TransitionToState(PlayerState.JUMPING);
                 }
 
                 else if (!_isGrounded)
@@ -282,7 +282,7 @@ public class PlayerStateMachine : MonoBehaviour
 
                 else if (Input.GetButton("Run"))
                 {
-                    TransitionToState(PlayerState.RUNNING);                    
+                    TransitionToState(PlayerState.RUNNING);
                 }
 
                 else if (Input.GetButtonDown("Sneak") && _isSneaking == false)
@@ -300,8 +300,8 @@ public class PlayerStateMachine : MonoBehaviour
             #endregion
 
             //-------R U N N I N G ----------------------------------------------------------------------------------------------------------------------------------------------
-            
-                #region RUNNING
+
+            #region RUNNING
             case PlayerState.RUNNING:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -317,19 +317,19 @@ public class PlayerStateMachine : MonoBehaviour
                     TransitionToState(PlayerState.JUMPING);
                 }
 
-                else if ( !_isGrounded )
+                else if (!_isGrounded)
                 {
                     TransitionToState(PlayerState.FALLING);
                 }
 
-               else if (!Input.GetButton("Run"))
+                else if (!Input.GetButton("Run"))
                 {
                     TransitionToState(PlayerState.JOGGING);
                 }
 
-               else if (Input.GetButtonDown("Dodge"))
+                else if (Input.GetButtonDown("Dodge"))
                 {
-                    
+
                     TransitionToState(PlayerState.DODGING);
                 }
 
@@ -337,8 +337,8 @@ public class PlayerStateMachine : MonoBehaviour
             #endregion
 
             //------S N E A K I N G --------------------------------------------------------------------------------------------------------------------------------------------
-            
-                #region SNEAKING
+
+            #region SNEAKING
             case PlayerState.SNEAKING:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -366,25 +366,25 @@ public class PlayerStateMachine : MonoBehaviour
             #endregion
 
             //------J U M P I N G --------------------------------------------------------------------------------------------------------------------------------------------
-           
-                #region JUMPING
+
+            #region JUMPING
             case PlayerState.JUMPING:
                 Move();
                 _animator.SetBool("isJumping", true);
                 _animator.SetBool("isGrounded", false);
 
-                if ( _rigidbody.velocity.y < -0.2f && !_isGrounded )
+                if (_rigidbody.velocity.y < -0.2f && !_isGrounded)
                 {
                     TransitionToState(PlayerState.FALLING);
-                    
+
                 }
 
                 break;
             #endregion
 
             //------F A L L I N G --------------------------------------------------------------------------------------------------------------------------------------------
-            
-                #region FALLING
+
+            #region FALLING
             case PlayerState.FALLING:
                 Move();
                 _animator.SetBool("isJumping", false);
@@ -402,16 +402,16 @@ public class PlayerStateMachine : MonoBehaviour
 
             //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
-                #region DODGING
+            #region DODGING
             case PlayerState.DODGING:
 
                 Dodge();
-                        
+
                 break;
 
             default:
                 break;
-           #endregion
+                #endregion
         }
 
     }
@@ -466,7 +466,7 @@ public class PlayerStateMachine : MonoBehaviour
                       + _cameraTransform.right.normalized * Input.GetAxisRaw("Horizontal");//left-right movement: relative to PLAYER
 
         // Smoothing movement
-       // _currentSpeed = Mathf.SmoothDamp( _smoothSpeed, _currentSpeed, ref _speedSmoothDampVelocity, _speedSmoothTime);
+        // _currentSpeed = Mathf.SmoothDamp( _smoothSpeed, _currentSpeed, ref _speedSmoothDampVelocity, _speedSmoothTime);
 
         _direction *= _currentSpeed; // multiply by movement speed to get direction of movement
 
@@ -484,7 +484,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void RotateTowardsCamera()
     {
-          
+
         Vector3 lookDirection = _cameraTransform.forward;   // make a copy of cameraTransform.forward...
         lookDirection.y = 0;    // ... to be able to set the y-axis of the camera to 0
         // --> otherwise player would lean forward when looking down and lean backward when looking up
@@ -507,12 +507,29 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector3 _dodgeMovement = new Vector3();
 
-        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical") ;
-        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal") ;
+        _dodgeMovement += _cameraTransform.forward * Input.GetAxis("Vertical");
+        _dodgeMovement += _cameraTransform.right * Input.GetAxisRaw("Horizontal");
 
         //make sure character rotates into direction of movement  
         Quaternion rollRotation = Quaternion.LookRotation(_direction);
         _rigidbody.transform.rotation = rollRotation;
+    }
+
+    public void HandleRolling()
+    {
+        if (_animator.GetBool("isInteracting"))
+            return;
+        if (_isDodging)
+        {
+            _direction = _cameraTransform.forward * Input.GetAxis("Vertical");
+            _direction += _cameraTransform.right * Input.GetAxisRaw("Horizontal");
+
+            if (_direction.magnitude > 0)
+            {
+                
+            }
+        }
+
     }
 
 
