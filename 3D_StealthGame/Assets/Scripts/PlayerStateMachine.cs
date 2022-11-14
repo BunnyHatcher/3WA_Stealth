@@ -192,9 +192,9 @@ public class PlayerStateMachine : MonoBehaviour
     {
         switch (_currentState)
         {
-        //-----I D L E ------------------------------------------------------------------------------------------------------------------------------------------------
+            //-----I D L E ------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+            #region IDLE
             case PlayerState.IDLE:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -233,27 +233,29 @@ public class PlayerStateMachine : MonoBehaviour
                 }
 
                 break;
+            #endregion
 
-        //------W A L K I N G---------------------------------------------------------------------------------------------------------------------------------------------------
-        /*
-            case PlayerState.WALKING:
-                Move();
+            //------W A L K I N G---------------------------------------------------------------------------------------------------------------------------------------------------
+            /*
+                case PlayerState.WALKING:
+                    Move();
 
-                if (_direction.magnitude > 0)
-                {
-                    TransitionToState(PlayerState.JOGGING);
-                    _animator.SetFloat("MoveSpeedX", Input.GetAxis("Horizontal"));
-                }
+                    if (_direction.magnitude > 0)
+                    {
+                        TransitionToState(PlayerState.JOGGING);
+                        _animator.SetFloat("MoveSpeedX", Input.GetAxis("Horizontal"));
+                    }
 
-                else if (Input.GetButtonDown("Jump"))
-                {
-                    TransitionToState(PlayerState.JUMPING);
-                }
-                break;
-        */
+                    else if (Input.GetButtonDown("Jump"))
+                    {
+                        TransitionToState(PlayerState.JUMPING);
+                    }
+                    break;
+            */
 
-        //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
-
+            //-------J O G G I N G --------------------------------------------------------------------------------------------------------------------------------------------
+            
+                #region JOGGING
             case PlayerState.JOGGING:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -295,9 +297,11 @@ public class PlayerStateMachine : MonoBehaviour
                 }
 
                 break;
+            #endregion
 
-        //-------R U N N I N G ----------------------------------------------------------------------------------------------------------------------------------------------
-
+            //-------R U N N I N G ----------------------------------------------------------------------------------------------------------------------------------------------
+            
+                #region RUNNING
             case PlayerState.RUNNING:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -330,9 +334,11 @@ public class PlayerStateMachine : MonoBehaviour
                 }
 
                 break;
+            #endregion
+
+            //------S N E A K I N G --------------------------------------------------------------------------------------------------------------------------------------------
             
-        //------S N E A K I N G --------------------------------------------------------------------------------------------------------------------------------------------
-                
+                #region SNEAKING
             case PlayerState.SNEAKING:
                 Move();
                 _animator.SetFloat("SpeedX", Input.GetAxis("Horizontal"));
@@ -357,9 +363,11 @@ public class PlayerStateMachine : MonoBehaviour
                 }
 
                 break;
+            #endregion
 
-        //------J U M P I N G --------------------------------------------------------------------------------------------------------------------------------------------
-
+            //------J U M P I N G --------------------------------------------------------------------------------------------------------------------------------------------
+           
+                #region JUMPING
             case PlayerState.JUMPING:
                 Move();
                 _animator.SetBool("isJumping", true);
@@ -372,9 +380,11 @@ public class PlayerStateMachine : MonoBehaviour
                 }
 
                 break;
+            #endregion
 
-        //------F A L L I N G --------------------------------------------------------------------------------------------------------------------------------------------
-
+            //------F A L L I N G --------------------------------------------------------------------------------------------------------------------------------------------
+            
+                #region FALLING
             case PlayerState.FALLING:
                 Move();
                 _animator.SetBool("isJumping", false);
@@ -388,9 +398,11 @@ public class PlayerStateMachine : MonoBehaviour
                 }
 
                 break;
+            #endregion
 
-       //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
+            //------D O D G I N G --------------------------------------------------------------------------------------------------------------------------------------------
 
+                #region DODGING
             case PlayerState.DODGING:
 
                 Dodge();
@@ -399,7 +411,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             default:
                 break;
-
+           #endregion
         }
 
     }
@@ -461,13 +473,7 @@ public class PlayerStateMachine : MonoBehaviour
         _direction.y = 0; // Vertical transform is not taken into account, we have the Jumpmethod for that
     }
 
-
-    
-
-
-
-
-        private void StickToGround()
+    private void StickToGround()
     {
         Vector3 averagePosition = _floorDetector.AverageHeight();
 
