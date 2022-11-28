@@ -16916,7 +16916,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18910751, y: 0.000000016895916, z: -0.0000000032538556, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910751, y: -0.000000016895918, z: 0.000000003253856, w: 0.9819564}
   m_LocalPosition: {x: -0.52007484, y: 1.5, z: 57.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23023,7 +23023,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887102, y: 1e-45, z: -0, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887102, y: 1e-45, z: -1e-45, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36642,7 +36642,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730187505}
-  m_LocalRotation: {x: 0.1891075, y: 0.000000008447957, z: -0.0000000016269277, w: 0.9819564}
+  m_LocalRotation: {x: 0.1891075, y: -0.000000008447959, z: 0.000000001626928, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -43310,6 +43310,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5947976142931365}
     m_Modifications:
+    - target: {fileID: 5988628866181712754, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988628866181712754, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 17a195e7ba8fdb945b3c391ace4dcf42, type: 2}
     - target: {fileID: 5988628866191079604, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
       propertyPath: m_Name
       value: Werehog_PBR
@@ -44388,7 +44396,7 @@ Animator:
   m_GameObject: {fileID: 5947976142931386}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6bddef67d5c980e48be3e62a7d65790b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 17a195e7ba8fdb945b3c391ace4dcf42, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1b84f2004d2aff14f870e8d130871840, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -44503,7 +44511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!195 &5947976142931387
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -51701,7 +51709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7708900961886054320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51729,7 +51737,7 @@ Animator:
   m_GameObject: {fileID: 7708900961886054313}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 25be4f04cada3554ea839c4ad099f89c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 5f79256f4e359764ca1e92b8d5110e0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 69083153e4e244e478661e155361b14b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
