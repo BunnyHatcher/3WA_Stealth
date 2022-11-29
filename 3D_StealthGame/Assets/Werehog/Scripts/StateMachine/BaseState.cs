@@ -10,16 +10,26 @@ public abstract class BaseState : StateMachineBehaviour
 {
     #region References
     //private StateMachine _brain;
+    protected GameObject _player;
+    
+    protected GameObject _enemy;
     protected MoveAgent _agentPatrol;
     protected NavMeshAgent _agent;
     protected Animator _animator;
     protected Animator _FSM;
 
     protected TMP_Text _stateNote;
-    protected GameObject _player;
 
     //Vision Cone
     protected VisionCone _visionCone;
+    #endregion
+
+    #region Bools & Parameters
+    protected bool _withinAttackRange;
+
+    protected float _endChaseDistance = 5.5f;
+    public float _timeSinceLastSawPlayer = Mathf.Infinity;
+
     #endregion
 
 
@@ -28,16 +38,19 @@ public abstract class BaseState : StateMachineBehaviour
 
     private void Awake()
     {
-        _player = GameObject.Find("Werehog");
+        //_player = GameObject.Find("Player");
+        _player = GameObject.FindWithTag("Player");
 
-        _visionCone = _player.GetComponentInChildren<VisionCone>();
-        _stateNote = _player.GetComponentInChildren<TMP_Text>();
+        _enemy = GameObject.Find("Werehog");
 
-        _agent = _player.GetComponent<NavMeshAgent>();
-        _agentPatrol = _player.GetComponent<MoveAgent>();
+        _visionCone = _enemy.GetComponentInChildren<VisionCone>();
+        _stateNote = _enemy.GetComponentInChildren<TMP_Text>();
+
+        _agent = _enemy.GetComponent<NavMeshAgent>();
+        _agentPatrol = _enemy.GetComponent<MoveAgent>();
         
-        _animator = _player.GetComponent<Animator>();
-        _FSM = _player.GetComponentInChildren<Animator>();
+        _animator = _enemy.GetComponent<Animator>();
+        _FSM = _enemy.GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -58,35 +71,7 @@ public abstract class BaseState : StateMachineBehaviour
     
     
     
-    protected void Move()
-    {
-        // Get input for movement direction
-        _movementDirection = _cameraTransform.forward * Input.GetAxisRaw("Vertical")
-                            + _cameraTransform.right * Input.GetAxisRaw("Horizontal");
-
-
-        _movementDirection.y = 0f;
-
-        // Move into calculated direction
-        _controller.Move(_movementDirection.normalized * _playerControlSettings._currentSpeed * Time.deltaTime);
-
-        _animatorHandler._moveSpeed = (_movementDirection.normalized * _playerControlSettings._currentSpeed
-                                        * Time.deltaTime).magnitude;
-
-        Debug.Log("Move Speed: " + _animatorHandler._moveSpeed);
-
-    }
-
-    protected void RotateTowardsCamera()
-    {
-        //Rotation
-        Vector3 lookDirection = _cameraTransform.forward;
-        lookDirection.y = 0;
-
-
-        Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
-        _playerTransform.rotation = Quaternion.Lerp(_playerTransform.rotation, lookRotation, _playerControlSettings._turnSpeed * Time.deltaTime);
-    }
+   
 
     #endregion
 

@@ -12,9 +12,9 @@ public class WerehogStateMachine : MonoBehaviour
     #region References
 
     private StateMachine _brain;
-    private MoveAgent _agentPatrol;
     private PlayerStateMachine _player;
 
+    private MoveAgent _agentPatrol;
     private NavMeshAgent _agent;
     private Animator _animator;
     private Animator _FSM;

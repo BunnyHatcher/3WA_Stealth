@@ -10,10 +10,18 @@ public class VisionCone : MonoBehaviour
     [HideInInspector]
     public GameObject _target;
 
+    private BaseState _baseState;
+
     public bool _fleetingDetection = false;
     public bool _fullDetection = false;
 
     private float _detectionTimer = 3f;
+
+
+    private void Awake()
+    {
+        _baseState = FindObjectOfType<BaseState>();
+    }
 
     private void Update()
     {
@@ -45,7 +53,7 @@ public class VisionCone : MonoBehaviour
                 {
                     Debug.Log("Fleeting Detection");
                     //_target = other.gameObject;
-                    _fleetingDetection = true;
+                    _fleetingDetection = true;                    
                 }
             }
 
@@ -71,6 +79,7 @@ public class VisionCone : MonoBehaviour
                         Debug.Log("Full detection");
                         _fullDetection = true;
                         _target = other.gameObject;
+                        _baseState._timeSinceLastSawPlayer = 0;
                     }
                 }
 
