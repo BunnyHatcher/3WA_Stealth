@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Animator))]
+//[RequireComponent(typeof(NavMeshAgent))]
+//[RequireComponent(typeof(Animator))]
 
 public class AnimateAgent : MonoBehaviour
 {
+    [SerializeField]
+    GameObject _enemy;
     Animator _anim;
     NavMeshAgent _agent;
     Vector2 _smoothDeltaPosition = Vector2.zero;
@@ -15,6 +17,7 @@ public class AnimateAgent : MonoBehaviour
 
     void Start()
     {
+        //_enemy = GameObject.Find("Werehog");
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         // Don’t update position automatically

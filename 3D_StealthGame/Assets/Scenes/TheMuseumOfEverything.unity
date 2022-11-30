@@ -10601,6 +10601,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ff30d039db580264cb1df0c2383801ff, type: 3}
   m_PrefabInstance: {fileID: 621138736}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &629799585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 629799586}
+  - component: {fileID: 629799587}
+  m_Layer: 0
+  m_Name: WerehogStateMachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &629799586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629799585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5947976142931365}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &629799587
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629799585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 6bddef67d5c980e48be3e62a7d65790b, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1b84f2004d2aff14f870e8d130871840, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &632435238
 GameObject:
   m_ObjectHideFlags: 0
@@ -23023,7 +23075,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887102, y: 1e-45, z: -0, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887102, y: 1e-45, z: -1e-45, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23132,6 +23184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
 --- !u!95 &1205699091
 Animator:
   serializedVersion: 4
@@ -32120,6 +32173,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1563261470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5988628866191079604, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
+  m_PrefabInstance: {fileID: 2100981388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578807553
 GameObject:
   m_ObjectHideFlags: 0
@@ -43312,12 +43370,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5988628866181712754, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5988628866181712754, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 17a195e7ba8fdb945b3c391ace4dcf42, type: 2}
+    - target: {fileID: 5988628866181712754, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988628866181712754, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5988628866191079604, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
       propertyPath: m_Name
       value: Werehog_PBR
@@ -43385,6 +43451,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5988628866191565972, guid: c175787c917c3054982fdfee1715f3c0, type: 3}
   m_PrefabInstance: {fileID: 2100981388}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2100981391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563261470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 5947976142931386}
 --- !u!1 &2106681052
 GameObject:
   m_ObjectHideFlags: 0
@@ -44386,6 +44465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
 --- !u!95 &5947976142931362
 Animator:
   serializedVersion: 4
@@ -44396,7 +44476,7 @@ Animator:
   m_GameObject: {fileID: 5947976142931386}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6bddef67d5c980e48be3e62a7d65790b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1b84f2004d2aff14f870e8d130871840, type: 2}
+  m_Controller: {fileID: 9100000, guid: 17a195e7ba8fdb945b3c391ace4dcf42, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -44452,6 +44532,7 @@ Transform:
   - {fileID: 1685604223378612805}
   - {fileID: 300351869}
   - {fileID: 2100981389}
+  - {fileID: 629799586}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -44483,7 +44564,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5947976142931386}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c56058eaabef3d043bb0219171d160ed, type: 3}
   m_Name: 
@@ -45360,6 +45441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
 --- !u!4 &1019086811991880934
 Transform:
   m_ObjectHideFlags: 0
@@ -50578,6 +50660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
 --- !u!114 &7532199642878648708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51759,6 +51842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
 --- !u!114 &7708900961886054324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53647,6 +53731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f4e3ae036aea4c9ded3746aac99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
 --- !u!114 &9142080522676454999
 MonoBehaviour:
   m_ObjectHideFlags: 0
