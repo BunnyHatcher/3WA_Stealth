@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PatrolState : BaseState
 {
+    bool _playerIsNear = false;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -13,7 +15,20 @@ public class PatrolState : BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-     if (_visionCone._target != null)
+        _playerIsNear = Vector3.Distance(_enemy.transform.position, _player.transform.position) < 5;
+        
+        if (_playerIsNear)
+        {
+            _FSM.SetBool("CHASING", true);
+        }
+        else
+        {
+            _FSM.SetBool("PATROLLING", true);
+        }
+        
+        
+        /*
+        if (_visionCone._target != null)
         {
             if (_visionCone._fullDetection == true)
             {
@@ -29,7 +44,9 @@ public class PatrolState : BaseState
         else
         {
             _agentPatrol.PatrolMovement();
-        }   
+        }
+     */
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

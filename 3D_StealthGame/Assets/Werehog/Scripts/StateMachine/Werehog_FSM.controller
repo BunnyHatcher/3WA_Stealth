@@ -111,7 +111,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: FSM
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1061220410506633363}
@@ -207,28 +207,28 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CHASING
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SUSPICIOUS
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATTACKING
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: FSM
     m_StateMachine: {fileID: -2567850255025199950}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7712f5512a048324691ec10239491ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeSinceLastSawPlayer: Infinity
 --- !u!1102 &1061220410506633363
 AnimatorState:
   serializedVersion: 6
@@ -470,3 +471,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f923999ab63ca46a16644ecb22a68e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeSinceLastSawPlayer: Infinity

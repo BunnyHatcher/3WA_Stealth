@@ -15,11 +15,18 @@ public class AnimateAgent : MonoBehaviour
     Vector2 _smoothDeltaPosition = Vector2.zero;
     Vector2 _velocity = Vector2.zero;
 
-    void Start()
+
+    private void Awake()
     {
         //_enemy = GameObject.Find("Werehog");
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+    }
+    void Start()
+    {
+        // turn off RootMotion
+        _anim.applyRootMotion = false;
+
         // Don’t update position automatically
         _agent.updatePosition = false;
     }
