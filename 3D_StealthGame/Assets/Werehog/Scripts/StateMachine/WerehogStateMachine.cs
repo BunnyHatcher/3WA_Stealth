@@ -14,7 +14,7 @@ public class WerehogStateMachine : MonoBehaviour
     private StateMachine _brain;
     private PlayerStateMachine _player;
 
-    private MoveAgent _agentPatrol;
+    private MoveAgent _moveAgent;
     private NavMeshAgent _navAgent;
     private Animator _animator;
     private Animator _FSM;
@@ -66,7 +66,7 @@ public class WerehogStateMachine : MonoBehaviour
         
         _brain = GetComponent<StateMachine>();
         _player = FindObjectOfType<PlayerStateMachine>();
-        _agentPatrol = GetComponent<MoveAgent>();
+        _moveAgent = GetComponent<MoveAgent>();
         _navAgent = GetComponent<NavMeshAgent>();
 
         _playerIsNear = false;
@@ -124,7 +124,7 @@ public class WerehogStateMachine : MonoBehaviour
 
         else
         {
-            _agentPatrol.PatrolMovement();
+            _moveAgent.PatrolMovement();
         }
 
     }

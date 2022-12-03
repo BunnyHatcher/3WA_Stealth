@@ -10,8 +10,10 @@ public class AnimateAgent : MonoBehaviour
 {
     [SerializeField]
     GameObject _enemy;
+    Rigidbody _enemyRigidbody;
     Animator _anim;
     NavMeshAgent _navAgent;
+    MoveAgent _moveAgent;
     Vector2 _smoothDeltaPosition = Vector2.zero;
     Vector2 _velocity = Vector2.zero;
 
@@ -64,6 +66,16 @@ public class AnimateAgent : MonoBehaviour
     {
         // Update position to agent position
         transform.position = _navAgent.nextPosition;
+
+        // the following code centers our model back on our gameobject
+        //when our animator plays an animation with root motion
+        float delta = Time.deltaTime;
+        _enemyRigidbody.drag = 0;
+        Vector3 deltaPosition = _anim.deltaPosition;
+        deltaPosition.y = 0;
+        Vector3 velocity = deltaPosition / delta;
+        _enemyRigidbody.velocity = velocity /* * _moveAgent._moveSpeed*/;
+
     }
 
     #region Methods

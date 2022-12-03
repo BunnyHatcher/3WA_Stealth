@@ -7,38 +7,55 @@ using UnityEngine.UI;
 
 public class MoveAgent : MonoBehaviour
 {
+    #region References to other Classes
+    public Transform _target;
+
+    private NavMeshAgent _navAgent;    
+    private VisionCone _visionCone;
+    private BaseState _baseState;
+    private Rigidbody _enemyRigidbody;
+
     //private StateMachine _brain;
     //private Animator _animator;
-    private Text _stateNote;
-    private BaseState _baseState;
-    private NavMeshAgent _navAgent;    
-    public Transform _target;
-    //private PlayerStateMachine _playerStateMachine;
+    //private Text _stateNote;
+    //private PlayerStateMachine _playerStateMachine;    
+    #endregion
 
+    #region Patrol Behaviour
     //Patrol Behaviour
     public Transform[] _points;
     private int _destPoint = 0;
     private bool _goingForward =  true;
     [SerializeField] private bool _backAndForth = false;
+    #endregion
 
-    //Vision Cone
-    private VisionCone _visionCone;
+    #region Bools & Parameters
+    //Locomotion
+    public float _rotationSpeed = 15f;
+    public float _moveSpeed = 3f;
+    #endregion
 
 
     private void Awake()
     {
         //_animator = transform.GetChild(0).GetComponent<Animator>();
+        //_brain = GetComponent<StateMachine>();
+        //_playerStateMachine = FindObjectOfType<PlayerStateMachine>();
+        
+        _navAgent = GetComponent<NavMeshAgent>();
         _visionCone = GetComponentInChildren<VisionCone>();
         _baseState = FindObjectOfType<BaseState>();
+        _enemyRigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        //_brain = GetComponent<StateMachine>();
-        //_playerStateMachine = FindObjectOfType<PlayerStateMachine>();
-        _navAgent = GetComponent<NavMeshAgent>();
+        //_navAgent.enabled = false;
+        //_enemyRigidbody.isKinematic = false;
+
         _navAgent.autoBraking = false;
 
+        // Start Patrol:
         GotoNextPoint();
 
     }
@@ -48,6 +65,11 @@ public class MoveAgent : MonoBehaviour
     {
         //PatrolMovement();
 
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
 

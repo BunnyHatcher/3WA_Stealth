@@ -8,7 +8,7 @@ using TMPro;
 public class NFTBotStateMachine : MonoBehaviour
 {
     private StateMachine _brain;
-    private MoveAgent _agentPatrol;
+    private MoveAgent _moveAgent;
     private PlayerStateMachine _player;
 
     private NavMeshAgent _agent;
@@ -46,7 +46,7 @@ public class NFTBotStateMachine : MonoBehaviour
         _brain = GetComponent<StateMachine>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        _agentPatrol = GetComponent<MoveAgent>();
+        _moveAgent = GetComponent<MoveAgent>();
   
         _playerIsNear = false;
         _withinCatchRange = false;

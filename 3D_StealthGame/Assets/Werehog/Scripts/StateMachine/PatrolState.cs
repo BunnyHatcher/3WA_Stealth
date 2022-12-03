@@ -24,7 +24,7 @@ public class PatrolState : BaseState
         else
         {
             //_FSM.SetBool("PATROLLING", true);
-            _agentPatrol.PatrolMovement();
+            _moveAgent.PatrolMovement();
         }
         
         
@@ -44,7 +44,7 @@ public class PatrolState : BaseState
 
         else
         {
-            _agentPatrol.PatrolMovement();
+            _moveAgent.PatrolMovement();
         }
      */
 

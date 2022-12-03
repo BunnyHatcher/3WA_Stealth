@@ -14,7 +14,7 @@ public abstract class BaseState : StateMachineBehaviour
     
     protected GameObject _enemy;
     protected Rigidbody _enemyRigidbody;
-    protected MoveAgent _agentPatrol;
+    protected MoveAgent _moveAgent;
     protected NavMeshAgent _navAgent;
     protected AnimateAgent _enemyAnimations;
     protected Animator _animator;
@@ -28,10 +28,7 @@ public abstract class BaseState : StateMachineBehaviour
     #region Bools & Parameters
     
     public bool _isPerformingAction = false;
-    protected float _distanceFromTarget;
-
-    //Locomotion
-    public float _rotationSpeed = 15f;
+    protected float _distanceFromTarget = 1f;    
     
     // Chasing
     protected float _endChaseDistance = 5.5f;
@@ -58,7 +55,7 @@ public abstract class BaseState : StateMachineBehaviour
 
         // A.I.
         _navAgent = _enemy.GetComponent<NavMeshAgent>();
-        _agentPatrol = _enemy.GetComponent<MoveAgent>();
+        _moveAgent = _enemy.GetComponent<MoveAgent>();
         // Animation
         _animator = _enemy.GetComponent<Animator>();
         _enemyAnimations = _enemy.GetComponent<AnimateAgent>();
@@ -93,12 +90,18 @@ public abstract class BaseState : StateMachineBehaviour
             _animator.SetFloat("velocityX", 0, 0.1f, Time.deltaTime);
             _navAgent.enabled = false;
         }
-
+        // otherwise...
         else
         {
-            if(_distanceFromTarget > _navAgent.stoppingDistance)
+            // we move, when we are not in attack range
+            if(_distanceFromTarget > _attackRange /*or: _navAgent.stoppingDistance */)
             {
                 _animator.SetFloat("velocityX", 1, 0.1f, Time.deltaTime);
+            }
+            // or we stand still when we are in attack range
+            else if (_distanceFromTarget <= _attackRange)
+            {
+                _animator.SetFloat("velocityX", 0, 0.1f, Time.deltaTime);
             }
         }
 
@@ -122,7 +125,7 @@ public abstract class BaseState : StateMachineBehaviour
             }
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            _enemy.transform.rotation = Quaternion.Slerp(_enemy.transform.rotation, targetRotation, _rotationSpeed / Time.deltaTime);
+            _enemy.transform.rotation = Quaternion.Slerp(_enemy.transform.rotation, targetRotation, _moveAgent._rotationSpeed / Time.deltaTime);
         }
         //Rotate with Pathfinding
         else
@@ -133,7 +136,8 @@ public abstract class BaseState : StateMachineBehaviour
             _navAgent.enabled = true;
             _navAgent.SetDestination(_player.transform.position);
             _enemyRigidbody.velocity = targetVelocity;
-            _enemy.transform.rotation = Quaternion.Slerp(_enemy.transform.rotation, _navAgent.transform.rotation, _rotationSpeed / Time.deltaTime);
+            _enemy.transform.rotation = Quaternion.Slerp(_enemy.transform.rotation,
+                _navAgent.transform.rotation, _moveAgent._rotationSpeed / Time.deltaTime);
         }
 
         _navAgent.transform.localPosition = Vector3.zero;

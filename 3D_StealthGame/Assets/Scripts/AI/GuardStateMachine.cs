@@ -12,7 +12,7 @@ public class GuardStateMachine : MonoBehaviour
     #region References
 
     private StateMachine _brain;
-    private MoveAgent _agentPatrol;
+    private MoveAgent _moveAgent;
     private PlayerStateMachine _player;
 
     private NavMeshAgent _agent;
@@ -64,7 +64,7 @@ public class GuardStateMachine : MonoBehaviour
         _brain = GetComponent<StateMachine>();
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerStateMachine>();
-        _agentPatrol = GetComponent<MoveAgent>();
+        _moveAgent = GetComponent<MoveAgent>();
         _agent = GetComponent<NavMeshAgent>();
 
         _playerIsNear = false;
@@ -122,7 +122,7 @@ public class GuardStateMachine : MonoBehaviour
 
         else
         {
-            _agentPatrol.PatrolMovement();
+            _moveAgent.PatrolMovement();
         }
 
     }
