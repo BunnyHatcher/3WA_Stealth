@@ -9,7 +9,7 @@ public class PatrolState : BaseState
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _stateNote.text = "Patroling";
+        _stateNote.text = "Patrolling";
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,7 +23,8 @@ public class PatrolState : BaseState
         }
         else
         {
-            _FSM.SetBool("PATROLLING", true);
+            //_FSM.SetBool("PATROLLING", true);
+            _agentPatrol.PatrolMovement();
         }
         
         

@@ -33,7 +33,7 @@ public class MoveAgent : MonoBehaviour
 
     private void Start()
     {
-        _brain = GetComponent<StateMachine>();
+        //_brain = GetComponent<StateMachine>();
         //_playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.autoBraking = false;
@@ -45,7 +45,7 @@ public class MoveAgent : MonoBehaviour
 
     private void Update()
     {
-        PatrolMovement();
+        //PatrolMovement();
 
     }
 

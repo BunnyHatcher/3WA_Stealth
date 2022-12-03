@@ -66,6 +66,13 @@ public class AnimateAgent : MonoBehaviour
         transform.position = _agent.nextPosition;
     }
 
+    #region Methods
 
+    public void PlayTargetAnimation()
+    {
+
+    }
+
+    #endregion
 
 }

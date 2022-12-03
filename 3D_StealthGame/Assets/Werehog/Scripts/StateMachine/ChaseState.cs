@@ -13,20 +13,24 @@ public class ChaseState : BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+       // Safety Check to make sure, that Actions interrupt locomotion
+        if (_isPerformingAction)
+            return;
+        
+        // AI chases player's position
         _agent.SetDestination(_player.transform.position);
-        if (Vector3.Distance(_enemy.transform.position, _player.transform.position) > _endChaseDistance)
+
+        _distanceFromTarget = Vector3.Distance(_enemy.transform.position, _player.transform.position);
+        if (_distanceFromTarget > _endChaseDistance)
         {
             _FSM.SetBool("SUSPICIOUS", true);
         }
 
-        if (_withinAttackRange)
+        if (_distanceFromTarget < _attackRange)
         {
-            _timeSinceLastSawPlayer = 0;
             _FSM.SetBool("ATTACKING", true);
         }
 
-
-        _timeSinceLastSawPlayer += Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
