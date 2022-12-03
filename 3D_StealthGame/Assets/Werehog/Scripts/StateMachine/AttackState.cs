@@ -12,20 +12,23 @@ public class AttackState : BaseState
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _stateNote.text = "Attacking";
-        _agent.ResetPath();
+        _navAgent.ResetPath();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        HandleMoveToTarget();
         HandleRecoveryTimer();
+        GetNewAttack();
+        AttackTarget();
 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _FSM.SetBool("CHASING", false);
+        _FSM.SetBool("ATTACKING", false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
@@ -54,7 +57,7 @@ public class AttackState : BaseState
         {
              _isPerformingAction = true;
             _currentRecoveryTime = _currentAttack._recoveryTime; // _currentAttack = EnemyAttackAction
-            // _enemyAnimations.PlayTargetAnimation(_currentAttack._actionAnimation, true);
+            _enemyAnimations.PlayTargetAnimation(_currentAttack._actionAnimation, true);
 
         }
     }

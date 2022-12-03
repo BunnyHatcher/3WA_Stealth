@@ -8,7 +8,7 @@ public class SuspicionState : BaseState
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _stateNote.text = "Suspicious";
-        _agent.ResetPath();
+        _navAgent.ResetPath();
         _timeSinceLastSawPlayer = 0f;
     }
 

@@ -15,7 +15,7 @@ public class WerehogStateMachine : MonoBehaviour
     private PlayerStateMachine _player;
 
     private MoveAgent _agentPatrol;
-    private NavMeshAgent _agent;
+    private NavMeshAgent _navAgent;
     private Animator _animator;
     private Animator _FSM;
 
@@ -67,7 +67,7 @@ public class WerehogStateMachine : MonoBehaviour
         _brain = GetComponent<StateMachine>();
         _player = FindObjectOfType<PlayerStateMachine>();
         _agentPatrol = GetComponent<MoveAgent>();
-        _agent = GetComponent<NavMeshAgent>();
+        _navAgent = GetComponent<NavMeshAgent>();
 
         _playerIsNear = false;
         _withinCatchRange = false;
@@ -180,7 +180,7 @@ public class WerehogStateMachine : MonoBehaviour
         NavMeshHit navMeshHit;
         NavMesh.SamplePosition(wanderDirection, out navMeshHit, 3f, NavMesh.AllAreas);
         Vector3 destination = navMeshHit.position;
-        _agent.SetDestination(destination);
+        _navAgent.SetDestination(destination);
     }
     void Wander()
     {
@@ -207,7 +207,7 @@ public class WerehogStateMachine : MonoBehaviour
 
     void Chase()
     {
-        _agent.SetDestination(_player.transform.position);
+        _navAgent.SetDestination(_player.transform.position);
         if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
         {
             _brain.PopState();
@@ -238,7 +238,7 @@ public class WerehogStateMachine : MonoBehaviour
     // ATTACK STATE
     void OnEnterAttack()
     {
-        _agent.ResetPath();
+        _navAgent.ResetPath();
         _stateNote.text = "Attack";
     }
     void Attack()
@@ -267,7 +267,7 @@ public class WerehogStateMachine : MonoBehaviour
     void OnSuspicionEnter()
     {
         _stateNote.text = "Suspicious";
-        _agent.ResetPath();
+        _navAgent.ResetPath();
     }
 
     void Suspicion()

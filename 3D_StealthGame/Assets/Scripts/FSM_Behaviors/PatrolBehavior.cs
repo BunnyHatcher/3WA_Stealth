@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PatrolBehavior : StateMachineBehaviour
 {
 
-    private NavMeshAgent _agent;
+    private NavMeshAgent _navAgent;
     private StateMachine _brain;
     private VisionCone _visionCone;
 
@@ -24,7 +24,7 @@ public class PatrolBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _agent = animator.GetComponent<NavMeshAgent>();
+        _navAgent = animator.GetComponent<NavMeshAgent>();
         GameObject gameObject = animator.gameObject;
     }
 
@@ -88,7 +88,7 @@ public class PatrolBehavior : StateMachineBehaviour
     {
         // Choose the next destination point when the agent gets
         // close to the current one.
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if (!_navAgent.pathPending && _navAgent.remainingDistance < 0.5f)
 
 
         { // Returns if no points have been set up
@@ -112,14 +112,14 @@ public class PatrolBehavior : StateMachineBehaviour
             }
 
             // Set the agent to go to the currently selected destination.
-            _agent.destination = _points[_destPoint].position;
+            _navAgent.destination = _points[_destPoint].position;
 
         }
     }
 
     private void GoToPreviousPoint()
     {
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if (!_navAgent.pathPending && _navAgent.remainingDistance < 0.5f)
         {
             _destPoint--;
 
@@ -137,7 +137,7 @@ public class PatrolBehavior : StateMachineBehaviour
                 }
             }
 
-            _agent.destination = _points[_destPoint].position;
+            _navAgent.destination = _points[_destPoint].position;
 
         }
 

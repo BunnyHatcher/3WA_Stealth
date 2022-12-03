@@ -11,7 +11,7 @@ public class AnimateAgent : MonoBehaviour
     [SerializeField]
     GameObject _enemy;
     Animator _anim;
-    NavMeshAgent _agent;
+    NavMeshAgent _navAgent;
     Vector2 _smoothDeltaPosition = Vector2.zero;
     Vector2 _velocity = Vector2.zero;
 
@@ -20,7 +20,7 @@ public class AnimateAgent : MonoBehaviour
     {
         //_enemy = GameObject.Find("Werehog");
         _anim = GetComponent<Animator>();
-        _agent = GetComponent<NavMeshAgent>();
+        _navAgent = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
@@ -28,12 +28,12 @@ public class AnimateAgent : MonoBehaviour
         _anim.applyRootMotion = false;
 
         // Don’t update position automatically
-        _agent.updatePosition = false;
+        _navAgent.updatePosition = false;
     }
 
     void Update()
     {
-        Vector3 worldDeltaPosition = _agent.nextPosition - transform.position;
+        Vector3 worldDeltaPosition = _navAgent.nextPosition - transform.position;
 
         // Map 'worldDeltaPosition' to local space
         float dx = Vector3.Dot(transform.right, worldDeltaPosition);
@@ -48,7 +48,7 @@ public class AnimateAgent : MonoBehaviour
         if (Time.deltaTime > 1e-5f)
             _velocity = _smoothDeltaPosition / Time.deltaTime;
 
-        bool shouldMove = _velocity.magnitude > 0.5f && _agent.remainingDistance > _agent.radius;
+        bool shouldMove = _velocity.magnitude > 0.5f && _navAgent.remainingDistance > _navAgent.radius;
 
         // Update animation parameters
         _anim.SetBool("isMoving", shouldMove);
@@ -57,19 +57,21 @@ public class AnimateAgent : MonoBehaviour
 
         LookAt lookAt = GetComponent<LookAt>();
         if (lookAt)
-            lookAt.lookAtTargetPosition = _agent.steeringTarget + transform.forward;
+            lookAt.lookAtTargetPosition = _navAgent.steeringTarget + transform.forward;
     }
 
     void OnAnimatorMove()
     {
         // Update position to agent position
-        transform.position = _agent.nextPosition;
+        transform.position = _navAgent.nextPosition;
     }
 
     #region Methods
 
-    public void PlayTargetAnimation()
+    public void PlayTargetAnimation(string targetAnim, bool isInteracting)
     {
+        _anim.SetBool("isInteracting", isInteracting);
+        _anim.CrossFade(targetAnim, 0.2f);
 
     }
 

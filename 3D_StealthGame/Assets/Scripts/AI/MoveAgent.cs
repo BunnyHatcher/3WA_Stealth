@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 public class MoveAgent : MonoBehaviour
 {
-    private StateMachine _brain;
+    //private StateMachine _brain;
     //private Animator _animator;
     private Text _stateNote;
-
-    private NavMeshAgent _agent;    
-    public Transform m_target;
+    private BaseState _baseState;
+    private NavMeshAgent _navAgent;    
+    public Transform _target;
     //private PlayerStateMachine _playerStateMachine;
 
     //Patrol Behaviour
@@ -29,14 +29,15 @@ public class MoveAgent : MonoBehaviour
     {
         //_animator = transform.GetChild(0).GetComponent<Animator>();
         _visionCone = GetComponentInChildren<VisionCone>();
+        _baseState = FindObjectOfType<BaseState>();
     }
 
     private void Start()
     {
         //_brain = GetComponent<StateMachine>();
         //_playerStateMachine = FindObjectOfType<PlayerStateMachine>();
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.autoBraking = false;
+        _navAgent = GetComponent<NavMeshAgent>();
+        _navAgent.autoBraking = false;
 
         GotoNextPoint();
 
@@ -49,6 +50,8 @@ public class MoveAgent : MonoBehaviour
 
     }
 
+
+    #region Patrolling
     public void PatrolMovement()
     {
         if (_backAndForth)
@@ -72,7 +75,7 @@ public class MoveAgent : MonoBehaviour
     {
         // Choose the next destination point when the agent gets
         // close to the current one.
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if (!_navAgent.pathPending && _navAgent.remainingDistance < 0.5f)
 
         
         { // Returns if no points have been set up
@@ -98,7 +101,7 @@ public class MoveAgent : MonoBehaviour
             
             
             // Set the agent to go to the currently selected destination.
-            _agent.destination = _points[_destPoint].position;
+            _navAgent.destination = _points[_destPoint].position;
 
             // Choose the next point in the array as the destination,
             // cycling to the start if necessary.
@@ -108,7 +111,7 @@ public class MoveAgent : MonoBehaviour
 
     private void GoToPreviousPoint()
     {
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if (!_navAgent.pathPending && _navAgent.remainingDistance < 0.5f)
         {
             _destPoint--;
 
@@ -126,7 +129,7 @@ public class MoveAgent : MonoBehaviour
                 }
             }
 
-            _agent.destination = _points[_destPoint].position;
+            _navAgent.destination = _points[_destPoint].position;
 
         }
 
@@ -153,7 +156,26 @@ public class MoveAgent : MonoBehaviour
         }
     }
 
-    
+    #endregion
+
+    #region Targeting
+    /*
+    public void HandleMoveToTarget()
+    {
+        Vector3 targetDirection = _target.position - transform.position;
+        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+
+        // If we perform an action, stop movement
+        if (_baseState._isPerformingAction)
+        { 
+            
+        }
+
+    }
+    */
+    #endregion
+
+
 
 
 

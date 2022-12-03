@@ -17,10 +17,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -96,10 +96,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -251,7 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9d6f03afaaa2a43998ecbc60b2ad16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPerformingAction: 0
   _timeSinceLastSawPlayer: Infinity
+  _attackRange: 1
   _enemyAttacks:
   - {fileID: 11400000, guid: 7a49dffa1db8b4e4c99d60ed4a06afd4, type: 2}
   - {fileID: 11400000, guid: 7de8fb4c4e674414c988ff0a235f6ea3, type: 2}
@@ -270,7 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7712f5512a048324691ec10239491ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPerformingAction: 0
   _timeSinceLastSawPlayer: Infinity
+  _attackRange: 1
 --- !u!1102 &1061220410506633363
 AnimatorState:
   serializedVersion: 6
@@ -393,10 +397,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -492,7 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f923999ab63ca46a16644ecb22a68e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPerformingAction: 0
   _timeSinceLastSawPlayer: Infinity
+  _attackRange: 1
 --- !u!114 &9053409774644373333
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -505,4 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82fe980df842054d988950bef75608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPerformingAction: 0
   _timeSinceLastSawPlayer: Infinity
+  _attackRange: 1

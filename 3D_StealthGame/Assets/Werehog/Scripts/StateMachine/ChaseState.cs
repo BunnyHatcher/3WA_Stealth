@@ -18,7 +18,7 @@ public class ChaseState : BaseState
             return;
         
         // AI chases player's position
-        _agent.SetDestination(_player.transform.position);
+        _navAgent.SetDestination(_player.transform.position);
 
         _distanceFromTarget = Vector3.Distance(_enemy.transform.position, _player.transform.position);
         if (_distanceFromTarget > _endChaseDistance)
@@ -26,7 +26,7 @@ public class ChaseState : BaseState
             _FSM.SetBool("SUSPICIOUS", true);
         }
 
-        if (_distanceFromTarget < _attackRange)
+        if (_distanceFromTarget < _navAgent.stoppingDistance /*_attackRange*/)
         {
             _FSM.SetBool("ATTACKING", true);
         }

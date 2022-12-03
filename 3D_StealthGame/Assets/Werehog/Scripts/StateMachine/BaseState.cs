@@ -13,12 +13,12 @@ public abstract class BaseState : StateMachineBehaviour
     protected GameObject _player;
     
     protected GameObject _enemy;
+    protected Rigidbody _enemyRigidbody;
     protected MoveAgent _agentPatrol;
-    protected NavMeshAgent _agent;
+    protected NavMeshAgent _navAgent;
     protected AnimateAgent _enemyAnimations;
     protected Animator _animator;
     protected Animator _FSM;
-
     protected TMP_Text _stateNote;
 
     //Vision Cone
@@ -27,8 +27,11 @@ public abstract class BaseState : StateMachineBehaviour
 
     #region Bools & Parameters
     
-    protected bool _isPerformingAction = false;
+    public bool _isPerformingAction = false;
     protected float _distanceFromTarget;
+
+    //Locomotion
+    public float _rotationSpeed = 15f;
     
     // Chasing
     protected float _endChaseDistance = 5.5f;
@@ -38,7 +41,7 @@ public abstract class BaseState : StateMachineBehaviour
     protected float _suspicionTime = 3f;
 
     // Attack
-    protected float _attackRange;
+    public float _attackRange = 1f;
     #endregion
 
 
@@ -49,10 +52,12 @@ public abstract class BaseState : StateMachineBehaviour
     {
         //_player = GameObject.Find("Player");
         _player = GameObject.FindWithTag("Player");
+        
         _enemy = GameObject.Find("Werehog");
+        _enemyRigidbody = _enemy.GetComponent<Rigidbody>();
 
         // A.I.
-        _agent = _enemy.GetComponent<NavMeshAgent>();
+        _navAgent = _enemy.GetComponent<NavMeshAgent>();
         _agentPatrol = _enemy.GetComponent<MoveAgent>();
         // Animation
         _animator = _enemy.GetComponent<Animator>();
@@ -76,13 +81,70 @@ public abstract class BaseState : StateMachineBehaviour
 
     #region Methods
 
-    
+    public void HandleMoveToTarget()
+    {
+        Vector3 targetDirection = _player.transform.position - _enemy.transform.position;
+        _distanceFromTarget = Vector3.Distance(_player.transform.position, _enemy.transform.position);
+        float viewableAngle = Vector3.Angle(targetDirection, _enemy.transform.forward);
+
+        // If we perform an action, stop movement
+        if (_isPerformingAction)
+        {
+            _animator.SetFloat("velocityX", 0, 0.1f, Time.deltaTime);
+            _navAgent.enabled = false;
+        }
+
+        else
+        {
+            if(_distanceFromTarget > _navAgent.stoppingDistance)
+            {
+                _animator.SetFloat("velocityX", 1, 0.1f, Time.deltaTime);
+            }
+        }
+
+        HandleRotateTowardsTarget();
+        _navAgent.transform.localPosition = Vector3.zero;
+        _navAgent.transform.localRotation = Quaternion.identity;
+    }
+
+    public void HandleRotateTowardsTarget()
+    {
+        // Rotate manually
+        if (_isPerformingAction)
+        {
+            Vector3 direction = _player.transform.position - _enemy.transform.position;
+            direction.y = 0;
+            direction.Normalize();
+
+            if (direction == Vector3.zero)
+            {
+                direction = _enemy.transform.forward;
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            _enemy.transform.rotation = Quaternion.Slerp(_enemy.transform.rotation, targetRotation, _rotationSpeed / Time.deltaTime);
+        }
+        //Rotate with Pathfinding
+        else
+        {
+            Vector3 relativeDirection = _enemy.transform.InverseTransformDirection(_navAgent.desiredVelocity);
+            Vector3 targetVelocity = _enemyRigidbody.velocity;
+
+            _navAgent.enabled = true;
+            _navAgent.SetDestination(_player.transform.position);
+            _enemyRigidbody.velocity = targetVelocity;
+            _enemy.transform.rotation = Quaternion.Slerp(_enemy.transform.rotation, _navAgent.transform.rotation, _rotationSpeed / Time.deltaTime);
+        }
+
+        _navAgent.transform.localPosition = Vector3.zero;
+        _navAgent.transform.localRotation = Quaternion.identity;
+    }
 
 
-    
-    
-    
-   
+
+
+
+
 
     #endregion
 
