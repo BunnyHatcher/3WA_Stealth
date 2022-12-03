@@ -23,6 +23,7 @@ public class AnimateAgent : MonoBehaviour
         //_enemy = GameObject.Find("Werehog");
         _anim = GetComponent<Animator>();
         _navAgent = GetComponent<NavMeshAgent>();
+        _enemyRigidbody = GetComponent<Rigidbody>();
     }
     void Start()
     {
@@ -68,7 +69,7 @@ public class AnimateAgent : MonoBehaviour
         transform.position = _navAgent.nextPosition;
 
         // the following code centers our model back on our gameobject
-        //when our animator plays an animation with root motion
+        //when our animator plays an animation with root motion:
         float delta = Time.deltaTime;
         _enemyRigidbody.drag = 0;
         Vector3 deltaPosition = _anim.deltaPosition;
