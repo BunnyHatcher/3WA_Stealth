@@ -28,7 +28,7 @@ public abstract class BaseState : StateMachineBehaviour
     #region Bools & Parameters
     
     public bool _isPerformingAction = false;
-    protected float _distanceFromTarget = 1f;    
+    public float _distanceFromTarget = Mathf.Infinity;    
     
     // Chasing
     protected float _endChaseDistance = 5.5f;

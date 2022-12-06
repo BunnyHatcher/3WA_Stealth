@@ -18,11 +18,9 @@ public class AttackState : BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        HandleMoveToTarget();
-        HandleRecoveryTimer();
-        GetNewAttack();
+        //HandleCurrentAction();
         AttackTarget();
-
+        HandleRecoveryTimer();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -43,6 +41,20 @@ public class AttackState : BaseState
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
 
+
+    private void HandleCurrentAction()
+    {
+        _distanceFromTarget = Vector3.Distance(_player.transform.position, _enemy.transform.position);
+        if (_distanceFromTarget > _attackRange)
+        { 
+            HandleMoveToTarget();
+        }
+        else if (_distanceFromTarget <= _attackRange)
+        {
+            AttackTarget();
+        }
+    }
+
     #region Attacks
     private void AttackTarget()
     {
@@ -58,7 +70,7 @@ public class AttackState : BaseState
              _isPerformingAction = true;
             _currentRecoveryTime = _currentAttack._recoveryTime; // _currentAttack = EnemyAttackAction
             _enemyAnimations.PlayTargetAnimation(_currentAttack._actionAnimation, true);
-
+            _currentAttack = null;
         }
     }
     private void GetNewAttack()
