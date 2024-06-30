@@ -83,6 +83,7 @@ public class AnimateAgent : MonoBehaviour
 
     public void PlayTargetAnimation(string targetAnim, bool isInteracting)
     {
+        //_anim.applyRootMotion = isInteracting;
         _anim.SetBool("isInteracting", isInteracting);
         _anim.CrossFade(targetAnim, 0.2f);
 

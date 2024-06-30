@@ -22787,7 +22787,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195197485}
-  m_LocalRotation: {x: 0.34887096, y: -0.000000022804642, z: 0.000000008489251, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887096, y: -0.000000022804642, z: 0.00000000848925, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -39052,7 +39052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1875012436
 Transform:
   m_ObjectHideFlags: 0
@@ -44995,6 +44995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Werehog
       objectReference: {fileID: 0}
+    - target: {fileID: 1103117260156789938, guid: b9848eb9d20430b4186365cb141f6a6e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1746929324029625137, guid: b9848eb9d20430b4186365cb141f6a6e, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -46624,7 +46628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566328, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Controller
@@ -51363,6 +51367,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1055871054}
+    - target: {fileID: 2627905668052444512, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2627905668052444513, guid: 3d3f698ec46bc4f4e88304de5ba80d34, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -52470,7 +52478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &9142080522676454992
 MonoBehaviour:
   m_ObjectHideFlags: 0
