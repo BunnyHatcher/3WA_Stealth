@@ -12,22 +12,41 @@ public class VisionCone : MonoBehaviour
 
     private BaseState _baseState;
 
-    public bool _fleetingDetection = false;
+    public bool _investigatingDetection = false;
     public bool _fullDetection = false;
+    public bool _suspicionDetection = false;
 
-    private float _detectionTimer = 3f;
+    public float _suspicionTimer = 1f;
+    public float _detectionTimer = 1f;
 
+    Vector3 rayDirectionGizmo;
+
+    MoveAgent moveAgent;
 
     private void Awake()
     {
         _baseState = FindObjectOfType<BaseState>();
+        moveAgent = GetComponentInParent<MoveAgent>();
     }
 
     private void Update()
     {
+
         // Collision timer
-        if (_fleetingDetection == true)
+        if (_investigatingDetection == true)
         {
+            _suspicionTimer -= Time.deltaTime;
+            if (_suspicionTimer < 0)
+            {
+                _suspicionTimer = 0;
+                Debug.Log("Suspicion Timer = 0");
+            }
+        }
+
+        if (_suspicionDetection == true)
+        {
+
+
             _detectionTimer -= Time.deltaTime;
             if (_detectionTimer < 0)
             {
@@ -53,7 +72,7 @@ public class VisionCone : MonoBehaviour
                 {
                     Debug.Log("Fleeting Detection");
                     //_target = other.gameObject;
-                    _fleetingDetection = true;                    
+                    _investigatingDetection = true;                    
                 }
             }
 
@@ -61,7 +80,11 @@ public class VisionCone : MonoBehaviour
     }
 
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, rayDirectionGizmo);
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -70,16 +93,28 @@ public class VisionCone : MonoBehaviour
             Vector3 rayDirection = other.transform.position - transform.position;
             RaycastHit hit;
 
+
+
             if (Physics.Raycast(transform.position, rayDirection, out hit, Mathf.Infinity, _playerLayer))
             {
-                if (hit.collider.CompareTag("Player") && _fleetingDetection == true)
+                if (hit.collider.CompareTag("Player") && _investigatingDetection == true)
                 {
+                    if (_suspicionTimer <= 0)
+                    {
+                        Debug.Log("Suspicion detection");
+                        _suspicionDetection = true;
+                        _target = other.gameObject;
+                      //  moveAgent.StopMovement();
+                      //  _baseState._timeSinceLastSawPlayer = 0;
+                    }
+
                     if (_detectionTimer <= 0)
                     {
                         Debug.Log("Full detection");
                         _fullDetection = true;
                         _target = other.gameObject;
                         _baseState._timeSinceLastSawPlayer = 0;
+                    //    moveAgent.ResumeMovement();
                     }
                 }
 
@@ -99,8 +134,9 @@ public class VisionCone : MonoBehaviour
         {
             Debug.Log("Player exited Detection");
             _fullDetection = false;
-            _fleetingDetection = false;
+            _investigatingDetection = false;
             _target = null;
+       //     moveAgent.ResumeMovement();
         }
     }
    

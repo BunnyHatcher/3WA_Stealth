@@ -60,6 +60,7 @@ public class CameraBehavior : MonoBehaviour
                 {
                 _playerTransform = other.transform;
                 Debug.Log("Player Raycast");
+                    
                 }
             }
         }
@@ -77,6 +78,7 @@ public class CameraBehavior : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     _resetTimer = Time.timeSinceLevelLoad + 2f;
+                    AiManager.instance.GuardsTargetCamera(this);
                 }
             }
         }

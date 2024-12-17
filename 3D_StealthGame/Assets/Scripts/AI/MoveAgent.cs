@@ -10,6 +10,7 @@ public class MoveAgent : MonoBehaviour
     #region References to other Classes
     public Transform _target;
 
+    public Color colorGizmo;
     private NavMeshAgent _navAgent;    
     private VisionCone _visionCone;
     private BaseState _baseState;
@@ -72,6 +73,15 @@ public class MoveAgent : MonoBehaviour
         
     }
 
+   /* public void StopMovement()
+    {
+        _navAgent.isStopped = true;
+    }
+
+    public void ResumeMovement()
+    {
+        _navAgent.isStopped = false;
+    }*/
 
     #region Patrolling
     public void PatrolMovement()
@@ -124,7 +134,7 @@ public class MoveAgent : MonoBehaviour
             
             // Set the agent to go to the currently selected destination.
             _navAgent.destination = _points[_destPoint].position;
-
+            
             // Choose the next point in the array as the destination,
             // cycling to the start if necessary.
             //_destPoint = (_destPoint + 1) % _points.Length;
@@ -160,7 +170,7 @@ public class MoveAgent : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = colorGizmo;
         
         for (int i = 0; i < _points.Length - 1; i++)
         {

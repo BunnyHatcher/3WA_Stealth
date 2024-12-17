@@ -36,7 +36,7 @@ public class PatrolState : BaseState
                 _FSM.SetBool("CHASING", true);
             }
 
-            else if (_visionCone._fleetingDetection == true && _visionCone._fullDetection == false)
+            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
             {
                 _FSM.SetBool("SUSPICIOUS", true); ;
             }

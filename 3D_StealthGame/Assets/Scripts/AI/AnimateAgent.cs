@@ -71,11 +71,11 @@ public class AnimateAgent : MonoBehaviour
         // the following code centers our model back on our gameobject
         //when our animator plays an animation with root motion:
         float delta = Time.deltaTime;
-        _enemyRigidbody.drag = 0;
+        if (_enemyRigidbody != null) _enemyRigidbody.drag = 0;
         Vector3 deltaPosition = _anim.deltaPosition;
         deltaPosition.y = 0;
         Vector3 velocity = deltaPosition / delta;
-        _enemyRigidbody.velocity = velocity /* * _moveAgent._moveSpeed*/;
+        if (_enemyRigidbody != null) _enemyRigidbody.velocity = velocity /* * _moveAgent._moveSpeed*/;
 
     }
 

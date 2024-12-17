@@ -116,7 +116,7 @@ public class WerehogStateMachine : MonoBehaviour
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
             }
 
-            else if (_visionCone._fleetingDetection == true && _visionCone._fullDetection == false)
+            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
             {
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnChaseExit);
             }

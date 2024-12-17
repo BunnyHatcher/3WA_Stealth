@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GuardStateMachine : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GuardStateMachine : MonoBehaviour
     #region References
 
     private StateMachine _brain;
+   // public Stack<State> states;
+   // public List<State> statesList;
     private MoveAgent _moveAgent;
     private PlayerStateMachine _player;
 
@@ -84,6 +87,8 @@ public class GuardStateMachine : MonoBehaviour
     {
         _playerIsNear = Vector3.Distance(transform.position, _player.transform.position) < 5;
         _withinCatchRange = Vector3.Distance(transform.position, _player.transform.position) < 1;
+       // states = _brain.States;
+       // statesList.AddRange(states);
     }
 
     #endregion
@@ -114,9 +119,9 @@ public class GuardStateMachine : MonoBehaviour
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
             }
 
-            else if (_visionCone._fleetingDetection == true && _visionCone._fullDetection == false)
+            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
             {
-                _brain.PushState(Suspicion, OnSuspicionEnter, OnChaseExit);
+                _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
             }
         }
 
@@ -265,6 +270,8 @@ public class GuardStateMachine : MonoBehaviour
     void OnSuspicionEnter()
     {
         _stateNote.text = "Suspicious";
+        _agent.isStopped = true;
+        _animator.SetBool("isInvestigating", true);
         _agent.ResetPath();
     }
 
@@ -281,8 +288,8 @@ public class GuardStateMachine : MonoBehaviour
     }
         void OnSuspicionExit()
         {
-
-        }
+            _animator.SetBool("isInvestigating", false);
+    }
 
         #endregion
 
