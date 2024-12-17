@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 2795342800549566331}
   - component: {fileID: 2795342800549566329}
   - component: {fileID: 1900704633}
+  - component: {fileID: 229467486}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -327,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
+  colorGizmo: {r: 1, g: 0, b: 0, a: 1}
   _points:
   - {fileID: 0}
   - {fileID: 0}
@@ -415,6 +417,18 @@ MonoBehaviour:
   _changeMindMinRange: 4
   _changeMindMaxRange: 10
   _suspicionTime: 5
+--- !u!114 &229467486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795342800549566304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e06279bdd999e4eb7f7945dbf3ed15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3583269689338589408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,8 +1138,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   _target: {fileID: 0}
-  _fleetingDetection: 0
+  _investigatingDetection: 0
   _fullDetection: 0
+  _suspicionDetection: 0
+  _suspicionTimer: 1
+  _detectionTimer: 1
 --- !u!1001 &2795342798523298724
 PrefabInstance:
   m_ObjectHideFlags: 0

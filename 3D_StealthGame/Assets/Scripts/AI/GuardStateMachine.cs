@@ -12,6 +12,7 @@ public class GuardStateMachine : MonoBehaviour
 
     #region References
 
+    GuardClass guardClass;
     private StateMachine _brain;
    // public Stack<State> states;
    // public List<State> statesList;
@@ -109,7 +110,7 @@ public class GuardStateMachine : MonoBehaviour
     {
         _stateNote.text = "Patroling";
     }
-    void Patrol()
+    public void Patrol()
     {
 
         if (_visionCone._target != null)
@@ -117,12 +118,16 @@ public class GuardStateMachine : MonoBehaviour
             if (_visionCone._fullDetection == true)
             {
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+                return;
             }
 
             else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
             {
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
+                return;
             }
+
+                _brain.PushState(Follow, OnFollowEnter, OnFollowExit);
         }
 
         else
@@ -234,7 +239,34 @@ public class GuardStateMachine : MonoBehaviour
 
     #endregion
 
+    #region FOLLOW TARGET
 
+    // FOLLOW STATE
+    void OnFollowEnter()
+    {
+        _stateNote.text = "Follow";
+        _animator.SetBool("Chase", true);
+    }
+
+    void Follow()
+    {
+        _agent.SetDestination(guardClass.moveAgent._target.transform.position);
+
+
+         // METTRE UN DELAI DANS LA CONDITION
+       /* if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
+        {
+            _brain.PopState();
+            _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
+        }*/
+    }
+
+    void OnFollowExit()
+    {
+        _animator.SetBool("Chase", false);
+    }
+
+    #endregion
 
     #region ATTACK
 
