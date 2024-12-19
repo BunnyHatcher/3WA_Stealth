@@ -3894,28 +3894,6 @@ MonoBehaviour:
   hotspotPriority: 0.5
   autoHotspotLayout: 0
   hotspotGroup: 0
---- !u!114 &229467478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-  m_PrefabInstance: {fileID: 2795342799539930094}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4344763682a34ebbe01cdcb040dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &229467482 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2795342800549566333, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-  m_PrefabInstance: {fileID: 2795342799539930094}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c56058eaabef3d043bb0219171d160ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &238142932
 Mesh:
   m_ObjectHideFlags: 0
@@ -12333,8 +12311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guardList:
-  - {fileID: 229467478}
-  - {fileID: 1773762742}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &669549379
 Transform:
   m_ObjectHideFlags: 0
@@ -12424,7 +12402,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676824259}
-  m_LocalRotation: {x: 0.09853767, y: 0.000000029671313, z: -0.0000000029380405, w: 0.99513334}
+  m_LocalRotation: {x: 0.09853764, y: -9.1233093e-10, z: 9.033863e-11, w: 0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -43307,17 +43285,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2795342800549566335, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
   m_PrefabInstance: {fileID: 2033892026}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1773762742 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-  m_PrefabInstance: {fileID: 2033892026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4344763682a34ebbe01cdcb040dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1776804675
 GameObject:
   m_ObjectHideFlags: 0
@@ -47660,26 +47627,6 @@ PrefabInstance:
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
       value: ComicGuard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: colorGizmo.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: colorGizmo.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: colorGizmo.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: colorGizmo.r
-      value: 0.06742728
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: _points.Array.size
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: _points.Array.data[0]
@@ -54153,17 +54100,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1062014814}
     m_Modifications:
-    - target: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: _brain
-      value: 
-      objectReference: {fileID: 229467482}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
       value: Guard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: colorGizmo.a
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: colorGizmo.b
@@ -54171,11 +54110,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: colorGizmo.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: colorGizmo.r
-      value: 1
+      value: 0.22874355
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: _points.Array.data[0]
