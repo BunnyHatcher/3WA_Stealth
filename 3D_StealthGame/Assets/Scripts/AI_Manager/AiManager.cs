@@ -7,6 +7,7 @@ public class AiManager : MonoBehaviour
     public static AiManager instance;
 
     [SerializeField] private List<GuardClass> guardList;
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -25,7 +26,9 @@ public class AiManager : MonoBehaviour
         foreach (GuardClass guard in guardList) 
         {
             guard.moveAgent._target = cam.transform;
-            guard.guardStateMachine.Patrol();
+            guard.guardStateMachine.FollowStart();
+            Debug.Log("Follow State");
+            
         }
     }
 }

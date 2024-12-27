@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CameraBehavior : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float _rotateSpeed;
     public GameObject lookAtVisor;
     private float _resetTimer = 0f;
+
+    [SerializeField] TextMeshProUGUI _detectionText;
 
     private Transform _target;
     [SerializeField] private Transform _playerTransform = null;
@@ -78,6 +81,7 @@ public class CameraBehavior : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     _resetTimer = Time.timeSinceLevelLoad + 2f;
+                    _detectionText.text = "Detected!";
                     AiManager.instance.GuardsTargetCamera(this);
                 }
             }

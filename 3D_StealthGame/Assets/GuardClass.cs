@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GuardClass : MonoBehaviour
 {
-    public GuardStateMachine guardStateMachine;
-    public MoveAgent moveAgent;
+    /*[HideInInspector]*/ public GuardStateMachine guardStateMachine;
+    /*[HideInInspector]*/ public MoveAgent moveAgent;
+
+    private void Start()
+    {
+        guardStateMachine = GetComponent<GuardStateMachine>();
+        moveAgent = GetComponent<MoveAgent>();
+    }
 }

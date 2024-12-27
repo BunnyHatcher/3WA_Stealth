@@ -126,8 +126,7 @@ public class GuardStateMachine : MonoBehaviour
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                 return;
             }
-
-                _brain.PushState(Follow, OnFollowEnter, OnFollowExit);
+               
         }
 
         else
@@ -242,15 +241,31 @@ public class GuardStateMachine : MonoBehaviour
     #region FOLLOW TARGET
 
     // FOLLOW STATE
+
+    public void FollowStart()
+    {
+        _brain.PushState(Follow, OnFollowEnter, OnFollowExit);
+    }
     void OnFollowEnter()
     {
         _stateNote.text = "Follow";
-        _animator.SetBool("Chase", true);
+        //_animator.SetBool("Chase", true);
+        _agent.SetDestination(GetComponent<MoveAgent>()._target.transform.position);
     }
 
     void Follow()
     {
-        _agent.SetDestination(guardClass.moveAgent._target.transform.position);
+        Debug.Log("1");
+        Debug.Log(_agent);
+        Debug.Log("2");
+        Debug.Log(guardClass);
+        Debug.Log("3");
+        Debug.Log(GetComponent<MoveAgent>());
+        Debug.Log("4");
+        Debug.Log(GetComponent<MoveAgent>()._target);
+        Debug.Log("5");
+
+        
 
 
          // METTRE UN DELAI DANS LA CONDITION
