@@ -271,6 +271,24 @@ public class GuardStateMachine : MonoBehaviour
             _brain.PushState(Attack, OnEnterAttack, null);
         }
 
+        /* On fait ca pour la prochaine fois
+         * Il faut verifier la target de visioncone */
+
+       /* if (_visionCone._target != null)
+        {
+            if (_visionCone._fullDetection == true)
+            {
+                _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+                return;
+            }
+
+            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+            {
+                _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
+                return;
+            }*/
+
+        }
 
         _timeSinceLastSawPlayer += Time.deltaTime;
 
