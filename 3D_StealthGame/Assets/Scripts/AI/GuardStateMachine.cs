@@ -286,9 +286,9 @@ public class GuardStateMachine : MonoBehaviour
             {
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                 return;
-            }*/
+            }
 
-        }
+        }*/
 
         _timeSinceLastSawPlayer += Time.deltaTime;
 
