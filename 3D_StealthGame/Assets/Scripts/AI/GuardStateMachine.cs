@@ -12,6 +12,8 @@ public class GuardStateMachine : MonoBehaviour
 
     #region References
 
+    public Transform camTransform;
+
     GuardClass guardClass;
     private StateMachine _brain;
    // public Stack<State> states;
@@ -244,36 +246,41 @@ public class GuardStateMachine : MonoBehaviour
 
     public void FollowStart()
     {
+        _brain.PopState();
         _brain.PushState(Follow, OnFollowEnter, OnFollowExit);
     }
     void OnFollowEnter()
     {
         _stateNote.text = "Follow";
+       //  _moveAgent.GoTo(camTransform.position);
         //_animator.SetBool("Chase", true);
-        _agent.SetDestination(GetComponent<MoveAgent>()._target.transform.position);
     }
 
     void Follow()
     {
-        Debug.Log("1");
-        Debug.Log(_agent);
-        Debug.Log("2");
-        Debug.Log(guardClass);
-        Debug.Log("3");
-        Debug.Log(GetComponent<MoveAgent>());
-        Debug.Log("4");
-        Debug.Log(GetComponent<MoveAgent>()._target);
-        Debug.Log("5");
-
-        
-
-
-         // METTRE UN DELAI DANS LA CONDITION
-       /* if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
+        _agent.SetDestination(camTransform.position);
+        if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
         {
             _brain.PopState();
             _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
-        }*/
+        }
+
+        if (_withinCatchRange)
+        {
+            _timeSinceLastSawPlayer = 0;
+            _brain.PushState(Attack, OnEnterAttack, null);
+        }
+
+
+        _timeSinceLastSawPlayer += Time.deltaTime;
+
+        // METTRE UN DELAI DANS LA CONDITION
+        /* if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
+         {
+             _brain.PopState();
+             _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
+         }*/
+        _agent.SetDestination(_player.transform.position);
     }
 
     void OnFollowExit()
@@ -304,7 +311,7 @@ public class GuardStateMachine : MonoBehaviour
 
             _attackTimer = 2f;
         }
-
+        GameManager.instance.GameOver();
     }
 
     #endregion

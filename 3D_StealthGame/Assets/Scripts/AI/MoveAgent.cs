@@ -90,16 +90,13 @@ public class MoveAgent : MonoBehaviour
         {
             if (_goingForward)
             { GotoNextPoint(); }
-
             else
             { GoToPreviousPoint(); }
         }
 
         else
         {
-
             GotoNextPoint();
-
         }
     }
 
@@ -130,11 +127,11 @@ public class MoveAgent : MonoBehaviour
                 }
             }
 
-            
-            
+
+
             // Set the agent to go to the currently selected destination.
-            _navAgent.destination = _points[_destPoint].position;
-            
+            _navAgent.destination =  _points[_destPoint].position;
+
             // Choose the next point in the array as the destination,
             // cycling to the start if necessary.
             //_destPoint = (_destPoint + 1) % _points.Length;
@@ -206,19 +203,4 @@ public class MoveAgent : MonoBehaviour
     }
     */
     #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

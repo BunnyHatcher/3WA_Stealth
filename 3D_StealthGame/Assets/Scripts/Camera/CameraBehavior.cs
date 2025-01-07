@@ -18,7 +18,7 @@ public class CameraBehavior : MonoBehaviour
     private bool _rightToLeft = true;
     [SerializeField] LayerMask _rayLayer;
 
-
+    private bool canDetect = true;
 
 
 
@@ -78,20 +78,26 @@ public class CameraBehavior : MonoBehaviour
 
             if (Physics.Raycast(transform.position, rayDirection, out hit, Mathf.Infinity, _rayLayer))
             {
-                if (hit.collider.CompareTag("Player"))
+                if (hit.collider.CompareTag("Player") && canDetect)
                 {
                     _resetTimer = Time.timeSinceLevelLoad + 2f;
                     _detectionText.text = "Detected!";
                     AiManager.instance.GuardsTargetCamera(this);
+                    StartCoroutine(TriggerDelay());
                 }
             }
         }
 
     }
 
+    IEnumerator TriggerDelay()
+    {
+        canDetect = false;
+        yield return new WaitForSeconds(10f);
+        canDetect = true;
+    }
 
-
-    private void PingPong()
+            private void PingPong()
     {
         Vector3 lookPosition = Vector3.RotateTowards(transform.forward, _target.localPosition, _rotateSpeed * Time.deltaTime, 0f);
         Quaternion lookRotation = Quaternion.LookRotation(lookPosition);

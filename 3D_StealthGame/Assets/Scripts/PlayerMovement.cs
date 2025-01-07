@@ -149,6 +149,4 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(_groundChecker.position, _boxDimension * 2f); // by default OverlapBox only takes half the size of the box in each dimension, so we need to double the size of _boxDimension
     }
-    
-
 }
