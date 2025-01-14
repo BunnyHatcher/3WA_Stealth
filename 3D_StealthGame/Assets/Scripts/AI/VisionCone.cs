@@ -7,7 +7,6 @@ public class VisionCone : MonoBehaviour
     [SerializeField]
     private LayerMask _playerLayer;
     
-    [HideInInspector]
     public GameObject _target;
 
     private BaseState _baseState;

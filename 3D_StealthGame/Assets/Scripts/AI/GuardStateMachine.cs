@@ -35,6 +35,8 @@ public class GuardStateMachine : MonoBehaviour
     private float _changeMind;
     public float _changeMindMinRange = 4;
     public float _changeMindMaxRange = 10;
+    private bool canWander = false;
+    private bool canWanderElsewhere = false;
 
     //Attacking
     private float _attackTimer;
@@ -49,6 +51,8 @@ public class GuardStateMachine : MonoBehaviour
     [SerializeField]
     float _suspicionTime = 5f;
 
+    // Follow
+    private bool isFollowToWanderDelaying = false;
 
     #endregion
 
@@ -114,7 +118,6 @@ public class GuardStateMachine : MonoBehaviour
     }
     public void Patrol()
     {
-
         if (_visionCone._target != null)
         {
             if (_visionCone._fullDetection == true)
@@ -184,7 +187,11 @@ public class GuardStateMachine : MonoBehaviour
     // WANDER STATE
     void OnWanderEnter()
     {
-        _animator.SetBool("isWandering", true);
+        StartCoroutine(WanderDelay());
+
+        StartCoroutine(WanderElsewhereDelay());
+
+        _animator.SetBool("isMoving", true);
         Vector3 wanderDirection = (Random.insideUnitSphere * 1.2f) + transform.position;
         NavMeshHit navMeshHit;
         NavMesh.SamplePosition(wanderDirection, out navMeshHit, 3f, NavMesh.AllAreas);
@@ -194,13 +201,60 @@ public class GuardStateMachine : MonoBehaviour
     void Wander()
     {
         _stateNote.text = "Wandering";
+
+        /* On fait ca pour la prochaine fois
+         * Il faut verifier la target de visioncone */
+
+       
+        if (_visionCone._target != null)
+        {
+            if (_visionCone._fullDetection == true)
+            {
+                _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+                return;
+            }
+
+            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+            {
+                _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
+                return;
+            }
+        }
+        else
+        {
+            if (canWanderElsewhere) 
+            {
+                StartCoroutine(WanderElsewhereDelay());
+                _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
+                canWanderElsewhere = false;
+            }
+            else if (canWander)
+            {
+                _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
+                canWanderElsewhere = false;
+                StopCoroutine(WanderElsewhereDelay());
+            }
+        }
+
+        _timeSinceLastSawPlayer += Time.deltaTime;
     }
 
     void OnWanderExit()
     {
-        _animator.SetBool("isWandering", false);
+        _animator.SetBool("isMoving", false);
     }
 
+    IEnumerator WanderDelay()
+    {
+        yield return new WaitForSeconds(10);
+        canWander = false;
+    }
+    
+    IEnumerator WanderElsewhereDelay()
+    {
+        yield return new WaitForSeconds(2);
+        canWanderElsewhere = false;
+    }
     #endregion
 
 
@@ -246,7 +300,7 @@ public class GuardStateMachine : MonoBehaviour
 
     public void FollowStart()
     {
-        _brain.PopState();
+     //   _brain.PopState();
         _brain.PushState(Follow, OnFollowEnter, OnFollowExit);
     }
     void OnFollowEnter()
@@ -259,11 +313,13 @@ public class GuardStateMachine : MonoBehaviour
     void Follow()
     {
         _agent.SetDestination(camTransform.position);
-        if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
+   //     _agent.
+     /*   if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
         {
             _brain.PopState();
             _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
-        }
+        }*/
+
 
         if (_withinCatchRange)
         {
@@ -274,7 +330,7 @@ public class GuardStateMachine : MonoBehaviour
         /* On fait ca pour la prochaine fois
          * Il faut verifier la target de visioncone */
 
-       /* if (_visionCone._target != null)
+        if (_visionCone._target != null)
         {
             if (_visionCone._fullDetection == true)
             {
@@ -288,7 +344,12 @@ public class GuardStateMachine : MonoBehaviour
                 return;
             }
 
-        }*/
+        }
+        else if(!_animator.GetBool("isMoving") && !isFollowToWanderDelaying)
+        {
+            isFollowToWanderDelaying = true;
+             StartCoroutine(FollowToWanderDelay());
+        }
 
         _timeSinceLastSawPlayer += Time.deltaTime;
 
@@ -298,12 +359,17 @@ public class GuardStateMachine : MonoBehaviour
              _brain.PopState();
              _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
          }*/
-        _agent.SetDestination(_player.transform.position);
     }
 
     void OnFollowExit()
     {
         _animator.SetBool("Chase", false);
+    }
+
+    IEnumerator FollowToWanderDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
     }
 
     #endregion
