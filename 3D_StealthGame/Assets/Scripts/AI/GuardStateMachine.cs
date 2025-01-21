@@ -49,7 +49,7 @@ public class GuardStateMachine : MonoBehaviour
     // Suspicion
     float _timeSinceLastSawPlayer = Mathf.Infinity;
     [SerializeField]
-    float _suspicionTime = 5f;
+    public float _suspicionTime = 5f;
 
     // Follow
     private bool isFollowToWanderDelaying = false;
