@@ -8,8 +8,8 @@ public class HearingSphere : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            AttentionSlider attentionSlider = GetComponentInParent<AttentionSlider>();
-            attentionSlider.SliderEnable();
+            SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
+            suspicionSlider.GuardTrigger_SliderEnable();
         }
     }
 
@@ -17,8 +17,8 @@ public class HearingSphere : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            AttentionSlider attentionSlider = GetComponentInParent<AttentionSlider>();
-            attentionSlider.SliderDisable();
+            SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
+            suspicionSlider.GuardTrigger_SliderDisable();
         }
     }
 }

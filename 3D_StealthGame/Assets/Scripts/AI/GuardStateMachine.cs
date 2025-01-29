@@ -48,8 +48,10 @@ public class GuardStateMachine : MonoBehaviour
 
     // Suspicion
     float _timeSinceLastSawPlayer = Mathf.Infinity;
-    [SerializeField]
+    bool isSuspicious = false;
+
     public float _suspicionTime = 5f;
+    float _suspicionTimeCurrent;
 
     // Follow
     private bool isFollowToWanderDelaying = false;
@@ -118,30 +120,32 @@ public class GuardStateMachine : MonoBehaviour
     }
     public void Patrol()
     {
-        if (_visionCone._target != null)
-        {
-            if (_visionCone._fullDetection == true)
+       
+
+            if (_visionCone._target != null)
             {
-                _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
-                return;
+                if (_visionCone._fullDetection == true)
+                {
+                    _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+                    return;
+                }
+
+                else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+                {
+                    _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
+                    return;
+                }
+
             }
 
-            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+            else
             {
-                _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
-                return;
+                _moveAgent.PatrolMovement();
             }
-               
-        }
-
-        else
-        {
-            _moveAgent.PatrolMovement();
-        }
-
     }
     void OnPatrolExit()
     {
+
     }
 
     #endregion
@@ -411,11 +415,12 @@ public class GuardStateMachine : MonoBehaviour
         _agent.isStopped = true;
         _animator.SetBool("isInvestigating", true);
         _agent.ResetPath();
+        isSuspicious = true;
     }
 
     void Suspicion()
     {
-        _suspicionTime -= Time.deltaTime;
+        _suspicionTimeCurrent -= Time.deltaTime;
 
         if (_suspicionTime <= 0)
         {
@@ -427,8 +432,20 @@ public class GuardStateMachine : MonoBehaviour
         void OnSuspicionExit()
         {
             _animator.SetBool("isInvestigating", false);
+        isSuspicious = false;
+       // SuspicionIncrement();
     }
 
-        #endregion
+    void SuspicionIncrement()
+    {
+        // Pour nous meme, la semaine prochaine il faudra inverser le sens +=
+        if (_suspicionTimeCurrent < _suspicionTime)
+        {
+            _suspicionTimeCurrent += Time.deltaTime;
+            if (!isSuspicious) SuspicionIncrement();
+        }  
+    }
+
+    #endregion
 
 }

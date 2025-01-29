@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AttentionSlider : MonoBehaviour
+public class SuspicionSlider : MonoBehaviour
 {
     bool isHearing = false;
     bool isIncrementing = false;
 
-    float attentionCountdown = 5f;
+    float sliderProgress = 5f;
     float suspicionTime = 5f;
 
-   public GuardClass guard;
-   public Slider attentionSlider;
+
+    public GuardClass guard;
+   public Slider suspicionSlider;
 
     // 0 / 5 = 0
     // 1 / 5 = 0.2
@@ -21,30 +22,31 @@ public class AttentionSlider : MonoBehaviour
     // 4 / 5 = 0.8
     // 5 / 5 = 1
 
-    //Attention Slider Function
+    //Suspicion Slider Function
 
     private void Start()
     {
         suspicionTime = guard.guardStateMachine._suspicionTime;
-        attentionCountdown = suspicionTime;
+    }
+
+    public void GuardTrigger_SliderEnable()
+    {
+        isHearing = true;
+        isIncrementing = false;
+        StopCoroutine(SliderDecrement());
+    }
+
+    public void GuardTrigger_SliderDisable()
+    {
+        StopCoroutine(SliderIncrement());
+        StartCoroutine(SliderDecrement());
+        isHearing = false;
+        isIncrementing = false;
     }
 
     private void Update()
     {
         if (isHearing) SliderInit();
-    }
-
-    public void SliderEnable()
-    {
-        isHearing = true;
-        isIncrementing = true;
-    }
-
-    public void SliderDisable()
-    {
-        isHearing = false;
-        isIncrementing = false;
-        StopCoroutine(SliderIncrement());
     }
 
     void SliderInit()
@@ -54,12 +56,15 @@ public class AttentionSlider : MonoBehaviour
 
     IEnumerator SliderIncrement()
     {
-        isIncrementing = true;
-        yield return new WaitForSeconds(0.01f);
-        attentionCountdown -= 0.01f;
-        attentionSlider.value = 1 - (attentionCountdown / suspicionTime);
+        if (!isHearing) yield break;
 
-        if (attentionCountdown >= 0.01f) 
+        isIncrementing = true;
+        suspicionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(0.01f);
+        sliderProgress -= 0.01f;
+        suspicionSlider.value = 1 - (sliderProgress / suspicionTime);
+
+        if (sliderProgress >= 0.01f) 
         {
              StartCoroutine(SliderIncrement());
         }else
@@ -71,10 +76,10 @@ public class AttentionSlider : MonoBehaviour
     IEnumerator SliderDecrement()
     {
         yield return new WaitForSeconds(0.01f);
-        attentionCountdown += 0.01f;
-        attentionSlider.value = 1 - (attentionCountdown / suspicionTime);
+        sliderProgress += 0.01f;
+        suspicionSlider.value = 1 - (sliderProgress / suspicionTime);
 
-        if (attentionCountdown <= 5f)
+        if (sliderProgress <= 5f)
         {
             StartCoroutine(SliderDecrement());
         }
