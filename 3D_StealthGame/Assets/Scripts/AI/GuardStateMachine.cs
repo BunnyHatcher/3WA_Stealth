@@ -422,7 +422,7 @@ public class GuardStateMachine : MonoBehaviour
     {
         _suspicionTimeCurrent -= Time.deltaTime;
 
-        if (_suspicionTime <= 0)
+        if (_suspicionTimeCurrent <= 0)
         {
             _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
 

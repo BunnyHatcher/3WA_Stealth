@@ -71,7 +71,13 @@ public class VisionCone : MonoBehaviour
                 {
                     Debug.Log("Fleeting Detection");
                     //_target = other.gameObject;
-                    _investigatingDetection = true;                    
+
+                    // Old Method based on timer
+                    // _investigatingDetection = true;
+
+                    SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
+                    //suspicionSlider.SliderEnable();
+                    suspicionSlider.IsSeeing = true;
                 }
             }
 
@@ -133,7 +139,10 @@ public class VisionCone : MonoBehaviour
         {
             Debug.Log("Player exited Detection");
             _fullDetection = false;
-            _investigatingDetection = false;
+            //    _investigatingDetection = false;
+            SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
+            //suspicionSlider.SliderDisable();
+            suspicionSlider.IsSeeing = false;
             _target = null;
        //     moveAgent.ResumeMovement();
         }

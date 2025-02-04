@@ -9,7 +9,8 @@ public class HearingSphere : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
-            suspicionSlider.GuardTrigger_SliderEnable();
+            // suspicionSlider.SliderEnable();
+            suspicionSlider.IsHearing = true;
         }
     }
 
@@ -18,7 +19,8 @@ public class HearingSphere : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
-            suspicionSlider.GuardTrigger_SliderDisable();
+            suspicionSlider.SliderDisable();
+            suspicionSlider.IsHearing = false;
         }
     }
 }

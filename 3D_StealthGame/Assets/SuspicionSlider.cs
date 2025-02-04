@@ -5,12 +5,35 @@ using UnityEngine.UI;
 
 public class SuspicionSlider : MonoBehaviour
 {
-    bool isHearing = false;
+    bool isHearing = false; public bool IsHearing
+    { get 
+        {
+              return isHearing; 
+        }
+        set
+        {
+            isHearing = value;
+            SliderTrigger(value);
+        }
+    }
+    bool isSeeing = false; public bool IsSeeing
+    {
+        get
+        {
+            return IsSeeing;
+        }
+        set
+        {
+            IsSeeing = value;
+            SliderTrigger(value);
+        }
+    }
     bool isIncrementing = false;
 
     float sliderProgress = 5f;
     float suspicionTime = 5f;
-
+    float sliderIncrementationMultiplier = 2f;
+    float sliderDecrementationMultiplier = 2f;
 
     public GuardClass guard;
    public Slider suspicionSlider;
@@ -29,24 +52,39 @@ public class SuspicionSlider : MonoBehaviour
         suspicionTime = guard.guardStateMachine._suspicionTime;
     }
 
-    public void GuardTrigger_SliderEnable()
+    void SliderTrigger(bool value)
+    {          
+       if (value)
+          {
+           SliderEnable();
+          }
+
+       else
+          {
+             if (!isHearing && !isSeeing) SliderDisable();
+          }
+    }
+
+
+public void SliderEnable()
     {
-        isHearing = true;
+        if (isHearing || isSeeing) return;
+
         isIncrementing = false;
         StopCoroutine(SliderDecrement());
     }
 
-    public void GuardTrigger_SliderDisable()
+    public void SliderDisable()
     {
+       
         StopCoroutine(SliderIncrement());
         StartCoroutine(SliderDecrement());
-        isHearing = false;
         isIncrementing = false;
     }
 
     private void Update()
     {
-        if (isHearing) SliderInit();
+        if (isHearing || isSeeing) SliderInit();
     }
 
     void SliderInit()
@@ -56,7 +94,7 @@ public class SuspicionSlider : MonoBehaviour
 
     IEnumerator SliderIncrement()
     {
-        if (!isHearing) yield break;
+        if (!isHearing && !isSeeing) yield break;
 
         isIncrementing = true;
         suspicionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.red;
