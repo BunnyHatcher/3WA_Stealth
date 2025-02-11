@@ -6,10 +6,12 @@ public class GuardClass : MonoBehaviour
 {
     /*[HideInInspector]*/ public GuardStateMachine guardStateMachine;
     /*[HideInInspector]*/ public MoveAgent moveAgent;
+    public SuspicionDetection suspicionDetection;
 
-    private void Start()
+    private void Awake()
     {
         guardStateMachine = GetComponent<GuardStateMachine>();
         moveAgent = GetComponent<MoveAgent>();
+        suspicionDetection = GetComponent<SuspicionDetection>();
     }
 }

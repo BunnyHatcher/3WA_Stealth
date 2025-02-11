@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class PatrolBehavior : StateMachineBehaviour
     private NavMeshAgent _navAgent;
     private StateMachine _brain;
     private VisionCone _visionCone;
+    public GuardClass guard;
 
     //Patrol Behaviour
     public Transform[] _points;
@@ -19,7 +21,10 @@ public class PatrolBehavior : StateMachineBehaviour
     [SerializeField] private bool _backAndForth = false;
 
 
-
+    private void Awake()
+    {
+        guard = _navAgent.GetComponent<GuardClass>();
+    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -33,7 +38,7 @@ public class PatrolBehavior : StateMachineBehaviour
     {
         PatrolMovement();
 
-        if (_visionCone._target != null)
+        if (guard.suspicionDetection._target != null)
         {
             animator.SetBool("playerDetected", true);
         }

@@ -7,16 +7,20 @@ public class VisionCone : MonoBehaviour
     [SerializeField]
     private LayerMask _playerLayer;
     
-    public GameObject _target;
+   // public GameObject _target;
 
     private BaseState _baseState;
 
+    public GuardClass guard;
+
+ /*   
     public bool _investigatingDetection = false;
     public bool _fullDetection = false;
     public bool _suspicionDetection = false;
 
     public float _suspicionTimer = 1f;
     public float _detectionTimer = 1f;
+    */
 
     Vector3 rayDirectionGizmo;
 
@@ -26,12 +30,14 @@ public class VisionCone : MonoBehaviour
     {
         _baseState = FindObjectOfType<BaseState>();
         moveAgent = GetComponentInParent<MoveAgent>();
+        guard = GetComponentInParent<GuardClass>();
     }
 
     private void Update()
     {
 
         // Collision timer
+        /*
         if (_investigatingDetection == true)
         {
             _suspicionTimer -= Time.deltaTime;
@@ -53,6 +59,7 @@ public class VisionCone : MonoBehaviour
                 Debug.Log("Detection Timer = 0");
             }
         }
+        */
     }
 
 
@@ -102,25 +109,9 @@ public class VisionCone : MonoBehaviour
 
             if (Physics.Raycast(transform.position, rayDirection, out hit, Mathf.Infinity, _playerLayer))
             {
-                if (hit.collider.CompareTag("Player") && _investigatingDetection == true)
+                if (hit.collider.CompareTag("Player"))
                 {
-                    if (_suspicionTimer <= 0)
-                    {
-                        Debug.Log("Suspicion detection");
-                        _suspicionDetection = true;
-                        _target = other.gameObject;
-                      //  moveAgent.StopMovement();
-                      //  _baseState._timeSinceLastSawPlayer = 0;
-                    }
-
-                    if (_detectionTimer <= 0)
-                    {
-                        Debug.Log("Full detection");
-                        _fullDetection = true;
-                        _target = other.gameObject;
-                        _baseState._timeSinceLastSawPlayer = 0;
-                    //    moveAgent.ResumeMovement();
-                    }
+                    guard.suspicionDetection.VisionConeDetection(other.gameObject);
                 }
 
             }
@@ -137,14 +128,7 @@ public class VisionCone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player exited Detection");
-            _fullDetection = false;
-            //    _investigatingDetection = false;
-            SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
-            //suspicionSlider.SliderDisable();
-            suspicionSlider.IsSeeing = false;
-            _target = null;
-       //     moveAgent.ResumeMovement();
+            guard.suspicionDetection.VisionConeExit();
         }
     }
    

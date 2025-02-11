@@ -14,7 +14,7 @@ public class GuardStateMachine : MonoBehaviour
 
     public Transform camTransform;
 
-    GuardClass guardClass;
+    GuardClass guard;
     private StateMachine _brain;
    // public Stack<State> states;
    // public List<State> statesList;
@@ -78,10 +78,12 @@ public class GuardStateMachine : MonoBehaviour
         _player = FindObjectOfType<PlayerStateMachine>();
         _moveAgent = GetComponent<MoveAgent>();
         _agent = GetComponent<NavMeshAgent>();
+        guard = GetComponent<GuardClass>();
+        
 
         _playerIsNear = false;
         _withinCatchRange = false;
-        _visionCone._fullDetection = false;
+        guard.suspicionDetection._fullDetection = false;
 
         _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
     }
@@ -122,15 +124,15 @@ public class GuardStateMachine : MonoBehaviour
     {
        
 
-            if (_visionCone._target != null)
+            if (guard.suspicionDetection._target != null)
             {
-                if (_visionCone._fullDetection == true)
+                if (guard.suspicionDetection._fullDetection == true)
                 {
                     _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
                     return;
                 }
 
-                else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+                else if (guard.suspicionDetection._investigatingDetection == true && guard.suspicionDetection._fullDetection == false)
                 {
                     _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                     return;
@@ -210,15 +212,15 @@ public class GuardStateMachine : MonoBehaviour
          * Il faut verifier la target de visioncone */
 
        
-        if (_visionCone._target != null)
+        if (guard.suspicionDetection._target != null)
         {
-            if (_visionCone._fullDetection == true)
+            if (guard.suspicionDetection._fullDetection == true)
             {
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
                 return;
             }
 
-            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+            else if (guard.suspicionDetection._investigatingDetection == true && guard.suspicionDetection._fullDetection == false)
             {
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                 return;
@@ -334,15 +336,15 @@ public class GuardStateMachine : MonoBehaviour
         /* On fait ca pour la prochaine fois
          * Il faut verifier la target de visioncone */
 
-        if (_visionCone._target != null)
+        if (guard.suspicionDetection._target != null)
         {
-            if (_visionCone._fullDetection == true)
+            if (guard.suspicionDetection._fullDetection == true)
             {
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
                 return;
             }
 
-            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+            else if (guard.suspicionDetection._investigatingDetection == true && guard.suspicionDetection._fullDetection == false)
             {
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                 return;

@@ -298,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2969206284361832181
 Transform:
   m_ObjectHideFlags: 0
@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 1900704633}
   - component: {fileID: 229467486}
   - component: {fileID: 1773762751}
+  - component: {fileID: 8240570090483476270}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -836,10 +837,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22982d9982c9395439ad9f3168f9c7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderIncrementation: 5
-  sliderDecrementation: 10
+  _investigatingDetection: 0
+  _fullDetection: 0
+  _suspicionDetection: 0
+  _suspicionTimer: 1
+  _detectionTimer: 1
   guard: {fileID: 229467486}
   suspicionSlider: {fileID: 1654026118}
+--- !u!114 &8240570090483476270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795342800549566304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e17ea6b6631c564db94ab1e5b0bdc70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _investigatingDetection: 0
+  _fullDetection: 0
+  _suspicionDetection: 0
+  _suspicionTimer: 1
+  _detectionTimer: 1
 --- !u!1 &3583269689338589408
 GameObject:
   m_ObjectHideFlags: 0

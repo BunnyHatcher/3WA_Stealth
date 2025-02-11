@@ -20,11 +20,11 @@ public class SuspicionSlider : MonoBehaviour
     {
         get
         {
-            return IsSeeing;
+            return isSeeing;
         }
         set
         {
-            IsSeeing = value;
+            isSeeing = value;
             SliderTrigger(value);
         }
     }
@@ -34,6 +34,15 @@ public class SuspicionSlider : MonoBehaviour
     float suspicionTime = 5f;
     float sliderIncrementationMultiplier = 2f;
     float sliderDecrementationMultiplier = 2f;
+
+    
+    //Detection Bools
+    public bool _investigatingDetection = false;
+    public bool _fullDetection = false;
+    public bool _suspicionDetection = false;
+
+    public float _suspicionTimer = 1f;
+    public float _detectionTimer = 1f;
 
     public GuardClass guard;
    public Slider suspicionSlider;
@@ -105,9 +114,10 @@ public void SliderEnable()
         if (sliderProgress >= 0.01f) 
         {
              StartCoroutine(SliderIncrement());
-        }else
+        }
+        else
         {
-            StartCoroutine(SliderIncrement());
+            guard.suspicionDetection._investigatingDetection = true;
         }
     }
 

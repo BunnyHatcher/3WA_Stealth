@@ -12552,7 +12552,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676824259}
-  m_LocalRotation: {x: 0.098537534, y: -0.0000000174731, z: 0.0000000017301766, w: 0.99513334}
+  m_LocalRotation: {x: 0.098537534, y: 0.0000000174731, z: -0.0000000017301766, w: 0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47890,7 +47890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1654026118, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Value
-      value: -0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: camTransform
@@ -47898,7 +47898,7 @@ PrefabInstance:
       objectReference: {fileID: 1093534167}
     - target: {fileID: 1368289328345384665, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
@@ -53818,6 +53818,10 @@ PrefabInstance:
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 1093534167}
+    - target: {fileID: 1368289328345384665, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
       value: Guard 2
