@@ -83,9 +83,9 @@ public class SuspicionDetection : MonoBehaviour
         Debug.Log("Player exited Detection");
         _fullDetection = false;
         //    _investigatingDetection = false;
-        SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
-        //suspicionSlider.SliderDisable();
-        suspicionSlider.IsSeeing = false;
+        DetectionSlider detectionSlider = GetComponentInParent<DetectionSlider>();
+        //detectionSlider.SliderDisable();
+        detectionSlider.IsSeeing = false;
         _target = null;
     }
 }

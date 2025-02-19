@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SuspicionSlider : MonoBehaviour
+public class DetectionSlider : MonoBehaviour
 {
+    float hearingMultiplier = 1f;
+    float seeingMultiplier = 2f;
+    float currentMultiplier = 1f;
+    float decrementationMultiplier = 2f;
+
     bool isHearing = false; public bool IsHearing
     { get 
         {
@@ -28,7 +33,7 @@ public class SuspicionSlider : MonoBehaviour
             SliderTrigger(value);
         }
     }
-    bool isIncrementing = false;
+    bool isAlreadyIncrementing = false;
 
     float sliderProgress = 5f;
     float suspicionTime = 5f;
@@ -45,7 +50,7 @@ public class SuspicionSlider : MonoBehaviour
     public float _detectionTimer = 1f;
 
     public GuardClass guard;
-   public Slider suspicionSlider;
+   public Slider detectionSlider;
 
     // 0 / 5 = 0
     // 1 / 5 = 0.2
@@ -77,9 +82,22 @@ public class SuspicionSlider : MonoBehaviour
 
 public void SliderEnable()
     {
-        if (isHearing || isSeeing) return;
+        if (isSeeing)
+        {
 
-        isIncrementing = false;
+        currentMultiplier = seeingMultiplier;
+
+        }
+
+
+        if (isHearing)
+        {
+         currentMultiplier = hearingMultiplier;
+        }
+
+        SliderInit();
+
+        //isAlreadyIncrementing = true;
         StopCoroutine(SliderDecrement());
     }
 
@@ -88,28 +106,32 @@ public void SliderEnable()
        
         StopCoroutine(SliderIncrement());
         StartCoroutine(SliderDecrement());
-        isIncrementing = false;
+        isAlreadyIncrementing = false;
     }
 
     private void Update()
     {
-        if (isHearing || isSeeing) SliderInit();
+       // if (isHearing || isSeeing) SliderInit();
     }
 
     void SliderInit()
     {
-        if (!isIncrementing) StartCoroutine(SliderIncrement());
+        if (!isAlreadyIncrementing) StartCoroutine(SliderIncrement());
     }
 
     IEnumerator SliderIncrement()
     {
         if (!isHearing && !isSeeing) yield break;
 
-        isIncrementing = true;
-        suspicionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.red;
+        isAlreadyIncrementing = true;
+
+        Image sliderImage = detectionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>();
+        if (currentMultiplier == seeingMultiplier) sliderImage.color = Color.red;
+        if (currentMultiplier == hearingMultiplier) sliderImage.color = Color.yellow;
+
         yield return new WaitForSeconds(0.01f);
-        sliderProgress -= 0.01f;
-        suspicionSlider.value = 1 - (sliderProgress / suspicionTime);
+        sliderProgress -= 0.01f * currentMultiplier;
+        detectionSlider.value = 1 - (sliderProgress / suspicionTime);
 
         if (sliderProgress >= 0.01f) 
         {
@@ -124,8 +146,12 @@ public void SliderEnable()
     IEnumerator SliderDecrement()
     {
         yield return new WaitForSeconds(0.01f);
-        sliderProgress += 0.01f;
-        suspicionSlider.value = 1 - (sliderProgress / suspicionTime);
+
+        Image sliderImage = detectionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>();
+        sliderImage.color = Color.green;
+
+        sliderProgress += 0.01f * decrementationMultiplier;
+        detectionSlider.value = 1 - (sliderProgress / suspicionTime);
 
         if (sliderProgress <= 5f)
         {

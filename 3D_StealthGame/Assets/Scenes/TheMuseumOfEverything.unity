@@ -12552,7 +12552,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676824259}
-  m_LocalRotation: {x: 0.098537534, y: 0.0000000174731, z: -0.0000000017301766, w: 0.99513334}
+  m_LocalRotation: {x: 0.098537534, y: -0.0000000174731, z: 0.0000000017301766, w: 0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31958,12 +31958,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 192
-  _target: {fileID: 0}
-  _investigatingDetection: 0
-  _fullDetection: 0
-  _suspicionDetection: 0
-  _suspicionTimer: 1
-  _detectionTimer: 3
+  guard: {fileID: 0}
 --- !u!64 &1414012289
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -47880,6 +47875,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1062014814}
     m_Modifications:
+    - target: {fileID: 112812394, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 112812395, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -47888,18 +47887,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 112812395, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 112812395, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1654026118, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 1093534167}
-    - target: {fileID: 1368289328345384665, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
       value: Guard 1
@@ -54019,12 +54022,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 192
-  _target: {fileID: 0}
-  _investigatingDetection: 0
-  _fullDetection: 0
-  _suspicionDetection: 0
-  _suspicionTimer: 1
-  _detectionTimer: 3
+  guard: {fileID: 0}
 --- !u!1 &3097743935489365411
 GameObject:
   m_ObjectHideFlags: 0
@@ -54056,12 +54054,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 192
-  _target: {fileID: 0}
-  _investigatingDetection: 0
-  _fullDetection: 0
-  _suspicionDetection: 0
-  _suspicionTimer: 1
-  _detectionTimer: 3
+  guard: {fileID: 0}
 --- !u!114 &3147595696233590965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54861,12 +54854,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 192
-  _target: {fileID: 0}
-  _investigatingDetection: 0
-  _fullDetection: 0
-  _suspicionDetection: 0
-  _suspicionTimer: 1
-  _detectionTimer: 3
+  guard: {fileID: 0}
 --- !u!114 &5490039557516362672
 MonoBehaviour:
   m_ObjectHideFlags: 0

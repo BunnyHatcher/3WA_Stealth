@@ -77,14 +77,10 @@ public class VisionCone : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     Debug.Log("Fleeting Detection");
-                    //_target = other.gameObject;
 
-                    // Old Method based on timer
-                    // _investigatingDetection = true;
+                    DetectionSlider detectionSlider = GetComponentInParent<DetectionSlider>();
 
-                    SuspicionSlider suspicionSlider = GetComponentInParent<SuspicionSlider>();
-                    //suspicionSlider.SliderEnable();
-                    suspicionSlider.IsSeeing = true;
+                    detectionSlider.IsSeeing = true;
                 }
             }
 
@@ -129,6 +125,8 @@ public class VisionCone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             guard.suspicionDetection.VisionConeExit();
+            DetectionSlider detectionSlider = GetComponentInParent<DetectionSlider>();
+            detectionSlider.IsSeeing = false;
         }
     }
    
