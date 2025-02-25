@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &112812397
 CanvasRenderer:
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -845,6 +845,7 @@ MonoBehaviour:
   _detectionTimer: 1
   guard: {fileID: 229467486}
   detectionSlider: {fileID: 1654026118}
+  playerState: {fileID: 0}
 --- !u!114 &8240570090483476270
 MonoBehaviour:
   m_ObjectHideFlags: 0

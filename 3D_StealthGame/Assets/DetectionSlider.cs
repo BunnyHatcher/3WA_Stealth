@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class DetectionSlider : MonoBehaviour
 {
-    float hearingMultiplier = 1f;
+    
+    float runningMultiplier = 2f;
+    float sneakingMultiplier = 0.5f;
+    float walkingMultiplier = 1f;   
+
     float seeingMultiplier = 2f;
     float currentMultiplier = 1f;
     float decrementationMultiplier = 2f;
@@ -51,6 +56,7 @@ public class DetectionSlider : MonoBehaviour
 
     public GuardClass guard;
    public Slider detectionSlider;
+    public PlayerStateMachine playerState;
 
     // 0 / 5 = 0
     // 1 / 5 = 0.2
@@ -85,14 +91,17 @@ public void SliderEnable()
         if (isSeeing)
         {
 
-        currentMultiplier = seeingMultiplier;
+            currentMultiplier = seeingMultiplier;
 
         }
 
 
         if (isHearing)
         {
-         currentMultiplier = hearingMultiplier;
+
+            CurrentPlayerState(playerState.GetState());
+
+
         }
 
         SliderInit();
@@ -101,6 +110,29 @@ public void SliderEnable()
         StopCoroutine(SliderDecrement());
     }
 
+    public void CurrentPlayerState(PlayerState ToState)
+    {
+            switch (playerState.GetState())
+            {
+                case PlayerState.IDLE:
+                    currentMultiplier = 0;
+                    break;
+
+                //add condition that allows incrementration only when moveSpeed in Animator is not 0
+                case PlayerState.SNEAKING:
+                    currentMultiplier = sneakingMultiplier;
+                    break;
+
+                case PlayerState.RUNNING:
+                    currentMultiplier = runningMultiplier;
+                    break;
+                
+                 default:
+                    currentMultiplier = walkingMultiplier;
+                    break;
+            }
+
+    }
     public void SliderDisable()
     {
        
@@ -127,7 +159,8 @@ public void SliderEnable()
 
         Image sliderImage = detectionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>();
         if (currentMultiplier == seeingMultiplier) sliderImage.color = Color.red;
-        if (currentMultiplier == hearingMultiplier) sliderImage.color = Color.yellow;
+        if (currentMultiplier == runningMultiplier) sliderImage.color = Color.yellow;
+        if (currentMultiplier == sneakingMultiplier) sliderImage.color = Color.blue;
 
         yield return new WaitForSeconds(0.01f);
         sliderProgress -= 0.01f * currentMultiplier;

@@ -33,5 +33,11 @@ public class AiManager : MonoBehaviour
         }
     }
 
-   
+    public void OnPlayerStateChange(PlayerState ToState)
+    {
+        foreach (GuardClass guard in guardList)
+        {
+           guard.detectionSlider.CurrentPlayerState(ToState);
+        }
+    }
 }

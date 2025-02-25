@@ -443,7 +443,16 @@ public class PlayerStateMachine : MonoBehaviour
         OnStateExit();
         _currentState = ToState;
         OnStateEnter();
+        PlayerManager.instance.OnStateChange(ToState);
 
+    }
+
+    // create a method to detext the current state, make it public in order to be able to use 
+    //it in other states as well
+
+    public PlayerState GetState()
+    {
+        return _currentState;
     }
 
     //---------------------------| O T H E R  M E T H O D S | ----------------------------------------------------------------------------------------------------------------------
