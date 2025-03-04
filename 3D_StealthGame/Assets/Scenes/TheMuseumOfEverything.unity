@@ -12491,6 +12491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8665aca436484c9468870f00d5b8fa6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1477446148}
 --- !u!4 &676026208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2610670786098672608, guid: 41e69b0de3073df49893ada4ae2c4f1f, type: 3}
@@ -12565,7 +12566,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676824259}
-  m_LocalRotation: {x: 0.09853752, y: 0.000000016948752, z: -0.0000000016782554, w: 0.99513334}
+  m_LocalRotation: {x: 0.09853752, y: -0.000000016948752, z: 0.0000000016782554, w: 0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47907,6 +47908,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1654026118, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1773762751, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: playerState
       value: 
@@ -47915,6 +47920,10 @@ PrefabInstance:
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 1093534167}
+    - target: {fileID: 1368289328345384665, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
       value: Guard 1
@@ -47997,7 +48006,7 @@ PrefabInstance:
       objectReference: {fileID: 499646773}
     - target: {fileID: 3583269689338589408, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3583269689338589411, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Mesh
@@ -53837,13 +53846,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1654026118, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773762751, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: playerState
+      value: 
+      objectReference: {fileID: 1477446148}
     - target: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 1093534167}
     - target: {fileID: 1368289328345384665, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
@@ -55065,6 +55082,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6226591702050383227, guid: ea90a8c1b8282cc409dc9a4a78231586, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226591702050383230, guid: ea90a8c1b8282cc409dc9a4a78231586, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -6,14 +6,27 @@ using UnityEngine.UI;
 
 public class DetectionSlider : MonoBehaviour
 {
-    
-    float runningMultiplier = 2f;
-    float sneakingMultiplier = 0.5f;
-    float walkingMultiplier = 1f;   
+    // Dans vision cone 
+    public float seeingMultiplier = 2f;
 
-    float seeingMultiplier = 2f;
-    float currentMultiplier = 1f;
-    float decrementationMultiplier = 2f;
+    // Dans hearing sphere
+    public float runningMultiplier = 2f;
+    public float walkingMultiplier = 1f;
+    public float sneakingMultiplier = 0.5f;
+
+    public float idleMultiplier = -1f;
+
+
+   
+  
+
+
+
+  
+
+   
+   public float currentMultiplier = 1f;
+   public float decrementationMultiplier = 2f;
 
     bool isHearing = false; public bool IsHearing
     { get 
@@ -73,7 +86,9 @@ public class DetectionSlider : MonoBehaviour
     }
 
     void SliderTrigger(bool value)
-    {          
+    {
+        CurrentPlayerState(PlayerManager.instance.player._currentState);
+
        if (value)
           {
            SliderEnable();
@@ -95,7 +110,7 @@ public void SliderEnable()
 
         }
 
-
+        /*
         if (isHearing)
         {
 
@@ -103,6 +118,7 @@ public void SliderEnable()
 
 
         }
+        */
 
         SliderInit();
 
@@ -112,10 +128,15 @@ public void SliderEnable()
 
     public void CurrentPlayerState(PlayerState ToState)
     {
+        if (isSeeing || !isHearing)
+        {
+            return;
+        }
+
             switch (playerState.GetState())
             {
                 case PlayerState.IDLE:
-                    currentMultiplier = 0;
+                    currentMultiplier = idleMultiplier;
                     break;
 
                 //add condition that allows incrementration only when moveSpeed in Animator is not 0
@@ -137,7 +158,7 @@ public void SliderEnable()
     {
        
         StopCoroutine(SliderIncrement());
-        StartCoroutine(SliderDecrement());
+        StartCoroutine(SliderDecrement()); // à abolir
         isAlreadyIncrementing = false;
     }
 
@@ -158,23 +179,39 @@ public void SliderEnable()
         isAlreadyIncrementing = true;
 
         Image sliderImage = detectionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>();
+        if (currentMultiplier == sneakingMultiplier) sliderImage.color = Color.yellow;
+        if (currentMultiplier == walkingMultiplier) sliderImage.color = new Color(1, 0.5f, 0);
+        if (currentMultiplier == runningMultiplier) sliderImage.color = Color.red;
+
         if (currentMultiplier == seeingMultiplier) sliderImage.color = Color.red;
-        if (currentMultiplier == runningMultiplier) sliderImage.color = Color.yellow;
-        if (currentMultiplier == sneakingMultiplier) sliderImage.color = Color.blue;
+       
 
         yield return new WaitForSeconds(0.01f);
         sliderProgress -= 0.01f * currentMultiplier;
         detectionSlider.value = 1 - (sliderProgress / suspicionTime);
 
-        if (sliderProgress >= 0.01f) 
+        if (sliderProgress >= 0.01f && detectionSlider.value < 1) 
         {
              StartCoroutine(SliderIncrement());
         }
-        else
+
+        if (detectionSlider.value >= 1f)
         {
             guard.suspicionDetection._investigatingDetection = true;
         }
+
+        if (detectionSlider.value == 0)
+        {
+            guard.suspicionDetection._investigatingDetection = false;
+        }
+
+        if (sliderProgress <= 0.01f && detectionSlider.value > 0)
+        {
+            StartCoroutine(SliderIncrement());
+        }
     }
+
+   // Replace Slider Decrement with negative incrementation funtion   
 
     IEnumerator SliderDecrement()
     {
@@ -191,4 +228,5 @@ public void SliderEnable()
             StartCoroutine(SliderDecrement());
         }
     }
+    
 }

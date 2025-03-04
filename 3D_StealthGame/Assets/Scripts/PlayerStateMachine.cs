@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 
@@ -59,7 +60,7 @@ public class PlayerStateMachine : MonoBehaviour
 
 
     //privates and protected
-    private PlayerState _currentState;
+    public PlayerState _currentState;
     private float _currentSpeed;
     private Vector3 _direction = new Vector3();
     private bool _isJumping = false;
@@ -111,6 +112,8 @@ public class PlayerStateMachine : MonoBehaviour
             
 
         }
+
+        Restart();
 
 
     }
@@ -402,6 +405,16 @@ public class PlayerStateMachine : MonoBehaviour
 
         }
 
+    }
+
+    //------R E S T A R T----------------------------------------------------------------------------
+
+    void Restart()
+    {
+        if (Input.GetButtonDown("Restart"))
+        {
+            GameManager.instance.Reset();
+        }
     }
 
     private void OnStateExit()

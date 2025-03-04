@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
+    public PlayerStateMachine player;
+
     // Start is called before the first frame update
     void Awake()
     {
