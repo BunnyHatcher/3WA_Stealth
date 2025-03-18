@@ -14,8 +14,8 @@ public class VisionCone : MonoBehaviour
     public GuardClass guard;
 
  /*   
-    public bool _investigatingDetection = false;
-    public bool _fullDetection = false;
+    public bool _fullSlider = false;
+    public bool _coneDetection = false;
     public bool _suspicionDetection = false;
 
     public float _suspicionTimer = 1f;
@@ -38,7 +38,7 @@ public class VisionCone : MonoBehaviour
 
         // Collision timer
         /*
-        if (_investigatingDetection == true)
+        if (_fullSlider == true)
         {
             _suspicionTimer -= Time.deltaTime;
             if (_suspicionTimer < 0)

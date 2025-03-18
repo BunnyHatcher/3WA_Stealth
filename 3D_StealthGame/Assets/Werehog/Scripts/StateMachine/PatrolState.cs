@@ -31,12 +31,12 @@ public class PatrolState : BaseState
         /*
         if (_visionCone._target != null)
         {
-            if (_visionCone._fullDetection == true)
+            if (_visionCone._coneDetection == true)
             {
                 _FSM.SetBool("CHASING", true);
             }
 
-            else if (_visionCone._investigatingDetection == true && _visionCone._fullDetection == false)
+            else if (_visionCone._fullSlider == true && _visionCone._coneDetection == false)
             {
                 _FSM.SetBool("SUSPICIOUS", true); ;
             }

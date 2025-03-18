@@ -58,12 +58,6 @@ public class DetectionSlider : MonoBehaviour
     float sliderIncrementationMultiplier = 2f;
     float sliderDecrementationMultiplier = 2f;
 
-    
-    //Detection Bools
-    public bool _investigatingDetection = false;
-    public bool _fullDetection = false;
-    public bool _suspicionDetection = false;
-
     public float _suspicionTimer = 1f;
     public float _detectionTimer = 1f;
 
@@ -190,24 +184,32 @@ public void SliderEnable()
         sliderProgress -= 0.01f * currentMultiplier;
         detectionSlider.value = 1 - (sliderProgress / suspicionTime);
 
-        if (sliderProgress >= 0.01f && detectionSlider.value < 1) 
+        if (    sliderProgress >= 0.01f && detectionSlider.value < 1  // se repète si la gauge augmente et n'est pas maxé 
+            ||  sliderProgress <= 0.01f && detectionSlider.value > 0) // respète si la gauge diminue et n'est pas vidé
         {
              StartCoroutine(SliderIncrement());
         }
 
+        // manière alternative pour lignes en dessous
+
+       /* bool isFullSlider = detectionSlider.value >= 1f;
+        isFullSlider = detectionSlider.value == 0;
+
+        guard.suspicionDetection._fullSlider = isFullSlider;
+        guard.guardStateMachine.canWanderElsewhere = isFullSlider;*/
+
         if (detectionSlider.value >= 1f)
         {
-            guard.suspicionDetection._investigatingDetection = true;
+            Debug.Log("Full  Slider1");
+            guard.suspicionDetection._fullSlider = true;
+            guard.guardStateMachine.canWander = true;
         }
 
         if (detectionSlider.value == 0)
         {
-            guard.suspicionDetection._investigatingDetection = false;
-        }
-
-        if (sliderProgress <= 0.01f && detectionSlider.value > 0)
-        {
-            StartCoroutine(SliderIncrement());
+            Debug.Log("Full  Slider2");
+            guard.suspicionDetection._fullSlider = false;
+            guard.guardStateMachine.canWander = false;
         }
     }
 
@@ -216,6 +218,8 @@ public void SliderEnable()
     IEnumerator SliderDecrement()
     {
         yield return new WaitForSeconds(0.01f);
+
+        if (guard.guardStateMachine._animator.GetBool("Chase")) yield break;
 
         Image sliderImage = detectionSlider.transform.Find("Fill Area/Fill").GetComponent<Image>();
         sliderImage.color = Color.green;

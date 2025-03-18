@@ -22,7 +22,7 @@ public class GuardStateMachine : MonoBehaviour
     private PlayerStateMachine _player;
 
     private NavMeshAgent _agent;
-    private Animator _animator;
+    public Animator _animator;
 
     [SerializeField]
     private TMP_Text _stateNote;
@@ -35,8 +35,8 @@ public class GuardStateMachine : MonoBehaviour
     private float _changeMind;
     public float _changeMindMinRange = 4;
     public float _changeMindMaxRange = 10;
-    private bool canWander = false;
-    private bool canWanderElsewhere = false;
+    public bool canWander = false;
+    private bool canWanderElsewhere = true;
 
     //Attacking
     private float _attackTimer;
@@ -83,7 +83,7 @@ public class GuardStateMachine : MonoBehaviour
 
         _playerIsNear = false;
         _withinCatchRange = false;
-        guard.suspicionDetection._fullDetection = false;
+        guard.suspicionDetection._coneDetection = false;
 
         _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
     }
@@ -126,13 +126,13 @@ public class GuardStateMachine : MonoBehaviour
 
             if (guard.suspicionDetection._target != null)
             {
-                if (guard.suspicionDetection._fullDetection == true)
+                if (guard.suspicionDetection._coneDetection == true)
                 {
                     _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
                     return;
                 }
 
-                else if (guard.suspicionDetection._investigatingDetection == true && guard.suspicionDetection._fullDetection == false)
+                else if (guard.suspicionDetection._fullSlider == true && guard.suspicionDetection._coneDetection == false)
                 {
                     _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                     return;
@@ -197,13 +197,36 @@ public class GuardStateMachine : MonoBehaviour
 
         StartCoroutine(WanderElsewhereDelay());
 
+        WanderBehavior();
+    }
+
+    void WanderBehavior()
+    {
         _animator.SetBool("isMoving", true);
         Vector3 wanderDirection = (Random.insideUnitSphere * 1.2f) + transform.position;
         NavMeshHit navMeshHit;
         NavMesh.SamplePosition(wanderDirection, out navMeshHit, 3f, NavMesh.AllAreas);
         Vector3 destination = navMeshHit.position;
         _agent.SetDestination(destination);
+
     }
+
+    void CheckWandering()
+    {
+        if (canWander && canWanderElsewhere)
+        {
+            StartCoroutine(WanderElsewhereDelay());
+            _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
+            canWanderElsewhere = false;
+        }
+        else if (!canWander)
+        {
+            _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
+            canWanderElsewhere = false;
+            StopCoroutine(WanderElsewhereDelay());
+        }
+    }
+
     void Wander()
     {
         _stateNote.text = "Wandering";
@@ -214,13 +237,13 @@ public class GuardStateMachine : MonoBehaviour
        
         if (guard.suspicionDetection._target != null)
         {
-            if (guard.suspicionDetection._fullDetection == true)
+            if (guard.suspicionDetection._coneDetection == true)
             {
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
                 return;
             }
 
-            else if (guard.suspicionDetection._investigatingDetection == true && guard.suspicionDetection._fullDetection == false)
+            else if (guard.suspicionDetection._fullSlider == true && guard.suspicionDetection._coneDetection == false)
             {
                 _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                 return;
@@ -228,18 +251,8 @@ public class GuardStateMachine : MonoBehaviour
         }
         else
         {
-            if (canWanderElsewhere) 
-            {
-                StartCoroutine(WanderElsewhereDelay());
-                _brain.PushState(Wander, OnWanderEnter, OnWanderExit);
-                canWanderElsewhere = false;
-            }
-            else if (canWander)
-            {
-                _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
-                canWanderElsewhere = false;
-                StopCoroutine(WanderElsewhereDelay());
-            }
+            CheckWandering();
+
         }
 
         _timeSinceLastSawPlayer += Time.deltaTime;
@@ -279,6 +292,11 @@ public class GuardStateMachine : MonoBehaviour
         _agent.SetDestination(_player.transform.position);
         if (Vector3.Distance(transform.position, _player.transform.position) > 5.5f)
         {
+            if (guard.suspicionDetection._fullSlider == true)
+            {
+                CheckWandering();
+                return;
+            }
             _brain.PopState();
             _brain.PushState(Patrol, OnPatrolEnter, OnPatrolExit);
         }
@@ -288,7 +306,6 @@ public class GuardStateMachine : MonoBehaviour
             _timeSinceLastSawPlayer = 0;
             _brain.PushState(Attack, OnEnterAttack, null);
         }
-
 
         _timeSinceLastSawPlayer += Time.deltaTime;
     }
@@ -338,15 +355,17 @@ public class GuardStateMachine : MonoBehaviour
 
         if (guard.suspicionDetection._target != null)
         {
-            if (guard.suspicionDetection._fullDetection == true)
+            if (guard.suspicionDetection._coneDetection == true)
             {
                 _brain.PushState(Chase, OnChaseEnter, OnChaseExit);
                 return;
             }
 
-            else if (guard.suspicionDetection._investigatingDetection == true && guard.suspicionDetection._fullDetection == false)
+            else if (guard.suspicionDetection._fullSlider == true && guard.suspicionDetection._coneDetection == false)
             {
-                _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
+                CheckWandering();
+
+                //   _brain.PushState(Suspicion, OnSuspicionEnter, OnSuspicionExit);
                 return;
             }
 

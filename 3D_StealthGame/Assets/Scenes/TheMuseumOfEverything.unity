@@ -12566,7 +12566,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676824259}
-  m_LocalRotation: {x: 0.09853752, y: -0.000000016948752, z: 0.0000000016782554, w: 0.99513334}
+  m_LocalRotation: {x: 0.09853752, y: 0.000000016948752, z: -0.0000000016782554, w: 0.99513334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19645,7 +19645,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1891076, y: -0.00000001689592, z: 0.0000000032538578, w: 0.9819564}
+  m_LocalRotation: {x: 0.1891076, y: 0.000000016895916, z: -0.0000000032538572, w: 0.9819564}
   m_LocalPosition: {x: -4.3, y: 11.19, z: 0.07999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26911,6 +26911,7 @@ MonoBehaviour:
   _stateNote: {fileID: 1431105422}
   _changeMindMinRange: 4
   _changeMindMaxRange: 10
+  canWander: 0
   _suspicionTime: 4
 --- !u!114 &1205699089
 MonoBehaviour:
@@ -42609,7 +42610,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730187505}
-  m_LocalRotation: {x: 0.18910757, y: -0.00000001689592, z: 0.0000000032538574, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910757, y: 0.000000016895912, z: -0.000000003253856, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47916,13 +47917,17 @@ PrefabInstance:
       propertyPath: playerState
       value: 
       objectReference: {fileID: 1477446148}
+    - target: {fileID: 1773762751, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
+      propertyPath: seeingMultiplier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1900704633, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 1093534167}
     - target: {fileID: 1368289328345384665, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Name
@@ -53844,7 +53849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112812395, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1654026118, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_Value
@@ -53868,7 +53873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566304, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795342800549566332, guid: c78aa9ab45058344582bfb83c9d076d7, type: 3}
       propertyPath: colorGizmo.b
@@ -54108,6 +54113,7 @@ MonoBehaviour:
   _stateNote: {fileID: 965332642951923620}
   _changeMindMinRange: 4
   _changeMindMaxRange: 10
+  canWander: 0
   _suspicionTime: 4
 --- !u!4 &3239149965601494874
 Transform:
@@ -54908,6 +54914,7 @@ MonoBehaviour:
   _stateNote: {fileID: 7708900961303606433}
   _changeMindMinRange: 4
   _changeMindMaxRange: 10
+  canWander: 0
   _suspicionTime: 4
 --- !u!4 &5514234161896903211
 Transform:

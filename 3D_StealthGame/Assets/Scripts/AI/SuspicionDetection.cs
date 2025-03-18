@@ -5,8 +5,8 @@ using UnityEngine;
 public class SuspicionDetection : MonoBehaviour
 {
 
-    public bool _investigatingDetection = false;
-    public bool _fullDetection = false;
+    public bool _fullSlider = false;
+    public bool _coneDetection = false;
     public bool _suspicionDetection = false;
 
     public float _suspicionTimer = 1f;
@@ -31,7 +31,7 @@ public class SuspicionDetection : MonoBehaviour
     void DetectionCheck()
     {
 
-    if (_investigatingDetection == true)
+    if (_fullSlider == true)
         {
             _suspicionTimer -= Time.deltaTime;
             if (_suspicionTimer < 0)
@@ -58,7 +58,7 @@ public class SuspicionDetection : MonoBehaviour
 
     public void VisionConeDetection(GameObject detectionTarget)
     {
-        if (!_investigatingDetection) return;
+        if (!_fullSlider) return;
         
             if (_suspicionTimer <= 0)
             {
@@ -72,7 +72,7 @@ public class SuspicionDetection : MonoBehaviour
             if (_detectionTimer <= 0)
             {
                 Debug.Log("Full detection");
-                _fullDetection = true;
+                _coneDetection = true;
                 _target = detectionTarget.gameObject;
                 //    moveAgent.ResumeMovement();
             }
@@ -81,8 +81,8 @@ public class SuspicionDetection : MonoBehaviour
     public void VisionConeExit()
     {
         Debug.Log("Player exited Detection");
-        _fullDetection = false;
-        //    _investigatingDetection = false;
+        _coneDetection = false;
+        //    _fullSlider = false;
         DetectionSlider detectionSlider = GetComponentInParent<DetectionSlider>();
         //detectionSlider.SliderDisable();
         detectionSlider.IsSeeing = false;
